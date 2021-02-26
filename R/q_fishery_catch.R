@@ -1,4 +1,4 @@
-#' Fishery catch data query
+#' fishery catch data query
 #'
 #' @param year assessment year
 #' @param fishery default is fsh1, change if age comps from multiple fisheries

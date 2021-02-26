@@ -1,4 +1,4 @@
-#' Long-line survey biomass data query
+#' longline survey biomass data query
 #'
 #' @param year
 #' @param survey
