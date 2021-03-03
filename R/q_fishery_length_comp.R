@@ -1,4 +1,4 @@
-' Fishery length comp data query
+#' Fishery length comp data query
 #'
 #' @param year assessment year
 #' @param fishery default is fsh1, change if age comps from multiple fisheries

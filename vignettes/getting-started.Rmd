@@ -1,8 +1,8 @@
 ---
-title: "getting started"
+title: "01 - getting started"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting started}
+  %\VignetteIndexEntry{01 - getting started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,9 +23,99 @@ You must be able to have a connection to the AFSC & AKFIN (Answers) data servers
 The `groundfishr` package can be installed from [github](https://github.com/BenWilliams-NOAA/groundfishr) with:
 ```{r}
 # install.packages("devtools")
-devtools::install_github("BenWilliams/groundfishr")
+devtools::install_github("BenWilliams-NOAA/groundfishr")
 ```
 
 ```{r setup}
 library(groundfishr)
 ```
+
+A consistent directory format is probably the most important aspect of this package. 
+The first function creates a number of directories within your R project folder. 
+The setup is organized by year within a folder. 
+The `setup()` function creates the following folders and files:
+
+```{r}
+# setup folders -----
+
+setup(2020)
+
+```
+```
+project
+|__2020
+    |__data
+        |__models
+        |    |__ageage
+        |    |     AGEAGE.tpl
+        |    |__allometric
+        |    |     allometric.tpl
+        |    |__length_sd
+        |    |     lengthSD.tpl
+        |    |__VBL
+        |    |      VBL.tpl
+        |    |__wVBL
+        |    |      wVBL.tpl
+        |    |      lvb.ctl
+        |
+        |__output
+        |__raw
+        |__SARA
+        |__user_input
+
+```
+
+This can then be updated for each year. 
+
+```{r}
+# setup folders -----
+
+setup(2021)
+
+```
+
+Which would create a duplication of the folders for the given year
+
+```
+project
+|__2020
+|   |__data
+|       |__models
+|       |    |__ageage
+|       |    |     AGEAGE.tpl
+|       |    |__allometric
+|       |    |     allometric.tpl
+|       |    |__length_sd
+|       |    |     lengthSD.tpl
+|       |    |__VBL
+|       |    |      VBL.tpl
+|       |    |__wVBL
+|       |    |      wVBL.tpl
+|       |    |      lvb.ctl
+|       |
+|       |__output
+|       |__raw
+|       |__SARA
+|       |__user_input
+|__2021
+    |__data
+        |__models
+        |    |__ageage
+        |    |     AGEAGE.tpl
+        |    |__allometric
+        |    |     allometric.tpl
+        |    |__length_sd
+        |    |     lengthSD.tpl
+        |    |__VBL
+        |    |      VBL.tpl
+        |    |__wVBL
+        |    |      wVBL.tpl
+        |    |      lvb.ctl
+        |
+        |__output
+        |__raw
+        |__SARA
+        |__user_input        
+
+```
+

@@ -12,9 +12,9 @@
 #'
 #' @examples
 #'
-q_lls_length_comp <- function(year, survey = "goa", afsc_species, area, akfin, save = TRUE){
+q_ts_length_comp <- function(year, survey = "goa", afsc_species, area, afsc, save = TRUE){
 
-  files <- grep(paste0(survey,"_lls_length"),
+  files <- grep(paste0(survey,"_ts_length"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
 
   .one = sql_read(files[1])

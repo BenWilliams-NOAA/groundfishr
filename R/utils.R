@@ -4,7 +4,7 @@
 #' @export sql_filter
 #' @export sql_run
 #' @export purrit
-#'
+#' @export collapse_row
 sql_read <- function(x) {
   if(file.exists(system.file("sql", x, package = "groundfishr"))) {
     readLines(system.file("sql", x, package = "groundfishr"))
@@ -135,6 +135,19 @@ purrit <- function(obs, pred = NULL, rec_age, plus_age, comp = "length", lenbins
   }
 
   dat
+}
+
+#' helper function for creating dat file
+
+collapse_row <- function(data){
+
+  l1 = paste(as.vector(data[1,]), collapse = " ")
+
+  for(i in 2:nrow(data)){
+    l2 = paste(as.vector(data[i,]), collapse = " ")
+    l1 = c(l1, l2)
+  }
+  l1
 }
 
 

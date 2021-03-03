@@ -2,9 +2,9 @@
 #'
 #' @param year assessment year
 #' @param survey default is fsh1, change if age comps from multiple fisheries
-#' @param norpac_species norpac species code
-#' @param region GOA or BSAI
-#' @param akfin the database to query
+#' @param afsc_species afsc species code
+#' @param area not used
+#' @param afsc the database to query
 #' @param save save the file in designated folder
 #'
 #' @return
@@ -12,7 +12,7 @@
 #'
 #' @examples
 #'
-q_lls_length_comp <- function(year, survey = "goa", afsc_species, area, akfin, save = TRUE){
+q_lls_length_comp <- function(year, survey = "goa", afsc_species, area, afsc, save = TRUE){
 
   files <- grep(paste0(survey,"_lls_length"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
@@ -22,13 +22,13 @@ q_lls_length_comp <- function(year, survey = "goa", afsc_species, area, akfin, s
 
   if(length(afsc_species) == 1){
 
-    .one = sql_filter(x = norpac_species, sql_code = .one, flag = "-- insert species")
-    .two = sql_filter(x = norpac_species, sql_code = .two, flag = "-- insert species")
+    .one = sql_filter(x = afsc_species, sql_code = .one, flag = "-- insert species")
+    .two = sql_filter(x = afsc_species, sql_code = .two, flag = "-- insert species")
 
   } else {
-    .one = sql_filter(sql_precode = "IN", x = norpac_species,
+    .one = sql_filter(sql_precode = "IN", x = afsc_species,
                       sql_code = .one, flag = "-- insert species")
-    .two = sql_filter(sql_precode = "IN", x = norpac_species,
+    .two = sql_filter(sql_precode = "IN", x = afsc_species,
                       sql_code = .two, flag = "-- insert species")
   }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/q_fishery_catch.R
 \name{q_fishery_catch}
 \alias{q_fishery_catch}
-\title{Fishery catch data query}
+\title{fishery catch data query}
 \usage{
 q_fishery_catch(year, fishery = "fsh1", species, area, akfin, save = TRUE)
 }
@@ -23,7 +23,7 @@ q_fishery_catch(year, fishery = "fsh1", species, area, akfin, save = TRUE)
 
 }
 \description{
-Fishery catch data query
+fishery catch data query
 }
 \examples{
 

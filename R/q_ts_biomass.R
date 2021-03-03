@@ -1,3 +1,15 @@
+#' trawl survey biomass data query
+#'
+#' @param year
+#' @param survey
+#' @param afsc_species
+#' @param afsc
+#' @param save
+#'
+#' @return
+#' @export
+#'
+#' @examples
 q_ts_biomass <- function (year, survey = "goa", afsc_species, afsc, save = TRUE){
 
   files <- grep(paste0(survey,"_ts_age"),

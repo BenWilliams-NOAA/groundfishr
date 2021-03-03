@@ -13,6 +13,7 @@ clean_catch <- function(year, fishery = "fsh1", TAC = c(3333, 2222, 1111), fixed
 
   if(!is.null(fixed_catch)){
     fixed_catch = read.csv(here::here(year, "data", "user_input", fixed_catch))
+    names(fixed_catch) <- c("Year", "Catch")
   }
 
   if(sum(TAC == c(3333, 2222, 1111))==3) {

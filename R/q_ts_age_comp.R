@@ -12,7 +12,7 @@
 #'
 #' @examples
 #'
-q_ts_age_comp <- function(year, survey = "goa", afsc_species, area, akfin, save = TRUE){
+q_ts_age_comp <- function(year, survey = "goa", afsc_species, area, afsc, save = TRUE){
 
   files <- grep(paste0(survey,"_ts_age"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)

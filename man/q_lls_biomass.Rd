@@ -2,7 +2,7 @@
 % Please edit documentation in R/q_lls_biomass.R
 \name{q_lls_biomass}
 \alias{q_lls_biomass}
-\title{Long-line survey biomass data query}
+\title{longline survey biomass data query}
 \usage{
 q_lls_biomass(year, survey = "goa", afsc_species, afsc, save = TRUE)
 }
@@ -13,5 +13,5 @@ q_lls_biomass(year, survey = "goa", afsc_species, afsc, save = TRUE)
 
 }
 \description{
-Long-line survey biomass data query
+longline survey biomass data query
 }
