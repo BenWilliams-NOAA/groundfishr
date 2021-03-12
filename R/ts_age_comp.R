@@ -1,4 +1,4 @@
-#' Survey age comp
+#' trawl survey age comp
 #'
 #' @param year assessment year
 #' @param area default is "goa"
@@ -6,10 +6,10 @@
 #' @param plus_age plus group age
 #'
 #' @return
-#' @export survey_age_comp
+#' @export ts_age_comp
 #'
 #' @examples survey_age_comp(year = 2020, rec_age = 2, plus_age = 45)
-survey_age_comp <- function(year, area = "goa", rec_age, plus_age){
+ts_age_comp <- function(year, area = "goa", rec_age, plus_age){
 
   read.csv(here::here(year, "data", "raw", paste0(area, "_ts_specimen_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
