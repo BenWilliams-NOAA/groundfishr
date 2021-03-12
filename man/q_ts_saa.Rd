@@ -4,20 +4,18 @@
 \alias{q_ts_saa}
 \title{Trawl survey size at age data query}
 \usage{
-q_ts_saa(year, survey = "goa", afsc_species, area, afsc, save = TRUE)
+q_ts_saa(year, area = "goa", afsc_species, afsc, save = TRUE)
 }
 \arguments{
 \item{year}{assessment year}
 
-\item{survey}{default is "goa", change if age comps from multiple fisheries}
+\item{area}{default is "goa", change if age comps from multiple fisheries}
 
 \item{afsc_species}{afsc species code}
 
 \item{afsc}{the database to query}
 
 \item{save}{save the file in designated folder}
-
-\item{region}{GOA or BSAI}
 }
 \value{
 

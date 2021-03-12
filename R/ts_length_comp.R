@@ -1,7 +1,7 @@
 #' trawl survey length composition analysis
 #'
 #' @param year assessment year
-#' @param area survey area - default = "goa"
+#' @param area survey area default = "goa"
 #' @param lenbins lenbin file if left NULL it looks for (year/data/user_input/len_bins.csv")
 #'
 #' @return
@@ -10,6 +10,13 @@
 #' @examples
 #'
 ts_length_comp <- function(year, area = "goa", lenbins = NULL){
+
+  if(is.null(lenbins)){
+    stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")
+  } else {
+    lenbins = read.csv(here::here(year, "data", "user_input", lenbins))$len_bins
+  }
+
 
 read.csv(here::here(year, "data", "raw", paste0(area, "_ts_specimen_data.csv"))) %>%
   dplyr::rename_all(tolower) %>%

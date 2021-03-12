@@ -4,12 +4,10 @@
 \alias{lls_length_comp}
 \title{Longline length composition analysis}
 \usage{
-lls_length_comp(YEAR, species = NULL, rec_age, lenbins = NULL)
+lls_length_comp(YEAR, species = NULL, lenbins = NULL)
 }
 \arguments{
 \item{species}{enter if REBS, otherwise NULL}
-
-\item{rec_age}{recruitment age}
 
 \item{lenbins}{lenbin file if left NULL it looks for (year/data/user_input/len_bin_labels.csv")}
 

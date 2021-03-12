@@ -3,7 +3,6 @@
 #' @param year assessment year
 #' @param survey default is fsh1, change if age comps from multiple fisheries
 #' @param afsc_species afsc species code
-#' @param area not used
 #' @param afsc the database to query
 #' @param save save the file in designated folder
 #'
@@ -12,7 +11,7 @@
 #'
 #' @examples
 #'
-q_lls_length_comp <- function(year, survey = "goa", afsc_species, area, afsc, save = TRUE){
+q_lls_length_comp <- function(year, survey = "goa", afsc_species, afsc, save = TRUE){
 
   files <- grep(paste0(survey,"_lls_length"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)

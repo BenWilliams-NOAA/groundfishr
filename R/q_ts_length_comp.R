@@ -3,7 +3,6 @@
 #' @param year assessment year
 #' @param survey default is fsh1, change if age comps from multiple fisheries
 #' @param norpac_species norpac species code
-#' @param region GOA or BSAI
 #' @param akfin the database to query
 #' @param save save the file in designated folder
 #'
@@ -12,7 +11,7 @@
 #'
 #' @examples
 #'
-q_ts_length_comp <- function(year, survey = "goa", afsc_species, area, afsc, save = TRUE){
+q_ts_length_comp <- function(year, survey = "goa", afsc_species, afsc, save = TRUE){
 
   files <- grep(paste0(survey,"_ts_length"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)

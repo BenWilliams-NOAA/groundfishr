@@ -4,7 +4,7 @@
 \alias{q_ts_length_comp}
 \title{trawl survey length comp data query}
 \usage{
-q_ts_length_comp(year, survey = "goa", afsc_species, area, afsc, save = TRUE)
+q_ts_length_comp(year, survey = "goa", afsc_species, afsc, save = TRUE)
 }
 \arguments{
 \item{year}{assessment year}
@@ -14,8 +14,6 @@ q_ts_length_comp(year, survey = "goa", afsc_species, area, afsc, save = TRUE)
 \item{save}{save the file in designated folder}
 
 \item{norpac_species}{norpac species code}
-
-\item{region}{GOA or BSAI}
 
 \item{akfin}{the database to query}
 }

@@ -3,7 +3,6 @@
 #' @param year assessment year
 #' @param area default is "goa", change if age comps from multiple fisheries
 #' @param afsc_species afsc species code
-#' @param region GOA or BSAI
 #' @param afsc the database to query
 #' @param save save the file in designated folder
 #'
@@ -12,7 +11,7 @@
 #'
 #' @examples
 #'
-q_ts_saa <- function(year, area = "goa", afsc_species, area, afsc, save = TRUE){
+q_ts_saa <- function(year, area = "goa", afsc_species,  afsc, save = TRUE){
 
   .files <- grep(paste0(area,"_ts_saa"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
