@@ -12,7 +12,7 @@ You must be able to have a connection to the AFSC & AKFIN (Answers) data servers
 
 ## Installation
 
-You can install the released version of groundfishr from [github](https://github.com/BenWilliams-NOAA/rockfishr) with:
+You can install the released version of groundfishr from [github](https://github.com/BenWilliams-NOAA/groundfishr) with:
 
 ``` r
 install.packages("groundfishr")
