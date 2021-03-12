@@ -1,7 +1,30 @@
 reference:
 - title: setup
-  desc: functions for setting up an approrpiate framework.
 - contents:
   - setup
+
 - title: query functions
+- contents:
   - startes_with("q_")
+
+- title: core functions
+- contents:
+  - clean_catch
+  - age_error
+  - size_at_age
+  - lls_length_comp
+  - lls_rpn
+
+- title: figure functions
+- contents:
+
+- title: table functions
+- contents:
+  - best_f
+
+- title: helper functions
+- contents:
+  - collapse_row
+  - purrit
+
+
