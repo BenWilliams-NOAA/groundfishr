@@ -22,13 +22,13 @@ q_ts_length_comp <- function(year, survey = "goa", afsc_species, area, afsc, sav
 
   if(length(afsc_species) == 1){
 
-    .one = sql_filter(x = norpac_species, sql_code = .one, flag = "-- insert species")
-    .two = sql_filter(x = norpac_species, sql_code = .two, flag = "-- insert species")
+    .one = sql_filter(x = afsc_species, sql_code = .one, flag = "-- insert species")
+    .two = sql_filter(x = afsc_species, sql_code = .two, flag = "-- insert species")
 
   } else {
-    .one = sql_filter(sql_precode = "IN", x = norpac_species,
+    .one = sql_filter(sql_precode = "IN", x = afsc_species,
                       sql_code = .one, flag = "-- insert species")
-    .two = sql_filter(sql_precode = "IN", x = norpac_species,
+    .two = sql_filter(sql_precode = "IN", x = afsc_species,
                       sql_code = .two, flag = "-- insert species")
   }
 

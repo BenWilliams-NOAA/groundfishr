@@ -24,22 +24,22 @@ setup <- function(year){
     dir.create(here::here(year, "data", "models", folders[i]))
   }
 
-  file.copy(system.file("models", "AGEAGE.tpl", package = "groundfishr"),
+  file.copy(system.file("models", "ageage.tpl", package = "groundfishr"),
             here::here(year, "data", "models", "ageage"))
 
   file.copy(system.file("models", "allometric.tpl", package = "groundfishr"),
             here::here(year, "data", "models", "allometric"))
 
-  file.copy(system.file("models", "VBL.tpl", package = "groundfishr"),
+  file.copy(system.file("models", "vbl.tpl", package = "groundfishr"),
             here::here(year, "data", "models", "vonb"))
 
-  file.copy(system.file("models", "wVBL.tpl", package = "groundfishr"),
+  file.copy(system.file("models", "wvbl.tpl", package = "groundfishr"),
             here::here(year, "data", "models", "wvonb"))
 
-  file.copy(system.file("models", "lvb.ctl", package = "groundfishr"),
+  file.copy(system.file("models", "wvbl.ctl", package = "groundfishr"),
             here::here(year, "data", "models", "wvonb"))
 
-  file.copy(system.file("models", "lengthSD.tpl", package = "groundfishr"),
+  file.copy(system.file("models", "lengthsd.tpl", package = "groundfishr"),
             here::here(year, "data", "models", "length_sd"))
 
 }
