@@ -5,9 +5,10 @@
 #' @param lenbins lenbin file if left NULL it looks for (year/data/user_input/len_bins.csv")
 #'
 #' @return
-#' @export lls_length_comp
+#' @export ts_length_comp
 #'
 #' @examples
+#'
 ts_length_comp <- function(year, area = "goa", lenbins = NULL){
 
 read.csv(here::here(year, "data", "raw", paste0(area, "_ts_specimen_data.csv"))) %>%
