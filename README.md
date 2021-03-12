@@ -15,17 +15,10 @@ You must be able to have a connection to the AFSC & AKFIN (Answers) data servers
 You can install the released version of groundfishr from [github](https://github.com/BenWilliams-NOAA/groundfishr) with:
 
 ``` r
-install.packages("groundfishr")
+# install.packages("devtools")
+devtools::install_github("BenWilliams-NOAA/groundfishr")
 ```
 
-## Example
+Complete descriptions are available on the [groundfishr](https://benwilliams-noaa.github.io/groundfishr/) webpage.
 
-There are a suite of "global" items that are used repeatedly in the `rockfishr` package. 
-Currently the package is setup to deal with northern rockfish "NORK" or dusky rockfish "DUSK", other species can be added as needed. 
-
-
-``` r
-library(groundfishr)
-## basic example code
-```
 
