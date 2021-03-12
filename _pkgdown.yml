@@ -1,3 +1,9 @@
+repo:
+  url:
+    source: https://github.com/BenWilliams-NOAA/groundfishr
+    issue: https://github.com/BenWilliams-NOAA/groundfishr/issues/
+    user: https://github.com/BenWilliams-NOAA
+
 reference:
 - title: setup
 - contents:
