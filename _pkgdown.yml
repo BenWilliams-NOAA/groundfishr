@@ -20,13 +20,12 @@ reference:
 - contents:
   - clean_catch
   - ts_biomass
-  - lls_rpn
+  - lls_rpw
   - fish_age_comp
   - ts_age_comp
   - fishery_length_comp
   - ts_length_comp
   - lls_length_comp
-  - lls_rpn
   - age_error
   - size_at_age
 
