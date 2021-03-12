@@ -1,0 +1,147 @@
+---
+title: "best-f"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{best-f}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This is an adaptation of 
+Use **this year's** model to recalculate the F for the ***previous year*** that would have produced the specified OFL for the ***previous year***.
+
+
+## Data setup
+
+Data should be from **this year's** assessment in a dataframe. 
+
+ - For a 1 sex - 1 gear model the data format is `age, naa, waa, saa`.
+ - For a 1 sex - 2 gear model the data format is `age, naa, waa, saa1, saa2`.
+ - For a 2 sex - 1 gear model the data format is `age, naa1, naa2, waa1, waa2, saa1, saa2`. 
+ - For a 2 sex - 2 gear model the data format is `age, naa1, naa2, waa1, waa2, saa11, saa21, saa12, saa22`,
+
+*formatting numbers are sex-gear (e.g., sex1/gear1, sex2/gear1, sex1/gear2...)*
+
+## Function inputs
+
+`m`: natural mortality from **current model**  
+`m2`: natural mortality from **current model** if using a 2 sex model  
+`last_ofl`: the OFL from the ***previous assessment***  
+`f_ratio`: the final ratio of catch between gears in the ***previous assessment***, as estimated by **this year's** model  
+`type`:  
+
+ - 1 = 1 sex - 1 gear 
+ - 2 = 1 sex - 2 gear 
+ - 3 = 2 sex - 1 gear - 2 m
+ - 4 = 2 sex - 2 gear - 2 m
+
+
+The function is in the `groundfishr` package and available from GitHub.
+``` {r, eval = F}
+# install.packages("devtools")
+devtools::install_github("BenWilliams-NOAA/groundfishr")
+```
+
+
+## Example 
+
+```{r example}
+
+# load ----
+library(groundfishr)
+
+# data ----
+oneone <- data.frame(age = 1:9, 
+                  naa = c(15.27, 10.85, 0.24, 8.72, 2.49, 10.66, 3.92, 3.71, 2.6),
+                  waa = c(0.69, 1.11, 1.54, 1.95, 2.32, 2.64, 2.91, 3.41, 3.33),
+                  saa = c(0.01,	0.1	, 0.57, 0.94, 0.99, 1, 1,	1, 1))
+
+
+onetwo <- data.frame(age = 1:9, 
+                  naa = c(15.27, 10.85, 0.24, 8.72, 2.49, 10.66, 3.92, 3.71, 2.6),
+                  waa = c(0.69, 1.11, 1.54, 1.95, 2.32, 2.64, 2.91, 3.41, 3.33),
+                  saa01 = c(0.01,	0.1	, 0.57, 0.94, 0.99, 1, 1,	1, 1),
+                  saa01 = c(0.01, 0.06, 0.34, 0.82, 0.97, 1, 1, 1, 1))
+
+# data from excel spreadsheet
+twotwo = structure(list(age = 2:31, 
+                        naa_1 = c(7.63679, 5.42537, 0.121917, 4.35873, 1.24303, 
+                                  5.32974, 1.95914, 1.854, 1.30156, 1.41362, 
+                                  0.735815, 1.33366, 0.500973, 2.8615, 0.538878, 
+                                  0.874829, 1.19386, 0.033371, 0.506956, 0.167269,
+                                  0.117931, 0.0480766, 0.342494, 0.00281983, 
+                                  0.247283, 0.0431833, 0.0294041, 0.0182076, 
+                                  0.0811841,0.549864), 
+                        naa_2 = c(7.63679, 5.41544, 0.121735, 4.40234, 1.26591, 
+                                  5.44178, 1.99886, 1.88773, 1.32467, 1.44008, 
+                                  0.749866, 1.35731, 0.509176, 2.90783, 0.54674,
+                                  0.883593, 1.20234, 0.0335946, 0.508423,
+                                  0.167075, 0.117353, 0.0478421, 0.348337, 
+                                  0.00302884, 0.285272, 0.0533892, 0.0379721, 
+                                  0.023669, 0.10561, 0.642394),
+                        waa_1 = c(0.971715586, 1.456610048, 1.877666845, 
+                                  2.216248989, 2.476126923, 2.669769481, 
+                                  2.811274969, 2.913338963, 2.986303936, 
+                                  3.038149188, 3.074833056, 3.100713565, 
+                                  3.118935223, 3.131746354, 3.140744588, 
+                                  3.147060361, 3.151491197, 3.1545986, 
+                                  3.156777345, 3.158304712, 3.159375318, 
+                                  3.160125696, 3.1606516, 3.161020166, 
+                                  3.161278459, 3.161459467, 3.161586315, 
+                                  3.161675206, 3.161737498, 3.161781151), 
+                        waa_2 = c(0.916819778, 1.477123278, 2.052195835, 
+                                  2.598202155, 3.090971733, 3.520478614,
+                                  3.885686957, 4.190661834, 4.441940672, 
+                                  4.646893835, 4.812779804, 4.946254777, 
+                                  5.053162923, 5.138490103, 5.20640581, 
+                                  5.260347147, 5.303117714, 5.336986373, 
+                                  5.363778285, 5.384954987, 5.401682719, 
+                                  5.414889559, 5.425312496, 5.433535815, 
+                                  5.440022136, 5.445137382, 5.449170763, 
+                                  5.452350711, 5.454857574, 5.456833673), 
+                        saa_11 = c(0.00889783, 0.0976488, 0.566051, 0.940203, 
+                                   0.994751, 0.999562, 0.999964, 0.999997, 1, 
+                                   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+                                   1, 1, 1, 1, 1, 1), 
+                        saa_21 = c(0.00718349, 0.058106, 0.344685, 0.817671, 
+                                   0.974513, 0.996942, 0.99964, 0.999958, 
+                                   0.999995, 0.999999, 1, 1, 1, 1, 1, 1, 1, 1, 
+                                   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), 
+                        saa_12 = c(0.120336, 0.367107, 0.617893, 0.815247, 0.941289, 
+                                   0.998866, 1, 0.959358, 0.890888, 0.806329, 
+                                   0.71479, 0.622865, 0.534999, 0.453925, 
+                                   0.381086, 0.317002, 0.26157, 0.21429, 
+                                   0.174438, 0.141185, 0.113681, 0.0911072, 
+                                  0.072704, 0.0577917, 0.0457734, 0.0361345, 
+                                  0.0284382, 0.0223178, 0.0174684, 0.0136391), 
+                        saa_22 = c(0.014480753, 0.134767549, 0.381791759, 
+                                   0.664627671, 0.886024982, 0.997733286, 1, 
+                                   0.920367772, 0.793681429, 0.650166456, 
+                                   0.510924744, 0.387960808, 0.28622393, 
+                                   0.206047906, 0.145226539, 0.100490268, 
+                                   0.068418865, 0.045920204, 0.030428616, 
+                                   0.019933204, 0.01292337, 0.008300522, 
+                                   0.005285872, 0.003339881, 0.002095204, 
+                                   0.001305702, 0.000808731, 0.000498084, 
+                                   0.000305145, 0.000186025)), 
+                   class = "data.frame", row.names = c(NA, -30L))
+
+# best f ----
+# type 1
+best_f(m = 0.1, last_ofl = 15, data = oneone, type = 1)
+# type 2
+best_f(m = 0.1, last_ofl = 15, data = onetwo, type = 2, f_ratio = 0.1)
+# type 3
+best_f(m = 0.12, last_ofl = 15, data = twotwo, type = 3, f_ratio = 0.1, m2 = 0.08)
+# type 4
+best_f(m = 0.12, last_ofl = 15, data = twotwo, type = 4, f_ratio = 0.1, m2 = 0.08)
+```
+
+*Note the type 4 model produces the same output as the spreadsheet.*
