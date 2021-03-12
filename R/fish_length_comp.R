@@ -1,5 +1,5 @@
 
-#' Fishery size composition data
+#' fishery length composition analysis
 #'
 #' @param year assessment year
 #' @param fishery default is "fsh1"
@@ -7,10 +7,10 @@
 #' @param rec_age recruitment age
 #'
 #' @return
-#' @export fishery_length_comp
+#' @export fish_length_comp
 #'
 #' @examples
-fishery_length_comp <- function(year, fishery = "fsh1", rec_age, lenbins = NULL){
+fish_length_comp <- function(year, fishery = "fsh1", rec_age, lenbins = NULL){
 
   if(is.null(lenbins)){
     stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")

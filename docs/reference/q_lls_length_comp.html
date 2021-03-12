@@ -40,8 +40,7 @@
 
 
 <meta property="og:title" content="Longline survey length comp data query — q_lls_length_comp" />
-<meta property="og:description" content="Longline survey length comp data query
-trawl survey length comp data query" />
+<meta property="og:description" content="Longline survey length comp data query" />
 
 
 
@@ -96,13 +95,21 @@ trawl survey length comp data query" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/best-f.html">best-f</a>
+    </li>
+    <li>
       <a href="../articles/getting-started.html">01 - getting started</a>
     </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/BenWilliams-NOAA/groundfishr/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -117,18 +124,15 @@ trawl survey length comp data query" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Longline survey length comp data query</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/BenWilliams-NOAA/groundfishr/blob/master/R/q_lls_length_comp.R'><code>R/q_lls_length_comp.R</code></a></small>
     <div class="hidden name"><code>q_lls_length_comp.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Longline survey length comp data query</p>
-<p>trawl survey length comp data query</p>
     </div>
 
-    <pre class="usage"><span class='fu'>q_lls_length_comp</span><span class='op'>(</span><span class='va'>year</span>, survey <span class='op'>=</span> <span class='st'>"goa"</span>, <span class='va'>afsc_species</span>, <span class='va'>area</span>, <span class='va'>akfin</span>, save <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='fu'>q_lls_length_comp</span><span class='op'>(</span><span class='va'>year</span>, survey <span class='op'>=</span> <span class='st'>"goa"</span>, <span class='va'>afsc_species</span>, <span class='va'>area</span>, <span class='va'>akfin</span>, save <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>q_lls_length_comp</span><span class='op'>(</span><span class='va'>year</span>, survey <span class='op'>=</span> <span class='st'>"goa"</span>, <span class='va'>afsc_species</span>, <span class='va'>afsc</span>, save <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,20 +146,16 @@ trawl survey length comp data query" />
       <td><p>default is fsh1, change if age comps from multiple fisheries</p></td>
     </tr>
     <tr>
-      <th>akfin</th>
+      <th>afsc_species</th>
+      <td><p>afsc species code</p></td>
+    </tr>
+    <tr>
+      <th>afsc</th>
       <td><p>the database to query</p></td>
     </tr>
     <tr>
       <th>save</th>
       <td><p>save the file in designated folder</p></td>
-    </tr>
-    <tr>
-      <th>norpac_species</th>
-      <td><p>norpac species code</p></td>
-    </tr>
-    <tr>
-      <th>region</th>
-      <td><p>GOA or BSAI</p></td>
     </tr>
     </table>
 
@@ -165,11 +165,8 @@ trawl survey length comp data query" />
 
 
 
-
-
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

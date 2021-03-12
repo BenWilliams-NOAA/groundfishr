@@ -1,4 +1,4 @@
-#' Best F
+#' best F
 #'
 #'  Use this year's model to recalculate the F for the previous year that would have produced the specified OFL for the previous year
 #'

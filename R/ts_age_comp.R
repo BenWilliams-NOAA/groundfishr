@@ -1,4 +1,4 @@
-#' trawl survey age comp
+#' trawl survey age comp analysis
 #'
 #' @param year assessment year
 #' @param area default is "goa"

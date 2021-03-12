@@ -1,4 +1,4 @@
-#' Fishery length comp data query
+#' fishery length comp data query
 #'
 #' @param year assessment year
 #' @param fishery default is fsh1, change if age comps from multiple fisheries
@@ -12,7 +12,7 @@
 #'
 #' @examples
 #'
-q_fishery_length_comp <- function(year, fishery = "fsh1", norpac_species, area, akfin, save = TRUE){
+q_fish_length_comp <- function(year, fishery = "fsh1", norpac_species, area, akfin, save = TRUE){
 
 
   # get appropriate age compe query data for a specific fishery

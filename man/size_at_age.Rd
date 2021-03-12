@@ -2,7 +2,7 @@
 % Please edit documentation in R/size_at_age.R
 \name{size_at_age}
 \alias{size_at_age}
-\title{compute size at age (length at age and length sd)}
+\title{size at age analysis}
 \usage{
 size_at_age(year, admb_home, rec_age, lenbins = NULL)
 }
@@ -21,5 +21,5 @@ size_at_age(year, admb_home, rec_age, lenbins = NULL)
 
 }
 \description{
-compute size at age (length at age and length sd)
+size at age analysis
 }

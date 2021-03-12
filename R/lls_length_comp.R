@@ -8,7 +8,7 @@
 #' @export lls_length_comp
 #'
 #' @examples
-lls_length_comp <- function(YEAR, species = NULL, lenbins = NULL){
+lls_length_comp <- function(year, species = NULL, lenbins = NULL){
 
   if(is.null(lenbins)){
     stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")
@@ -26,7 +26,7 @@ lls_length_comp <- function(YEAR, species = NULL, lenbins = NULL){
 
   if(species == "REBS"){
     # min area_code, remove these areas, country to ignore, min year
-    drop <- list(25, c(28, 31, 36, 41, 42, 43,48), "Japan", 1993)
+    drop <- list(25, c(28, 31, 36, 41, 42, 43, 48), "Japan", 1993)
     # max station number, exploitable
     drop2 <- list(499, 1)
   }

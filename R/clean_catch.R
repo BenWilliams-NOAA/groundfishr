@@ -9,6 +9,7 @@
 #' @export clean_catch
 #'
 #' @examples clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "catch_1961-1992.csv")
+#'
 clean_catch <- function(year, fishery = "fsh1", TAC = c(3333, 2222, 1111), fixed_catch = NULL){
 
   if(!is.null(fixed_catch)){

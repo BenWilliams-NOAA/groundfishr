@@ -1,11 +1,11 @@
-#' Get the longline survey relative population weight
+#' longline survey relative population weight
 #'
 #' @param year of interest
 #' @param file using an alt-ll survey rpw? (file must have format: year, rpw, cv, sd, lci, uci)
 #' @param filter_yrs any years that would like removed from survey biomass estimates e.g., 1997 or c(2001, 2003)
 #'
 #' @return
-#' @export lls_rpn
+#' @export lls_rpw
 #'
 #' @examples
 #'

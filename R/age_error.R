@@ -1,10 +1,10 @@
-#' Age error analysis
+#' aging error analysis
 #'
 #' @param read_tester = if left blank it looks for the following file:"data/user_input/reader_tester.csv"
 #' @param species = "NORK"
 #' @param year = year of the assessment
 #' @param admb_home = location admb exists on your computer - if is "c:/admb" can leave NULL
-#' @param region = "GOA" (BSAI not currently setup)
+#' @param area = "GOA" (BSAI not currently setup)
 #' @param rec_age = recruitment age
 #' @param plus_age = max age for modeling
 #' @param max_age = max age for age error analysis - default = 100
@@ -12,9 +12,9 @@
 #' @return
 #' @export age_error
 #'
-#' @examples ageage(species = "NORK", year = 2020, admb_home = NULL, region = "GOA", rec_age = 2, plus_age = 45, max_age = 100, ...)
+#' @examples ageage(species = "NORK", year = 2020, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100, ...)
 #'
-age_error <- function(reader_tester = NULL, species, year, admb_home = NULL, region = "GOA", rec_age = 2, plus_age = 45, max_age = 100){
+age_error <- function(reader_tester = NULL, species, year, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100){
 
 
   if(is.null(reader_tester)){
@@ -41,7 +41,7 @@ age_error <- function(reader_tester = NULL, species, year, admb_home = NULL, reg
 
   rt %>%
     dplyr::filter(Species %in% norpac_species,
-                  Region == region,
+                  Region == area,
                   Read_Age > 0,
                   Test_Age > 0,
                   Final_Age > 0) %>%

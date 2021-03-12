@@ -26,12 +26,12 @@ goa_rebs <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
                           UID = akfin_user, PWD = akfin_pwd)
 
   # catch
-  q_fishery_catch(year, fishery = "fsh1", species = species, area = area, akfin = akfin)
-  q_fishery_obs(year, fishery = "fsh1", norpac_species = c(norpac_species, norpac_species2),
+  q_fish_catch(year, fishery = "fsh1", species = species, area = area, akfin = akfin)
+  q_fish_obs(year, fishery = "fsh1", norpac_species = c(norpac_species, norpac_species2),
                 area, akfin)
-  q_fishery_age_comp(year, fishery = "fsh1", norpac_species = c(norpac_species, norpac_species2),
+  q_fish_age_comp(year, fishery = "fsh1", norpac_species = c(norpac_species, norpac_species2),
                      area = area, akfin = akfin)
-  q_fishery_length_comp(year, fishery = "fsh1", norpac_species = c(norpac_species, norpac_species2),
+  q_fish_length_comp(year, fishery = "fsh1", norpac_species = c(norpac_species, norpac_species2),
                         area = area, akfin = akfin)
 
   DBI::dbDisconnect(akfin)

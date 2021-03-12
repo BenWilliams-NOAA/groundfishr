@@ -34,4 +34,5 @@ clean up catch data
 }
 \examples{
 clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "catch_1961-1992.csv")
+
 }

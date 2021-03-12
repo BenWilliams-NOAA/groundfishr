@@ -2,7 +2,7 @@
 % Please edit documentation in R/ts_biomass.R
 \name{ts_biomass}
 \alias{ts_biomass}
-\title{Get the survey biomass}
+\title{survey biomass}
 \usage{
 ts_biomass(year, survey = "goa", file = NULL)
 }
@@ -17,7 +17,7 @@ ts_biomass(year, survey = "goa", file = NULL)
 
 }
 \description{
-Get the survey biomass
+survey biomass
 }
 \examples{
 

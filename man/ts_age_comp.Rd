@@ -2,7 +2,7 @@
 % Please edit documentation in R/ts_age_comp.R
 \name{ts_age_comp}
 \alias{ts_age_comp}
-\title{trawl survey age comp}
+\title{trawl survey age comp analysis}
 \usage{
 ts_age_comp(year, area = "goa", rec_age, plus_age)
 }
@@ -19,7 +19,7 @@ ts_age_comp(year, area = "goa", rec_age, plus_age)
 
 }
 \description{
-trawl survey age comp
+trawl survey age comp analysis
 }
 \examples{
 survey_age_comp(year = 2020, rec_age = 2, plus_age = 45)

@@ -1,4 +1,4 @@
-#' compute size at age (length at age and length sd)
+#' size at age analysis
 #'
 #' @param year analysis year
 #' @param admb_home location admb exists on your computer
@@ -9,7 +9,7 @@
 #' @export size_at_age
 #'
 #' @examples
-size_at_age<- function(year, admb_home, rec_age, lenbins = NULL){
+size_at_age <- function(year, admb_home, rec_age, lenbins = NULL){
 
   if (!dir.exists(here::here(year, "data", "output"))){
     dir.create(here::here(year, "data", "output"), recursive=TRUE)

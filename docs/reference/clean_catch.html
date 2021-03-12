@@ -95,13 +95,21 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/best-f.html">best-f</a>
+    </li>
+    <li>
       <a href="../articles/getting-started.html">01 - getting started</a>
     </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/BenWilliams-NOAA/groundfishr/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -116,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>clean up catch data</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/BenWilliams-NOAA/groundfishr/blob/master/R/clean_catch.R'><code>R/clean_catch.R</code></a></small>
     <div class="hidden name"><code>clean_catch.Rd</code></div>
     </div>
 
@@ -166,7 +174,8 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>clean_catch</span><span class='op'>(</span><span class='va'>year</span>, TAC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2874</span>, <span class='fl'>2756</span>, <span class='fl'>3100</span><span class='op'>)</span>, fixed_catch <span class='op'>=</span> <span class='st'>"catch_1961-1992.csv"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "catch_1961-1992.csv"): could not find function "clean_catch"</span></div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in grepl("^[/\\\\~]|^[a-zA-Z]:[/\\\\]", x): object 'year' not found</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

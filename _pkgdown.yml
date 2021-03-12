@@ -23,7 +23,7 @@ reference:
   - lls_rpw
   - fish_age_comp
   - ts_age_comp
-  - fishery_length_comp
+  - fish_length_comp
   - ts_length_comp
   - lls_length_comp
   - age_error

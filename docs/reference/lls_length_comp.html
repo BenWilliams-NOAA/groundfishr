@@ -95,13 +95,21 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/best-f.html">best-f</a>
+    </li>
+    <li>
       <a href="../articles/getting-started.html">01 - getting started</a>
     </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/BenWilliams-NOAA/groundfishr/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -116,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Longline length composition analysis</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/BenWilliams-NOAA/groundfishr/blob/master/R/lls_length_comp.R'><code>R/lls_length_comp.R</code></a></small>
     <div class="hidden name"><code>lls_length_comp.Rd</code></div>
     </div>
 
@@ -124,26 +132,22 @@
     <p>Longline length composition analysis</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lls_length_comp</span><span class='op'>(</span><span class='va'>YEAR</span>, species <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>rec_age</span>, lenbins <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>lls_length_comp</span><span class='op'>(</span><span class='va'>year</span>, species <span class='op'>=</span> <span class='cn'>NULL</span>, lenbins <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>year</th>
+      <td><p>assessment year</p></td>
+    </tr>
+    <tr>
       <th>species</th>
       <td><p>enter if REBS, otherwise NULL</p></td>
     </tr>
     <tr>
-      <th>rec_age</th>
-      <td><p>recruitment age</p></td>
-    </tr>
-    <tr>
       <th>lenbins</th>
       <td><p>lenbin file if left NULL it looks for (year/data/user_input/len_bin_labels.csv")</p></td>
-    </tr>
-    <tr>
-      <th>year</th>
-      <td><p>assessment year</p></td>
     </tr>
     </table>
 

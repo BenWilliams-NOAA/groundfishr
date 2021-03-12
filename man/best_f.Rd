@@ -2,7 +2,7 @@
 % Please edit documentation in R/best_f.R
 \name{best_f}
 \alias{best_f}
-\title{Best F}
+\title{best F}
 \usage{
 best_f(data, m, last_ofl, type = 1, f_ratio = NULL, m2 = NULL)
 }

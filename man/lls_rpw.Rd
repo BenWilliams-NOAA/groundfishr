@@ -2,7 +2,7 @@
 % Please edit documentation in R/lls_rpw.R
 \name{lls_rpw}
 \alias{lls_rpw}
-\title{Get the longline survey relative population weight}
+\title{longline survey relative population weight}
 \usage{
 lls_rpw(year, file = NULL, filter_yrs = NULL)
 }
@@ -17,7 +17,7 @@ lls_rpw(year, file = NULL, filter_yrs = NULL)
 
 }
 \description{
-Get the longline survey relative population weight
+longline survey relative population weight
 }
 \examples{
 

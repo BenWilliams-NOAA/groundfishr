@@ -2,14 +2,14 @@
 % Please edit documentation in R/age_error.R
 \name{age_error}
 \alias{age_error}
-\title{Age error analysis}
+\title{aging error analysis}
 \usage{
 age_error(
   reader_tester = NULL,
   species,
   year,
   admb_home = NULL,
-  region = "GOA",
+  area = "GOA",
   rec_age = 2,
   plus_age = 45,
   max_age = 100
@@ -22,7 +22,7 @@ age_error(
 
 \item{admb_home}{= location admb exists on your computer - if is "c:/admb" can leave NULL}
 
-\item{region}{= "GOA" (BSAI not currently setup)}
+\item{area}{= "GOA" (BSAI not currently setup)}
 
 \item{rec_age}{= recruitment age}
 
@@ -36,9 +36,9 @@ age_error(
 
 }
 \description{
-Age error analysis
+aging error analysis
 }
 \examples{
-ageage(species = "NORK", year = 2020, admb_home = NULL, region = "GOA", rec_age = 2, plus_age = 45, max_age = 100, ...)
+ageage(species = "NORK", year = 2020, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100, ...)
 
 }

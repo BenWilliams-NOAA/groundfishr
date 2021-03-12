@@ -1,4 +1,4 @@
-#' Date of data pull
+#' date of data query
 #'
 #' @param year
 #'

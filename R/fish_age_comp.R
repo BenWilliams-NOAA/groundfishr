@@ -1,4 +1,4 @@
-#' Fishery age composition
+#' fishery age composition analysis
 #'
 #' @param year assessment year
 #' @param fishery default is fsh1, change if age comps from multiple fisheries (e.g., fsh2)

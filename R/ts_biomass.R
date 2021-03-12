@@ -1,4 +1,4 @@
-#' Get the survey biomass
+#' survey biomass
 #'
 #' @param year of interest
 #' @param type if not using the design-based abundance, the file name must be stated (e.g. "GAP_VAST.csv")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/q_date.R
 \name{q_date}
 \alias{q_date}
-\title{Date of data pull}
+\title{date of data query}
 \usage{
 q_date(year)
 }
@@ -13,5 +13,5 @@ q_date(year)
 
 }
 \description{
-Date of data pull
+date of data query
 }

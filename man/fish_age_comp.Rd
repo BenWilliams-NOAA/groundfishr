@@ -2,7 +2,7 @@
 % Please edit documentation in R/fish_age_comp.R
 \name{fish_age_comp}
 \alias{fish_age_comp}
-\title{Fishery age composition}
+\title{fishery age composition analysis}
 \usage{
 fish_age_comp(year, fishery = "fsh1", rec_age, plus_age)
 }
@@ -19,5 +19,5 @@ fish_age_comp(year, fishery = "fsh1", rec_age, plus_age)
 
 }
 \description{
-Fishery age composition
+fishery age composition analysis
 }
