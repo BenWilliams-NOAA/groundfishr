@@ -1,4 +1,4 @@
-#' Get the longline survey RPN
+#' Get the longline survey relative population weight
 #'
 #' @param year of interest
 #' @param file using an alt-ll survey rpw? (file must have format: year, rpw, cv, sd, lci, uci)
@@ -9,7 +9,7 @@
 #'
 #' @examples
 #'
-lls_rpn <- function(year, file = NULL, filter_yrs = NULL){
+lls_rpw <- function(year, file = NULL, filter_yrs = NULL){
 
   # For GOA only at this time
   if(is.null(filter_yrs)){
