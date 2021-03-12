@@ -12,8 +12,16 @@ reference:
   - clean_catch
   - age_error
   - size_at_age
+  - ts_biomass
   - lls_length_comp
   - lls_rpn
+
+- title: species functions
+- desc: wrapper functions for specific species and regions
+- contents:
+  - goa_dusk
+  - goa_nork
+  - goa_rebs
 
 - title: figure functions
 - contents:
