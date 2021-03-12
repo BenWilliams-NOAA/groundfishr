@@ -1,0 +1,7 @@
+reference:
+- title: setup
+  desc: functions for setting up an approrpiate framework.
+- contents:
+  - setup
+- title: query functions
+  - startes_with("q_")
