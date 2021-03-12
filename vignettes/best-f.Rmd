@@ -14,7 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-This is an adaptation of 
+This is an adaptation of the Best F Excel spreadsheet forwarded to assessment authors from Grant Thompson is 2020.
+
 Use **this year's** model to recalculate the F for the ***previous year*** that would have produced the specified OFL for the ***previous year***.
 
 
@@ -139,7 +140,7 @@ best_f(m = 0.1, last_ofl = 15, data = oneone, type = 1)
 # type 2
 best_f(m = 0.1, last_ofl = 15, data = onetwo, type = 2, f_ratio = 0.1)
 # type 3
-best_f(m = 0.12, last_ofl = 15, data = twotwo, type = 3, f_ratio = 0.1, m2 = 0.08)
+best_f(m = 0.12, last_ofl = 15, data = twotwo, type = 3, m2 = 0.08)
 # type 4
 best_f(m = 0.12, last_ofl = 15, data = twotwo, type = 4, f_ratio = 0.1, m2 = 0.08)
 ```
