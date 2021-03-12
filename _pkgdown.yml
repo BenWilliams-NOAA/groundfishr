@@ -5,7 +5,7 @@ reference:
 
 - title: query functions
 - contents:
-  - startes_with("q_")
+  - startes_with("q")
 
 - title: core functions
 - contents:
