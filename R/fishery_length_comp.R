@@ -7,10 +7,10 @@
 #' @param rec_age recruitment age
 #'
 #' @return
-#' @export fish_length_comp
+#' @export fishery_length_comp
 #'
 #' @examples
-fish_length_comp <- function(year, fishery = "fsh1", rec_age, lenbins = NULL){
+fishery_length_comp <- function(year, fishery = "fsh1", rec_age, lenbins = NULL){
 
   if(is.null(lenbins)){
     stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")
