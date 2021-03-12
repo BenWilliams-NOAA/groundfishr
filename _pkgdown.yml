@@ -22,6 +22,8 @@ reference:
   - age_error
   - size_at_age
   - ts_biomass
+  - fish_age_comp
+  - ts_age_comp
   - lls_length_comp
   - lls_rpn
 

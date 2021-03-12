@@ -3,13 +3,12 @@
 #' @param year assessment year
 #' @param species enter if REBS, otherwise NULL
 #' @param lenbins lenbin file if left NULL it looks for (year/data/user_input/len_bin_labels.csv")
-#' @param rec_age recruitment age
 #'
 #' @return
 #' @export lls_length_comp
 #'
 #' @examples
-lls_length_comp <- function(YEAR, species = NULL, rec_age, lenbins = NULL){
+lls_length_comp <- function(YEAR, species = NULL, lenbins = NULL){
 
   if(is.null(lenbins)){
     stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")

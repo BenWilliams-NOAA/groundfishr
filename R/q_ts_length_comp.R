@@ -34,10 +34,10 @@ q_ts_length_comp <- function(year, survey = "goa", afsc_species, area, afsc, sav
 
   if(isTRUE(save)){
     sql_run(afsc, .one) %>%
-      write.csv(here::here(year, "data", "raw", paste0(survey, "_lls_length_data.csv")),
+      write.csv(here::here(year, "data", "raw", paste0(survey, "_ts_length_data.csv")),
                 row.names = FALSE)
     sql_run(afsc, .two) %>%
-      write.csv(here::here(year, "data", "raw", paste0(survey, "_lls_specimen_data.csv")),
+      write.csv(here::here(year, "data", "raw", paste0(survey, "_ts_specimen_data.csv")),
                 row.names = FALSE)
   } else {
     list(sql_run(afsc, .one),
