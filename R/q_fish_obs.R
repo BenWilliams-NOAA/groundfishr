@@ -12,7 +12,7 @@
 #'
 #' @examples
 #'
-q_fishery_obs <- function(year, fishery = "fsh1", norpac_species, area, akfin, save = TRUE){
+q_fish_obs <- function(year, fishery = "fsh1", norpac_species, area, akfin, save = TRUE){
 
   # get appropriate age compe query data for a specific fishery
   # e.g., ("fsh1", "fsh2")

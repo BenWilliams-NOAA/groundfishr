@@ -1,0 +1,39 @@
+---
+title: "00 - naming conventions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{naming-conventions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+General naming conventions that are held through this package:
+
+## Functions 
+
+Fisheries are identified with `fsh` followed by a number - fsh1, fsh2.  
+Trawl survey functions start with `ts_`, longline survey functions start with `lls`.  
+A function that starts with `q_` is a database query that will connect to either the AKFIN or AFSC database for raw data. 
+Since queries may be specific for each species and region stand alone query "wrapper functions" are provided. 
+These functions are named by region and species a la `goa_nork()`.  
+Figure functions begin with `fig_`, table functions begin with `tab_`.
+
+## Data files
+
+A data file name that ends with `_data.csv` is the raw data that originates from the database with no or little filtering. 
+Query functions place files the `data/raw` folder.  
+Processed raw data (core function actions) are placed in the `data/output` folder.  
+A number of user provided files are needed (age error, length bins, VAST) these should be stored in the `data/user_input` folder as .csv files.
+
+
+
+
+
+

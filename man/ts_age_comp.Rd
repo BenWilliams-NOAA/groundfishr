@@ -22,5 +22,5 @@ ts_age_comp(year, area = "goa", rec_age, plus_age)
 trawl survey age comp analysis
 }
 \examples{
-survey_age_comp(year = 2020, rec_age = 2, plus_age = 45)
+ts_age_comp(year = 2020, rec_age = 2, plus_age = 45)
 }

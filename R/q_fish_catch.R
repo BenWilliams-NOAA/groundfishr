@@ -8,11 +8,11 @@
 #' @param save save the file in designated folder
 #'
 #' @return
-#' @export q_fishery_catch
+#' @export q_fish_catch
 #'
 #' @examples
 #'
-q_fishery_catch <- function(year, fishery = "fsh1", species, area, akfin, save = TRUE){
+q_fish_catch <- function(year, fishery = "fsh1", species, area, akfin, save = TRUE){
 
 
   # get appropriate age compe query data for a specific fishery

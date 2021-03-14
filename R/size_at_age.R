@@ -29,7 +29,7 @@ size_at_age <- function(year, admb_home, rec_age, lenbins = NULL){
   }
 
   if(is.null(lenbins)){
-    lenbins = read.csv(here::here(year, "data", "user_input", "len_bin_labels.csv"))$len_bins
+    stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")
   } else {
     lenbins = read.csv(here::here(year, "data", "user_input", lenbins))$len_bins
   }

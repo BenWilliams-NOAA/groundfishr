@@ -7,11 +7,23 @@
 goa_nork(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
 }
 \arguments{
-\item{afsc_pwd}{}
+\item{year}{assessment year}
+
+\item{akfin_user}{user name}
+
+\item{akfin_pwd}{user password}
+
+\item{afsc_user}{user name}
+
+\item{afsc_pwd}{user password}
 }
 \value{
 
 }
 \description{
 raw data query for GOA RE/BS
+}
+\examples{
+goa_nork(year = 2020, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
+
 }

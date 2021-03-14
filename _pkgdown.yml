@@ -8,6 +8,7 @@ reference:
 - title: setup
 - contents:
   - setup
+  - accepted_model
 
 - title: query functions
 - contents:

@@ -95,13 +95,24 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/best-f.html">best-f</a>
+    </li>
+    <li>
       <a href="../articles/getting-started.html">01 - getting started</a>
+    </li>
+    <li>
+      <a href="../articles/naming-conventions.html">00 - naming conventions</a>
     </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/BenWilliams-NOAA/groundfishr/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -116,7 +127,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>raw data query for GOA RE/BS</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/BenWilliams-NOAA/groundfishr/blob/master/R/goa_nork.R'><code>R/goa_nork.R</code></a></small>
     <div class="hidden name"><code>goa_nork.Rd</code></div>
     </div>
 
@@ -130,8 +141,24 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>year</th>
+      <td><p>assessment year</p></td>
+    </tr>
+    <tr>
+      <th>akfin_user</th>
+      <td><p>user name</p></td>
+    </tr>
+    <tr>
+      <th>akfin_pwd</th>
+      <td><p>user password</p></td>
+    </tr>
+    <tr>
+      <th>afsc_user</th>
+      <td><p>user name</p></td>
+    </tr>
+    <tr>
       <th>afsc_pwd</th>
-      <td></td>
+      <td><p>user password</p></td>
     </tr>
     </table>
 
@@ -141,6 +168,10 @@
 
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>goa_nork</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2020</span>, <span class='va'>akfin_user</span>, <span class='va'>akfin_pwd</span>, <span class='va'>afsc_user</span>, <span class='va'>afsc_pwd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in OdbcConnection(dsn = dsn, ..., timezone = timezone, timezone_out = timezone_out,     encoding = encoding, bigint = bigint, timeout = timeout,     driver = driver, server = server, database = database, uid = uid,     pwd = pwd, dbms.name = dbms.name, .connection_string = .connection_string): object 'akfin_user' not found</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

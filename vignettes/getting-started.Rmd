@@ -119,3 +119,25 @@ project
 
 ```
 
+The SSC accepted model can then be added from the last assessment as the current year's "base model".
+
+```{r}
+accepted_model(base_year = 2020, base_model = "m18.2b", year = 2021)
+```
+
+This creates a duplication of the folders for the given year
+
+```
+project
+|__2020
+    |__data
+    |__base    # last accepted model
+    |__m18.2a  # model variant a
+    |__m18.2b  # model variant b
+|__2021
+    |__data
+    |__base   # dupication of m18.2b
+        |__ base_model_2020_m18.2b.txt"
+
+```
+
