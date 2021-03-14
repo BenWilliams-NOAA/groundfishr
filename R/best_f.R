@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#'
+#'\dontrun{
 #' oneone <- data.frame(age = 1:9,
 #'                      naa = c(15.27, 10.85, 0.24, 8.72, 2.49, 10.66, 3.92, 3.71, 2.6),
 #'                      waa = c(0.69, 1.11, 1.54, 1.95, 2.32, 2.64, 2.91, 3.41, 3.33),
@@ -46,6 +46,7 @@
 #' best_f(m = 0.12, last_ofl = 15, data = twotwo, type = 3, f_ratio = 0.1, m2 = 0.08)
 #' type 4
 #' best_f(m = 0.12, last_ofl = 15, data = twotwo, type = 4, f_ratio = 0.1, m2 = 0.08)
+#' }
 
 #'
 best_f <- function(data, m, last_ofl, type = 1, f_ratio = NULL, m2 = NULL){
