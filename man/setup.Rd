@@ -16,6 +16,7 @@ setup(year)
 Creates a common folder structure for ADMB assessments
 }
 \examples{
+\dontrun{
 setup(2020)
-
+}
 }

@@ -8,8 +8,9 @@
 #' @export setup
 #'
 #' @examples
+#' \dontrun{
 #' setup(2020)
-#'
+#'}
 setup <- function(year){
 
   dirs = c("raw", "user_input", "output", "sara", "models")

@@ -20,5 +20,7 @@ accepted_model(base_year, base_model, year)
 copy of all base model files, also add a "base_model.txt" file that identifies the model used
 }
 \examples{
+\dontrun{
 accepted_model(base_year = 2020, base_model = "m18.2b", year = 2021)
+}
 }

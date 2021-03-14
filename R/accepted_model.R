@@ -9,7 +9,9 @@
 #' @export accepted_model
 #'
 #' @examples
+#' \dontrun{
 #' accepted_model(base_year = 2020, base_model = "m18.2b", year = 2021)
+#' }
 accepted_model <- function(base_year, base_model, year){
 
 

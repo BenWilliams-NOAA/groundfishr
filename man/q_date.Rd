@@ -7,7 +7,7 @@
 q_date(year)
 }
 \arguments{
-\item{year}{}
+\item{year}{assessment year}
 }
 \value{
 

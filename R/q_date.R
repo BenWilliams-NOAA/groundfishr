@@ -1,6 +1,6 @@
 #' date of data query
 #'
-#' @param year
+#' @param year assessment year
 #'
 #' @return
 #' @export
