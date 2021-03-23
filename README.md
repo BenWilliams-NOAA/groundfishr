@@ -1,3 +1,4 @@
+# groundfishr <img src="man/figures/logo.png" align="right" width=120 height=139 alt="" />
 
 # groundfishr
 
@@ -9,6 +10,11 @@ You must be able to have a connection to the AFSC & AKFIN (Answers) data servers
 <!-- badges: end -->
 
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  fig.path = "man/figures/"
+)
+```
 
 ## Installation
 
