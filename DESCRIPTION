@@ -24,3 +24,5 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/BenWilliams-NOAA/groundfishr
 BugReports: https://github.com/BenWilliams-NOAA/groundfishr/issues
+Depends: 
+    R (>= 2.10)
