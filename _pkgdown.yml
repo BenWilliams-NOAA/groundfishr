@@ -5,9 +5,12 @@ repo:
 - user: https://github.com/BenWilliams-NOAA
 
 articles:
-- title: Articles
+- title: articles
   contents:
-  - 01 - getting started
+  - getting-started
+  - naming-conventions
+  - complete-run
+  - best-f
 
 reference:
 - title: setup
