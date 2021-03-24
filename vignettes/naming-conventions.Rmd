@@ -1,5 +1,5 @@
 ---
-title: "00 - naming conventions"
+title: "naming-conventions"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{naming-conventions}

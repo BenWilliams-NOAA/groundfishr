@@ -4,6 +4,11 @@ repo:
 - issue: https://github.com/BenWilliams-NOAA/groundfishr/issues/
 - user: https://github.com/BenWilliams-NOAA
 
+articles:
+- title: Articles
+  contents:
+  - 01 - getting started
+
 reference:
 - title: setup
 - contents:

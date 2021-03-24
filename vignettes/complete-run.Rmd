@@ -1,5 +1,5 @@
 ---
-title: "03 - complete-run"
+title: "complete-run"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{complete-run}
