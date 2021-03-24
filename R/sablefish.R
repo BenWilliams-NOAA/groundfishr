@@ -10,6 +10,9 @@
 #' @export sablefish
 #'
 #' @examples
+#' \donttest{
+#' sablefish(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
+#' }
 sablefish <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
 
   # globals ----

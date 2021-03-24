@@ -15,3 +15,8 @@ sablefish(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
 \description{
 raw data query for sablefish
 }
+\examples{
+\donttest{
+sablefish(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
+}
+}
