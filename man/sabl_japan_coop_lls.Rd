@@ -3,7 +3,7 @@
 \docType{data}
 \name{sabl_japan_coop_lls}
 \alias{sabl_japan_coop_lls}
-\title{Sablefish historical CPUE relative population weight (RPW) and relative population numbers (RPN) from the Japanese cooperative longline fishery for 1979-1994}
+\title{Sablefish historical CPUE}
 \format{
 A data frame with 16 observations and 9 variables:
 \describe{
@@ -22,6 +22,6 @@ A data frame with 16 observations and 9 variables:
 sabl_japan_coop_lls
 }
 \description{
-A dataset containing both cpue data by year
+A dataset containing both relative population weight (RPW) and relative population numbers (RPN) from the Japanese cooperative longline fishery for 1979-1994
 }
 \keyword{datasets}

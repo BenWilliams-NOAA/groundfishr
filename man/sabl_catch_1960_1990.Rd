@@ -3,7 +3,7 @@
 \docType{data}
 \name{sabl_catch_1960_1990}
 \alias{sabl_catch_1960_1990}
-\title{Sablefish historical catch data for 1960-1990}
+\title{Sablefish historical catch data}
 \format{
 A data frame with 62 observations and 3 variables:
 \describe{
@@ -16,6 +16,6 @@ A data frame with 62 observations and 3 variables:
 sabl_catch_1960_1990
 }
 \description{
-A dataset containing both fixed gear and trawl gear catch by year
+A dataset containing both fixed gear and trawl gear catch by year for 1960-1990
 }
 \keyword{datasets}
