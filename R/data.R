@@ -27,3 +27,15 @@
 #' \item{rpw_uci}{upper confidence interval: 2 * se}
 #' }
 "sabl_japan_coop_lls"
+
+#' Sablefish fixed weights at length
+#'
+#' A dataset containing length bins and associated male and female weights
+#'
+#' @format A data frame with 30 observations and 3 variables:
+#' \describe{
+#' \item{length_bin}{length bin groups}
+#' \item{wt_m}{male weight (kg)}
+#' \item{wt_f}{female weight (kg)}
+#' }
+"sabl_old_wts_sex"
