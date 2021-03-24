@@ -37,6 +37,11 @@ reference:
 - contents:
   - best_f
 
+- title:: historical data
+- contents:
+  - sabl_catch_1960_1990
+  - sabl_japan_coop_lls
+
 - title: helper functions
 - contents:
   - collapse_row
