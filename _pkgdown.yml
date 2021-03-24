@@ -16,6 +16,7 @@ reference:
   - goa_dusk
   - goa_nork
   - goa_rebs
+  - sablefish
 
 - title: core functions
 - contents:
@@ -41,6 +42,7 @@ reference:
 - contents:
   - sabl_catch_1960_1990
   - sabl_japan_coop_lls
+  - sabl_old_wts_sex
 
 - title: helper functions
 - contents:
