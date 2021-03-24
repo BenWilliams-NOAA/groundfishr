@@ -1,6 +1,6 @@
-#' Sablefish historical catch data for 1960-1990
+#' Sablefish historical catch data
 #'
-#' A dataset containing both fixed gear and trawl gear catch by year
+#' A dataset containing both fixed gear and trawl gear catch by year for 1960-1990
 #'
 #' @format A data frame with 62 observations and 3 variables:
 #' \describe{
@@ -10,9 +10,9 @@
 #' }
 "sabl_catch_1960_1990"
 
-#' Sablefish historical CPUE relative population weight (RPW) and relative population numbers (RPN) from the Japanese cooperative longline fishery for 1979-1994
+#' Sablefish historical CPUE
 #'
-#' A dataset containing both cpue data by year
+#' A dataset containing both relative population weight (RPW) and relative population numbers (RPN) from the Japanese cooperative longline fishery for 1979-1994
 #'
 #' @format A data frame with 16 observations and 9 variables:
 #' \describe{
