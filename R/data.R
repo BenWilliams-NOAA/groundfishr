@@ -10,16 +10,20 @@
 #' }
 "sabl_catch_1960_1990"
 
-#' Sablefish historical CPUE relative population weight (RPW) from the Japanese longline fishery for 1964-1981
+#' Sablefish historical CPUE relative population weight (RPW) and relative population numbers (RPN) from the Japanese cooperative longline fishery for 1979-1994
 #'
 #' A dataset containing both cpue data by year
 #'
-#' @format A data frame with 18 observations and 5 variables:
+#' @format A data frame with 16 observations and 9 variables:
 #' \describe{
 #' \item{year}{year of cpue}
+#' \item{rpn}{relative population number}
+#' \item{rpn_se}{the standard error of rpn}
 #' \item{rpw}{relative population weight}
-#' \item{se}{the standard error of rpw}
-#' \item{lci}{lower confidence interval: 2 * se}
-#' \item{uci}{upper confidence interval: 2 * se}
+#' \item{rpw_se}{the standard error of rpw}
+#' \item{rpn_lci}{lower confidence interval: 2 * se}
+#' \item{rpn_uci}{upper confidence interval: 2 * se}
+#' \item{rpw_lci}{lower confidence interval: 2 * se}
+#' \item{rpw_uci}{upper confidence interval: 2 * se}
 #' }
-"sabl_japan_llf_rpw"
+"sabl_japan_coop_lls"
