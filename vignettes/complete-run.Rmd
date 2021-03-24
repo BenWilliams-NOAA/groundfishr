@@ -1,0 +1,83 @@
+---
+title: "03-complete-run"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{complete-run}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = F,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(groundfishr)
+
+# globals ----
+
+year = 2021
+species <- "REBS"
+rec_age <- 3
+plus_age <- 42
+TAC <- c(1328, 1327, 1444) # TAC from last 3 years
+admb_home <- "C:/Program Files (x86)/ADMB-12.1" # more common to be "C/ADMB"
+model_name <- "rebs"
+dat_name <- "goa_rebs_2021" 
+
+afsc_user = "your_user_name"
+afsc_pwd = "your_password"
+akfin_user = "your_user_name"
+akfin_pwd = "your_password"
+
+mcmc = 1e+06
+mcsave = 2000
+
+# data ----
+# setup folders 
+setup(year)
+
+# raw data query
+goa_rebs(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
+
+# clean and process data ----
+# catch
+clean_catch(year = year, TAC = TAC, fixed_catch = "rebs_fixed_catch.csv")
+
+# survey biomass 
+ts_biomass(year) # this is the design-based model, must provide separate file for VAST output
+
+# biological data 
+age_error( species = species, year = year, admb_home = admb_home) # file in data/user_input folder
+size_at_age(year, admb_home, rec_age, lenbins = NULL)
+
+fish_age_comp(year, rec_age, plus_age)
+ts_age_comp(year, rec_age, plus_age)
+
+fsh_length_comp(year, rec_age)
+ts_length_comp(year)
+
+saa(year, admb_home, rec_age)
+waa(year, admb_home, rec_age)
+
+# create data file in the "db" folder
+concat_dat(year, "db", rec_age, plus_age)
+
+# change the survey to the VAST estimated
+ts_biomass(year, "VAST_estimate.csv") # file in data/user_input folder
+concat_dat(year, "vast", rec_age, plus_age)
+
+run_admb(year, model, model_name, mcmc, mcsave)
+
+# cleanup output ----
+process_results(year, model = "db", model_name, data_name, rec_age, plus_age, mcmc = mcmc, mcsave = mcsave)
+process_results(year, model = "vast", model_name, data_name, rec_age, plus_age, mcmc = mcmc, mcsave = mcsave)
+
+# create base plots and tables
+base_plots(year, model, model_name, rec_age)
+base_tables(year, model, model_name)
+```
