@@ -1,9 +1,8 @@
 #'  trawl survey age comp data query
 #'
 #' @param year assessment year
-#' @param survey default is fsh1, change if age comps from multiple fisheries
+#' @param survey default is goa, change if age comps from multiple surveys
 #' @param afsc_species afsc species code(s)
-#' @param region GOA or BSAI
 #' @param akfin the database to query
 #' @param save save the file in designated folder
 #'
@@ -12,7 +11,7 @@
 #'
 #' @examples
 #'
-q_ts_age_comp <- function(year, survey = "goa", afsc_species, area, afsc, save = TRUE){
+q_ts_age_comp <- function(year, survey = "goa", afsc_species, afsc, save = TRUE){
 
   files <- grep(paste0(survey,"_ts_age"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)

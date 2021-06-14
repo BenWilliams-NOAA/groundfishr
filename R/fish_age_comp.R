@@ -9,6 +9,9 @@
 #' @export  fish_age_comp
 #'
 #' @examples
+#' \dontrun{
+#' fish_age_comp(year, fishery = "fsh1", rec_age, plus_age)
+#' }
 fish_age_comp <- function(year, fishery = "fsh1", rec_age, plus_age){
 
   read.csv(here::here(year, "data", "raw", paste0(fishery, "_age_comp_data.csv")),

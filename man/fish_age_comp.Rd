@@ -21,3 +21,8 @@ fish_age_comp(year, fishery = "fsh1", rec_age, plus_age)
 \description{
 fishery age composition analysis
 }
+\examples{
+\dontrun{
+fish_age_comp(year, fishery = "fsh1", rec_age, plus_age)
+}
+}

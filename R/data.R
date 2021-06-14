@@ -39,3 +39,26 @@
 #' \item{wt_f}{female weight (kg)}
 #' }
 "sabl_old_wts_sex"
+
+
+#' vessel lengths
+#'
+#' Vessel lengths for calculating whale depredation rates in the sablefish fishery
+#'
+#' @format A data frame with 7558 observations and 2 variables:
+#' \describe{
+#' \item{VESSEL_CODE}{vessel id}
+#' \item{LENGTH}{length of the vessel}
+#' }
+"sabl_vessel_lengths"
+
+#' GOA northern rockfish historical catch data
+#'
+#' A dataset containing trawl gear catch by year for 1961-1992
+#'
+#' @format A data frame with 32 observations and 2 variables:
+#' \describe{
+#' \item{year}{year of catch}
+#' \item{catch}{weight of catch in 1,000 t}
+#' }
+"goa_nork_catch_1961_1992"

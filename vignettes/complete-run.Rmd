@@ -21,13 +21,13 @@ library(groundfishr)
 # globals ----
 
 year = 2021
-species <- "REBS"
+species <- "SABL"
 rec_age <- 3
 plus_age <- 42
-TAC <- c(1328, 1327, 1444) # TAC from last 3 years
+TAC <- c(14957, 15068, 18293) # TAC from last 3 years (year-3, year-2, year-1)
 admb_home <- "C:/Program Files (x86)/ADMB-12.1" # more common to be "C/ADMB"
-model_name <- "rebs"
-dat_name <- "goa_rebs_2021" 
+model_name <- "sabl"
+dat_name <- "sabl_2021" 
 
 afsc_user = "your_user_name"
 afsc_pwd = "your_password"
@@ -42,11 +42,11 @@ mcsave = 2000
 setup(year)
 
 # raw data query
-goa_rebs(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
+sablefish(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
 
 # clean and process data ----
 # catch
-clean_catch(year = year, TAC = TAC, fixed_catch = "rebs_fixed_catch.csv")
+clean_catch(year = year, TAC = TAC)
 
 # survey biomass 
 ts_biomass(year) # this is the design-based model, must provide separate file for VAST output

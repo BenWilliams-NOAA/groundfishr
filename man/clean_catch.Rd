@@ -12,19 +12,15 @@ clean_catch(
 )
 }
 \arguments{
-\item{year}{\itemize{
-\item year of assessment
-}}
+\item{year}{year of assessment}
 
 \item{fishery}{identify the fishery default is "fsh1"}
 
-\item{TAC}{\itemize{
-\item last three TAC in form: c(year-3, year-2, year-1)
-}}
+\item{TAC}{last three TAC in form: c(year-3, year-2, year-1)}
 
-\item{fixed_catch}{\itemize{
-\item if catch is frozen place the file in user_input folder (format: Year, Catch)
-}}
+\item{fixed_catch}{if catch is frozen place the file in user_input folder (format: Year, Catch)}
+
+\item{species}{species of interest e.g., "SABL", "DUSK"}
 }
 \value{
 
@@ -33,6 +29,8 @@ clean_catch(
 clean up catch data
 }
 \examples{
+\dontrun{
 clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "catch_1961-1992.csv")
+}
 
 }

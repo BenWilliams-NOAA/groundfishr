@@ -1,16 +1,16 @@
-#' raw data query for sablefish
+#' raw data query for sablefish in the GOA and BSAI
 #'
-#' @param year
-#' @param akfin_user
-#' @param akfin_pwd
-#' @param afsc_user
-#' @param afsc_pwd
+#' @param year assessment year
+#' @param akfin_user user name
+#' @param akfin_pwd user password
+#' @param afsc_user user name
+#' @param afsc_pwd user password
 #'
 #' @return
 #' @export sablefish
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sablefish(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
 #' }
 sablefish <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
@@ -26,32 +26,37 @@ sablefish <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
                           UID = akfin_user, PWD = akfin_pwd)
 
   # catch data ----
-  .c = sql_read("catch.sql")
+  .c = sql_read("fsh1_catch.sql")
   .c = sql_filter(sql_precode = "<=", year, sql_code = .c, flag = "-- insert year")
   .c = sql_filter(sql_precode = "IN", area, sql_code = .c, flag = "-- insert region")
   .c = sql_filter(x = species, sql_code = .c, flag = "-- insert species")
 
   sql_run(akfin, .c) %>%
-    rename_all(tolower) %>%
-    group_by(agency_gear_code) %>%
-    mutate(year = as.numeric(year),
-           type = case_when(agency_gear_code %in% c("BTR", "PTR", "NPT", "TRW") ~ "trawl",
-                            agency_gear_code %in% c("HAL", "POT") ~ "fixed")) -> .df
+    dplyr::rename_all(tolower) %>%
+    dplyr::group_by(agency_gear_code) %>%
+    dplyr::mutate(year = as.numeric(year),
+           type = dplyr::case_when(agency_gear_code %in% c("BTR", "PTR", "NPT", "TRW") ~ "trawl",
+                                   agency_gear_code %in% c("HAL", "POT") ~ "fixed")) -> .df
 
   .df %>%
-    filter(type == "fixed") %>%
+    dplyr::filter(type == "fixed") %>%
     write.csv(here::here(year, "data", "raw", "fsh1_catch_data.csv"),
               row.names = FALSE)
 
   .df %>%
-    filter(type == "trawl") %>%
+    dplyr::filter(type == "trawl") %>%
     write.csv(here::here(year, "data", "raw", "fsh2_catch_data.csv"),
               row.names = FALSE)
 
   # whale depredation ----
-  sql_read("catch.sql") %>%
-    rename_all(tolower) %>%
+  sql_read("sabl_whale.sql") %>%
+    dplyr::rename_all(tolower) %>%
     write.csv(here::here(year, "data", "raw", "fsh1_whale_dep_data.csv"),
+              row.names = FALSE)
+
+  sql_read("sable_vessel.sql") %>%
+    dplyr::rename_all(tolower) %>%
+    write.csv(here::here(year, "data", "raw", "vessels.csv"),
               row.names = FALSE)
 
 }

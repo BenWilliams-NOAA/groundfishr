@@ -11,7 +11,8 @@
 #' @export q_fish_catch
 #'
 #' @examples
-#'
+#'\dontrun{q_fish_catch(year, fishery = "fsh1", species, area, akfin, save = TRUE)
+#'}
 q_fish_catch <- function(year, fishery = "fsh1", species, area, akfin, save = TRUE){
 
 

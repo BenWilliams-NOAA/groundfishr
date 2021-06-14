@@ -10,8 +10,9 @@
 #' @export goa_nork
 #'
 #' @examples
+#' \dontrun{
 #' goa_nork(year = 2020, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
-#'
+#'}
 goa_nork <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
 
   # globals ----
@@ -37,11 +38,14 @@ goa_nork <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
                          UID = afsc_user, PWD = afsc_pwd)
 
   q_ts_biomass(year, survey = "goa", afsc_species = afsc_species, afsc = afsc)
-  q_ts_age_comp(year, survey = "goa", afsc_species = norpac_species, afsc = afsc)
+  q_ts_age_comp(year, survey = "goa", afsc_species = afsc_species, afsc = afsc)
   q_ts_length_comp(year, survey = "goa", afsc_species = afsc_species, afsc = afsc)
-  q_ts_saa(year, area = "goa", afsc_species = afsc_species, afsc = afsc)
+  q_ts_saa(year, survey = "goa", afsc_species = afsc_species, afsc = afsc)
 
   DBI::dbDisconnect(afsc)
+
+  file.copy(system.file("data", "goa_nork_catch_1961_1992.rda", package = "groundfishr"),
+            here::here(year, "data", "user_input"))
 
 
   q_date(year)

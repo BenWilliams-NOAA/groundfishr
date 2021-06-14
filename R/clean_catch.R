@@ -1,14 +1,18 @@
 #' clean up catch data
 #'
-#' @param year - year of assessment
+#' @param year  year of assessment
+#' @param species species of interest e.g., "SABL", "DUSK"
 #' @param fishery identify the fishery default is "fsh1"
-#' @param TAC - last three TAC in form: c(year-3, year-2, year-1)
-#' @param fixed_catch - if catch is frozen place the file in user_input folder (format: Year, Catch)
+#' @param TAC last three TAC in form: c(year-3, year-2, year-1)
+#' @param fixed_catch if catch is frozen place the file in user_input folder (format: Year, Catch)
 #'
 #' @return
 #' @export clean_catch
 #'
-#' @examples clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "catch_1961-1992.csv")
+#' @examples
+#' \dontrun{
+#' clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "catch_1961-1992.csv")
+#' }
 #'
 clean_catch <- function(year, fishery = "fsh1", TAC = c(3333, 2222, 1111), fixed_catch = NULL){
 
@@ -23,8 +27,8 @@ clean_catch <- function(year, fishery = "fsh1", TAC = c(3333, 2222, 1111), fixed
 
 
   # Fishery catch data ----
-  read.csv(here::here(year, "data", "raw", "fsh1_catch_data.csv")) -> catch_data
-  read.csv(here::here(year, "data", "raw", "fsh1_obs_data.csv")) -> obs_data
+  read.csv(here::here(year, "data", "raw", paste0(fishery, "_catch_data.csv"))) -> catch_data
+  read.csv(here::here(year, "data", "raw",  paste0(fishery, "_obs_data.csv"))) -> obs_data
 
   # Estimate catch ratio in final year to end of year
   obs_data %>%
@@ -54,12 +58,11 @@ clean_catch <- function(year, fishery = "fsh1", TAC = c(3333, 2222, 1111), fixed
       dplyr::select(Year = YEAR, Catch = WEIGHT_POSTED) %>%
       dplyr::group_by(Year) %>%
       dplyr::summarise(Catch = round(sum(Catch))) %>%
-      dplyr::bind_rows(fixed_catch) %>%
       dplyr::arrange(Year) %>%
       dplyr::mutate(Catch = ifelse(Year==year, round(Catch * ratio), Catch)) -> catch
   }
 
-  write.csv(catch, here::here(year, "data", "output", "catch.csv"), row.names = FALSE)
+  write.csv(catch, here::here(year, "data", "output",  paste0(fishery, "_catch.csv")), row.names = FALSE)
 
   # estimate yield ratio of previous 3 years relative to TAC
   catch %>%

@@ -1,15 +1,18 @@
 #' raw data query for GOA dusky rockfish
 #'
-#' @param year
-#' @param akfin_user
-#' @param akfin_pwd
-#' @param afsc_user
-#' @param afsc_pwd
+#' @param year assessment year
+#' @param akfin_user user name
+#' @param akfin_pwd user password
+#' @param afsc_user user name
+#' @param afsc_pwd user password
 #'
 #' @return
 #' @export goa_dusk
 #'
 #' @examples
+#' \dontrun{
+#' goa_disk(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
+#' }
 goa_dusk <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
 
   # globals ----
