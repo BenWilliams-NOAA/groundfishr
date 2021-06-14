@@ -140,9 +140,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>year</th>
-      <td><ul>
-<li><p>year of assessment</p></li>
-</ul></td>
+      <td><p>year of assessment</p></td>
     </tr>
     <tr>
       <th>fishery</th>
@@ -150,15 +148,15 @@
     </tr>
     <tr>
       <th>TAC</th>
-      <td><ul>
-<li><p>last three TAC in form: c(year-3, year-2, year-1)</p></li>
-</ul></td>
+      <td><p>last three TAC in form: c(year-3, year-2, year-1)</p></td>
     </tr>
     <tr>
       <th>fixed_catch</th>
-      <td><ul>
-<li><p>if catch is frozen place the file in user_input folder (format: Year, Catch)</p></li>
-</ul></td>
+      <td><p>if catch is frozen place the file in user_input folder (format: Year, Catch)</p></td>
+    </tr>
+    <tr>
+      <th>species</th>
+      <td><p>species of interest e.g., "SABL", "DUSK"</p></td>
     </tr>
     </table>
 
@@ -169,8 +167,10 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>clean_catch</span><span class='op'>(</span><span class='va'>year</span>, TAC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2874</span>, <span class='fl'>2756</span>, <span class='fl'>3100</span><span class='op'>)</span>, fixed_catch <span class='op'>=</span> <span class='st'>"catch_1961-1992.csv"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in grepl("^[/\\\\~]|^[a-zA-Z]:[/\\\\]", x): object 'year' not found</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>clean_catch</span><span class='op'>(</span><span class='va'>year</span>, TAC <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2874</span>, <span class='fl'>2756</span>, <span class='fl'>3100</span><span class='op'>)</span>, fixed_catch <span class='op'>=</span> <span class='st'>"catch_1961-1992.csv"</span><span class='op'>)</span>
+<span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

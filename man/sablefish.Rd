@@ -2,21 +2,29 @@
 % Please edit documentation in R/sablefish.R
 \name{sablefish}
 \alias{sablefish}
-\title{raw data query for sablefish}
+\title{raw data query for sablefish in the GOA and BSAI}
 \usage{
 sablefish(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
 }
 \arguments{
-\item{afsc_pwd}{}
+\item{year}{assessment year}
+
+\item{akfin_user}{user name}
+
+\item{akfin_pwd}{user password}
+
+\item{afsc_user}{user name}
+
+\item{afsc_pwd}{user password}
 }
 \value{
 
 }
 \description{
-raw data query for sablefish
+raw data query for sablefish in the GOA and BSAI
 }
 \examples{
-\donttest{
+\dontrun{
 sablefish(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
 }
 }

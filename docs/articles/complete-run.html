@@ -93,13 +93,13 @@
 <span class="co"># globals ----</span>
 
 <span class="va">year</span> <span class="op">=</span> <span class="fl">2021</span>
-<span class="va">species</span> <span class="op">&lt;-</span> <span class="st">"REBS"</span>
+<span class="va">species</span> <span class="op">&lt;-</span> <span class="st">"SABL"</span>
 <span class="va">rec_age</span> <span class="op">&lt;-</span> <span class="fl">3</span>
 <span class="va">plus_age</span> <span class="op">&lt;-</span> <span class="fl">42</span>
-<span class="va">TAC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1328</span>, <span class="fl">1327</span>, <span class="fl">1444</span><span class="op">)</span> <span class="co"># TAC from last 3 years</span>
+<span class="va">TAC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">14957</span>, <span class="fl">15068</span>, <span class="fl">18293</span><span class="op">)</span> <span class="co"># TAC from last 3 years (year-3, year-2, year-1)</span>
 <span class="va">admb_home</span> <span class="op">&lt;-</span> <span class="st">"C:/Program Files (x86)/ADMB-12.1"</span> <span class="co"># more common to be "C/ADMB"</span>
-<span class="va">model_name</span> <span class="op">&lt;-</span> <span class="st">"rebs"</span>
-<span class="va">dat_name</span> <span class="op">&lt;-</span> <span class="st">"goa_rebs_2021"</span> 
+<span class="va">model_name</span> <span class="op">&lt;-</span> <span class="st">"sabl"</span>
+<span class="va">dat_name</span> <span class="op">&lt;-</span> <span class="st">"sabl_2021"</span> 
 
 <span class="va">afsc_user</span> <span class="op">=</span> <span class="st">"your_user_name"</span>
 <span class="va">afsc_pwd</span> <span class="op">=</span> <span class="st">"your_password"</span>
@@ -114,11 +114,11 @@
 <span class="fu"><a href="../reference/setup.html">setup</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>
 
 <span class="co"># raw data query</span>
-<span class="fu"><a href="../reference/goa_rebs.html">goa_rebs</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">akfin_user</span>, <span class="va">akfin_pwd</span>, <span class="va">afsc_user</span>, <span class="va">afsc_pwd</span><span class="op">)</span>
+<span class="fu"><a href="../reference/sablefish.html">sablefish</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">akfin_user</span>, <span class="va">akfin_pwd</span>, <span class="va">afsc_user</span>, <span class="va">afsc_pwd</span><span class="op">)</span>
 
 <span class="co"># clean and process data ----</span>
 <span class="co"># catch</span>
-<span class="fu"><a href="../reference/clean_catch.html">clean_catch</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">year</span>, TAC <span class="op">=</span> <span class="va">TAC</span>, fixed_catch <span class="op">=</span> <span class="st">"rebs_fixed_catch.csv"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/clean_catch.html">clean_catch</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">year</span>, TAC <span class="op">=</span> <span class="va">TAC</span><span class="op">)</span>
 
 <span class="co"># survey biomass </span>
 <span class="fu"><a href="../reference/ts_biomass.html">ts_biomass</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="co"># this is the design-based model, must provide separate file for VAST output</span>

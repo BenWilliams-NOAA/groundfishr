@@ -4,18 +4,16 @@
 \alias{q_ts_age_comp}
 \title{trawl survey age comp data query}
 \usage{
-q_ts_age_comp(year, survey = "goa", afsc_species, area, afsc, save = TRUE)
+q_ts_age_comp(year, survey = "goa", afsc_species, afsc, save = TRUE)
 }
 \arguments{
 \item{year}{assessment year}
 
-\item{survey}{default is fsh1, change if age comps from multiple fisheries}
+\item{survey}{default is goa, change if age comps from multiple surveys}
 
 \item{afsc_species}{afsc species code(s)}
 
 \item{save}{save the file in designated folder}
-
-\item{region}{GOA or BSAI}
 
 \item{akfin}{the database to query}
 }

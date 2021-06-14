@@ -26,5 +26,6 @@ q_fish_catch(year, fishery = "fsh1", species, area, akfin, save = TRUE)
 fishery catch data query
 }
 \examples{
-
+\dontrun{q_fish_catch(year, fishery = "fsh1", species, area, akfin, save = TRUE)
+}
 }

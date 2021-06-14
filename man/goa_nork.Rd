@@ -24,6 +24,7 @@ goa_nork(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
 raw data query for GOA RE/BS
 }
 \examples{
+\dontrun{
 goa_nork(year = 2020, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
-
+}
 }
