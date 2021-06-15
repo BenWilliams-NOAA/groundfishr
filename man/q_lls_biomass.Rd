@@ -4,7 +4,7 @@
 \alias{q_lls_biomass}
 \title{longline survey biomass data query}
 \usage{
-q_lls_biomass(year, survey = "goa", afsc_species, afsc, save = TRUE)
+q_lls_biomass(year, survey = "goa", afsc_species, akfin, save = TRUE)
 }
 \arguments{
 \item{save}{}
