@@ -21,7 +21,7 @@ q_fish_obs <- function(year, fishery = "fsh1", norpac_species, area, akfin, save
 
   .obs = sql_read(file)
   .obs = sql_filter(sql_precode = "", x = year-3, sql_code = .obs, flag = "-- insert year")
-  .obs = sql_filter(sql_precode = "", x = year-1, sql_code = .obs, flag = "-- year2")
+  .obs = sql_filter(sql_precode = "", x = year-1, sql_code = .obs, flag = "-- insert year2")
   .obs = sql_filter(x = area, sql_code = .obs, flag = "-- insert region")
 
   if(length(norpac_species) == 1){
