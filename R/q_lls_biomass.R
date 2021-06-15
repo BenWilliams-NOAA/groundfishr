@@ -3,14 +3,14 @@
 #' @param year
 #' @param survey
 #' @param afsc_species
-#' @param afsc
+#' @param akfin
 #' @param save
 #'
 #' @return
 #' @export
 #'
 #' @examples
-q_lls_biomass <- function (year, survey = "goa", afsc_species, afsc, save = TRUE){
+q_lls_biomass <- function (year, survey = "goa", afsc_species, akfin, save = TRUE){
 
   files <- grep(paste0(survey,"_lls"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
@@ -25,10 +25,10 @@ q_lls_biomass <- function (year, survey = "goa", afsc_species, afsc, save = TRUE
   }
 
   if(isTRUE(save)){
-    sql_run(afsc, .bio) %>%
+    sql_run(akfin, .bio) %>%
       write.csv(here::here(year, "data", "raw", paste0(survey, "_lls_biomass_data.csv")),
                 row.names = FALSE)
   } else {
-    sql_run(afsc, .bio)
+    sql_run(akfin, .bio)
   }
 }

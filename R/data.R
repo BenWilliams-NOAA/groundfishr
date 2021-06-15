@@ -62,3 +62,15 @@
 #' \item{catch}{weight of catch in 1,000 t}
 #' }
 "goa_nork_catch_1961_1992"
+
+
+#' GOA rougheye/blackspotted rockfish historical catch data
+#'
+#' A dataset containing trawl gear catch by year for 1977-2004
+#'
+#' @format A data frame with 28 observations and 2 variables:
+#' \describe{
+#' \item{year}{year of catch}
+#' \item{catch}{weight of catch in 1,000 t}
+#' }
+"goa_rebs_catch_1977_2004"

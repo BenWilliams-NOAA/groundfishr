@@ -49,14 +49,20 @@ sablefish <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
               row.names = FALSE)
 
   # whale depredation ----
-  sql_read("sabl_whale.sql") %>%
+  .wd = sql_read("sabl_whale.sql")
+
+  sql_run(akfin, .wd) %>%
     dplyr::rename_all(tolower) %>%
     write.csv(here::here(year, "data", "raw", "fsh1_whale_dep_data.csv"),
               row.names = FALSE)
 
-  sql_read("sable_vessel.sql") %>%
+  # vessel sizes
+  .v = sql_read("sabl_vessel.sql")
+
+  sql_run(akfin, .v) %>%
     dplyr::rename_all(tolower) %>%
     write.csv(here::here(year, "data", "raw", "vessels.csv"),
               row.names = FALSE)
+
 
 }
