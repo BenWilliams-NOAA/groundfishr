@@ -6,6 +6,7 @@
 \usage{
 clean_catch(
   year,
+  species,
   fishery = "fsh1",
   TAC = c(3333, 2222, 1111),
   fixed_catch = NULL
@@ -14,13 +15,13 @@ clean_catch(
 \arguments{
 \item{year}{year of assessment}
 
+\item{species}{species of interest e.g., "SABL", "DUSK"}
+
 \item{fishery}{identify the fishery default is "fsh1"}
 
 \item{TAC}{last three TAC in form: c(year-3, year-2, year-1)}
 
 \item{fixed_catch}{if catch is frozen place the file in user_input folder (format: Year, Catch)}
-
-\item{species}{species of interest e.g., "SABL", "DUSK"}
 }
 \value{
 
@@ -30,7 +31,7 @@ clean up catch data
 }
 \examples{
 \dontrun{
-clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "catch_1961-1992.csv")
+clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "goa_rebs_catch_1977_2004")
 }
 
 }

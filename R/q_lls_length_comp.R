@@ -3,7 +3,7 @@
 #' @param year assessment year
 #' @param survey default is fsh1, change if age comps from multiple fisheries
 #' @param afsc_species afsc species code
-#' @param afsc the database to query
+#' @param akfin the database to query
 #' @param save save the file in designated folder
 #'
 #' @return
@@ -11,7 +11,7 @@
 #'
 #' @examples
 #'
-q_lls_length_comp <- function(year, survey = "goa", afsc_species, afsc, save = TRUE){
+q_lls_length_comp <- function(year, survey = "goa", afsc_species, akfin, save = TRUE){
 
   files <- grep(paste0(survey,"_lls_length"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
@@ -32,15 +32,15 @@ q_lls_length_comp <- function(year, survey = "goa", afsc_species, afsc, save = T
   }
 
   if(isTRUE(save)){
-    sql_run(afsc, .one) %>%
+    sql_run(akfin, .one) %>%
       write.csv(here::here(year, "data", "raw", paste0(survey, "_lls_length_data.csv")),
                 row.names = FALSE)
-    sql_run(afsc, .two) %>%
+    sql_run(akfin, .two) %>%
       write.csv(here::here(year, "data", "raw", paste0(survey, "_lls_specimen_data.csv")),
                 row.names = FALSE)
   } else {
-    list(sql_run(afsc, .one),
-         sql_run(afsc, .two))
+    list(sql_run(akfin, .one),
+         sql_run(akfin, .two))
   }
 
 }

@@ -4,7 +4,7 @@
 \alias{q_lls_length_comp}
 \title{Longline survey length comp data query}
 \usage{
-q_lls_length_comp(year, survey = "goa", afsc_species, afsc, save = TRUE)
+q_lls_length_comp(year, survey = "goa", afsc_species, akfin, save = TRUE)
 }
 \arguments{
 \item{year}{assessment year}
@@ -13,7 +13,7 @@ q_lls_length_comp(year, survey = "goa", afsc_species, afsc, save = TRUE)
 
 \item{afsc_species}{afsc species code}
 
-\item{afsc}{the database to query}
+\item{akfin}{the database to query}
 
 \item{save}{save the file in designated folder}
 }

@@ -11,20 +11,30 @@
 #'
 #' @examples
 #' \dontrun{
-#' clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "catch_1961-1992.csv")
+#' clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "goa_rebs_catch_1977_2004")
 #' }
 #'
-clean_catch <- function(year, fishery = "fsh1", TAC = c(3333, 2222, 1111), fixed_catch = NULL){
+clean_catch <- function(year, species, fishery = "fsh1", TAC = c(3333, 2222, 1111), fixed_catch = NULL){
 
   if(sum(TAC == c(3333, 2222, 1111)) == 3) {
     stop("check your TAC!")
   }
 
   if(!is.null(fixed_catch)){
-    fixed_catch = read.csv(here::here(year, "data", "user_input", fixed_catch))
-    names(fixed_catch) <- c("Year", "Catch")
+    fixed_catch = vroom::vroom(here::here("data", "user_input", "fixed_catch"))
+  } else if(is.null(fixed_catch)){
+    if(species == "NORK"){
+      fixed_catch = groundfishr:::goa_nork_catch_1961_1992
+    }
+    if(species == "SABL"){
+      fixed_catch = groundfishr:::sabl_catch_1960_1990
+    }
+    if(species == "REBS"){
+      fixed_catch = groundfishr:::goa_rebs_catch_1977_2004
+    }
   }
 
+  names(fixed_catch) <- c("Year", "Catch")
 
   # Fishery catch data ----
   read.csv(here::here(year, "data", "raw", paste0(fishery, "_catch_data.csv"))) -> catch_data
@@ -44,7 +54,7 @@ clean_catch <- function(year, fishery = "fsh1", TAC = c(3333, 2222, 1111), fixed
     dplyr::pull(ratio) -> ratio
 
   # Compute catch
-  if(!is.null(fixed_catch)){
+  if(nrow(fixed_catch)>=1){
   catch_data %>%
     dplyr::select(Year = YEAR, Catch = WEIGHT_POSTED) %>%
     dplyr::filter(Year > max(fixed_catch$Year)) %>%
