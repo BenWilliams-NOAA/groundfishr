@@ -22,7 +22,7 @@ concat_dat(
 \arguments{
 \item{year}{assessment year}
 
-\item{species}{"nork", "rebs", "sabl"}
+\item{species}{"NORK", "REBS", "SABL"}
 
 \item{region}{"goa", "bsai", "everywhere"}
 

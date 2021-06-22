@@ -4,7 +4,7 @@
 \alias{lls_length_comp}
 \title{Longline length composition analysis}
 \usage{
-lls_length_comp(year, species = NULL, lenbins = NULL)
+lls_length_comp(year, species = NULL, region, lenbins = NULL)
 }
 \arguments{
 \item{year}{assessment year}

@@ -4,10 +4,12 @@
 \alias{lls_rpw}
 \title{longline survey relative population weight}
 \usage{
-lls_rpw(year, file = NULL, filter_yrs = NULL)
+lls_rpw(year, survey, file = NULL, filter_yrs = NULL)
 }
 \arguments{
 \item{year}{of interest}
+
+\item{survey}{"goa", "bsai"}
 
 \item{file}{using an alt-ll survey rpw? (file must have format: year, rpw, cv, sd, lci, uci)}
 

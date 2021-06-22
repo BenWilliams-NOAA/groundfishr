@@ -1,7 +1,7 @@
 #' Concatenate a .dat file
 #'
 #' @param year assessment year
-#' @param species "nork", "rebs", "sabl"
+#' @param species "NORK", "REBS", "SABL"
 #' @param region "goa", "bsai", "everywhere"
 #' @param model folder that the `.tpl` will be in
 #' @param dat_name what to call the .dat file - ".dat" will be appended to the name
@@ -29,9 +29,10 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
   }
 
 
-  if(exists(here::here(year, "data", "output", "lls_biomass.csv"))){
-    llslc = read.csv(here::here(year, "data", "output", "lls_length_comp.csv"))
-    llsb = read.csv(here::here(year, "data", "output", "lls_biomass.csv"))
+  if(length(grep(paste0(survey,"_lls"),
+                 list.files(here::here(year, "data", "output")), value=TRUE)) > 0){
+    llslc = read.csv(here::here(year, "data", "output", paste0(region, "_lls_length_comp.csv")))
+    llsb = read.csv(here::here(year, "data", "output", paste0(region, "_lls_biomass.csv")))
   }
 
   if(!is.null(maturity)){
