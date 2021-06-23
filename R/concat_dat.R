@@ -8,11 +8,10 @@
 #' @param rec_age recruitment age
 #' @param plus_age plus age group
 #' @param spawn_mo spawning month
-#' @param maturity maturity .csv file (age, proportion mature) in the user_input folder
+#' @param maturity if maturity is from outside the model (should be placed in user_input folder)
 #' @param n_ageage number of age error transmission matrices default is 1
 #' @param n_sizeage number of size at age transmission matrices default is 1
 #' @param retro not yet implemented
-#' @param maturity if maturity is from outside the model (should be placed in user_input folder)
 #' @param n_fleets number of fishing fleets e.g., ll fleet, trawl fleet, default is 1
 #' @param n_ts number of trawl surveys dafault is 1
 #' @param n_lls number of longline surveys e.g., domestic and japanes, default is 1
@@ -21,7 +20,7 @@
 #' @examples concat_dat(year = 2020, species = "NORK",  region = "goa", model = "base", dat_name = "goa_nr", rec_age = 2, plus_age = 45)
 #'
 concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, plus_age, spawn_mo = 5,
-                       maturity = NULL, n_fleets = 1, n_ts = NULL, n_lls = NULL){
+                       maturity = NULL, n_ageage = 1, n_sizeage = 1, retro = NULL, n_fleets = 1, n_ts = NULL, n_lls = NULL){
 
   # create directory
   if (!dir.exists(here::here(year, model))){
@@ -29,20 +28,20 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
   }
 
 
-  if(length(grep(paste0(survey,"_lls"),
+  if(length(grep(paste0(region,"_lls"),
                  list.files(here::here(year, "data", "output")), value=TRUE)) > 0){
     llslc = read.csv(here::here(year, "data", "output", paste0(region, "_lls_length_comp.csv")))
     llsb = read.csv(here::here(year, "data", "output", paste0(region, "_lls_biomass.csv")))
   }
 
   if(!is.null(maturity)){
-    mature = as.vector(read.csv(paste0(here::here(year, "data", "user_input", maturity)), header = F) %>%
+    mature = as.vector(read.csv(paste0(here::here(year, "data", "user_input", maturity))) %>%
                          dplyr::rename_all(tolower) %>%
                          dplyr::select(-age))
   }
 
   if(!is.null(weights)){
-    weights = as.vector(read.csv(paste0(here::here(year, "data", "user_input", maturity)), header = F))
+    weights = as.vector(read.csv(paste0(here::here(year, "data", "user_input", maturity))))
   }
 
 
@@ -50,16 +49,19 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
   survey = grep("ts_", list.files(here::here(year, 'data', "output")), value=TRUE)
   ll_survey = grep("lls_", list.files(here::here(year, 'data', "output")), value=TRUE)
 
-  grep("catch", fishery, value=TRUE)
-  catch = read.csv(here::here(year, "data", "output", "catch.csv"))
+  catch = read.csv(here::here(year, "data", "output", grep("catch", fishery, value=TRUE)))
   waa = read.csv(here::here(year, "data", "output", "waa.csv"))
   saa = read.csv(here::here(year, "data", "output", "saa.csv"))
   ae = read.csv(here::here(year, "data", "output", "ae_model.csv"))
-  fishac = read.csv(here::here(year, "data", "output", "fish_age_comp.csv"))
-  fishlc = read.csv(here::here(year, "data", "output", "fish_length_comp.csv"))
-  tsac = read.csv(here::here(year, "data", "output", "ts_age_comp.csv"))
-  tslc = read.csv(here::here(year, "data", "output", "ts_length_comp.csv"))
-  tsb = read.csv(here::here(year, "data", "output", "ts_biomass.csv"))
+  fishac = read.csv(here::here(year, "data", "output", grep("age", fishery, value=TRUE)))
+  fishlc = read.csv(here::here(year, "data", "output", grep("length", fishery, value=TRUE)))
+  tsac = read.csv(here::here(year, "data", "output", grep("age", survey, value=TRUE)))
+  tslc = read.csv(here::here(year, "data", "output", grep("length", survey, value=TRUE)))
+  tsb = read.csv(here::here(year, "data", "output", grep("biomass", survey, value=TRUE)))
+
+  llsrpw = read.csv(here::here(year, "data", "output", grep("biomass", ll_survey, value=TRUE)))
+  llsslc = read.csv(here::here(year, "data", "output", grep("length", ll_survey, value=TRUE)))
+  llsrpn = read.csv(here::here(year, "data", "output", grep("numbers", ll_survey, value=TRUE)))
 
   names(tsb) <- c("year", "biomass", "se", "lci", "uci")
   m_nages = nrow(ae)
@@ -86,12 +88,10 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
 
   # header ----
   header = c(sep,
-             "# GOA Northern Rockfish .dat file for ADMB optimization",
+             paste0("#", region, " ", species, " Rockfish .dat file for ADMB optimization"),
              paste ("# New data provided on:", read.table(file = here::here(year, "data/raw/data_called.txt"),
                                                           sep = "\t")[2,1]),
              "# Notes:",
-             "#   ~ Total catch prior to 1992 frozen",
-             "#   ~ Total catch from 1993 on uses catch downloaded from AKFIN",
              "#   ~ Weight-at-age and length-age transition matrix automatically updated",
              "#   ~ Formatted to conduct automated retrospective analysis",
              "#   ~ Does not use most recent years fishery size data",
@@ -127,12 +127,18 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
               paste(lbin, collapse=" "),
               "# Spawn month (spawn_fract):",
               as.character(spawn_mo),
-              "# Proportion mature (p_mature):",
-              paste(mature, collapse = " "),
-              "# Weight-at-age (wt):",
-              paste(waa$x, collapse=" "),
               "#",
               "#")
+
+    mat = c(sep,
+            "Proportion mature at age (p_mature):",
+            paste0("#! ",
+                   paste(mature$mature, collapse = " ")),
+            "#-",
+            "",
+            "")
+
+
   } else {
     mipv <- c(sep,
               "# Model input parameters/vectors",
@@ -158,11 +164,18 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
               paste(lbin, collapse=" "),
               "# Spawn month (spawn_fract):",
               as.character(spawn_mo),
-              "# Weight-at-age (wt):",
-              paste(waa$x, collapse=" "),
               "#",
               "#")
   }
+
+  waa = c(sep,
+          "Weight-at-age (wt):",
+          paste0("#! ",
+                 paste(waa$x, collapse=" ")),
+          "#-",
+          "#",
+          "#")
+
   # fishery catch ----
   fishery_catch = c(sep,
                     "# Fishery catch (mt): obs_catch(styr,endyr)",
@@ -203,9 +216,8 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
                     "",
                     "")
   # long line survey biomass ----
-  # not currently used for northern rockfish
 
-  if(exists("ll_biomass")){
+  if(exists("llsrpw")){
     ll_biomass = c(
       sep,
       "# Longline Survey Biomass",
@@ -396,9 +408,11 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
 
   # Compile DAT file for ADMB ----
 
-  if(exists("lls_biomass")){
+  if(exists("llsrpw") & exists("mat")){
     dat <- c(header,
              mipv,
+             mat,
+             waa,
              fishery_catch,
              cpue,
              trawl_biomass,
@@ -411,9 +425,25 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
              sizeage,
              aa,
              eof)
+  } else if(!exists("llsrpw") & exists("mat")){
+    dat <- c(header,
+             mipv,
+             mat,
+             waa,
+             fishery_catch,
+             cpue,
+             trawl_biomass,
+             fac,
+             tsac,
+             flc,
+             tslc,
+             sizeage,
+             aa,
+             eof)
   } else {
     dat <- c(header,
              mipv,
+             waa,
              fishery_catch,
              cpue,
              trawl_biomass,
