@@ -9,6 +9,7 @@
 #' @param type 1 = 1 sex - 1 gear; 2 = 1 sex - 2 gear; 3 = 2 sex - 1 gear - 2m; 4 = 2 sex - 2 gear - 2m
 #' @param f_ratio  is the final ratio of catch between gears in the previous year, as estimated by this year's model - only needed if using multiple gear types
 #' @param m2 is the second estimate of natural mortality
+#' @param last_f F value from the previous assessment
 #'
 #' @return The estimated F_OFL
 #' @export
@@ -49,7 +50,7 @@
 #' }
 
 #'
-best_f <- function(data, m, last_ofl, type = 1, f_ratio = NULL, m2 = NULL){
+best_f <- function(data, m, last_ofl, type = 1, f_ratio = NULL, m2 = NULL, last_f){
 
   # helper function
   catch = function(naa, waa, saa, m, f_ofl, f_ratio = NULL, gear = NULL){
@@ -158,7 +159,12 @@ best_f <- function(data, m, last_ofl, type = 1, f_ratio = NULL, m2 = NULL){
     }
   }
 
+  f_ofl = optimize(g, c(0, 1))$minimum
 
-  paste0("Type ", type, " corresponding F_OFL = ", optimize(g, c(0, 1))$minimum)
+  if(f_ofl < last_f){
+    stop("The F from the previous assessment is greater than F_OFL: something is wrong!!")
+  } else {
+    paste0("Type ", type, " corresponding F_OFL = ", f_ofl)
+  }
 
 }

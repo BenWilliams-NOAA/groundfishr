@@ -1,40 +1,40 @@
-#' Sablefish historical catch data
+#' Sablefish historical abundance data
 #'
-#' A dataset containing both fixed gear and trawl gear catch by year for 1960-1990
+#' A dataset containing both fixed gear and trawl gear catch, cpue, rpn & rpw data by year
 #'
-#' @format A data frame with 62 observations and 3 variables:
+#' @format A data frame with 121 observations and 5 variables:
 #' \describe{
-#' \item{year}{year of catch}
-#' \item{catch}{weight of catch in 1,000 t}
-#' \item{type}{fishery type is either fixed (includes longline and pot gear) or trawl}
+#' \item{year}{year}
+#' \item{value}{weight of catch in 1,000 t, or relative abundance}
+#' \item{variable}{rpw, rpn, cpue, or catch}
+#' \item{fleet}{japan or domestic}
+#' \item{gear}{lls = longline survey, llf = longline fishery, tf = trawl fishery}
 #' }
-"sabl_catch_1960_1990"
+"sabl_fixed_abundance"
 
-#' Sablefish historical CPUE
+#' Sablefish age and length comp data
 #'
-#' A dataset containing both relative population weight (RPW) and relative population numbers (RPN) from the Japanese cooperative longline fishery for 1979-1994
+#' A dataset containing both age and length composition data for multiple fisheries and surveys
 #'
-#' @format A data frame with 16 observations and 9 variables:
+#' @format A data frame with 2010 observations and 7 variables:
 #' \describe{
-#' \item{year}{year of cpue}
-#' \item{rpn}{relative population number}
-#' \item{rpn_se}{the standard error of rpn}
-#' \item{rpw}{relative population weight}
-#' \item{rpw_se}{the standard error of rpw}
-#' \item{rpn_lci}{lower confidence interval: 2 * se}
-#' \item{rpn_uci}{upper confidence interval: 2 * se}
-#' \item{rpw_lci}{lower confidence interval: 2 * se}
-#' \item{rpw_uci}{upper confidence interval: 2 * se}
+#' \item{year}{year}
+#' \item{age}{if relevant, otherwise NA}
+#' \item{comp}{age or length}
+#' \item{fleet}{japan or domestic}
+#' \item{type}{age or length}
+#' \item{gear}{lls = longline survey, tf = trawl fishery, ts = trawl survey}
+#' \item{sex}{male, female or NA}
 #' }
-"sabl_japan_coop_lls"
+"sabl_fixed_comps"
 
-#' Sablefish fixed weights at length
+#' Sablefish fixed weights at age
 #'
-#' A dataset containing length bins and associated male and female weights
+#' A dataset containing weights at age for two time blocks, by sex
 #'
-#' @format A data frame with 30 observations and 3 variables:
+#' @format A data frame with 120 observations and 3 variables:
 #' \describe{
-#' \item{length_bin}{length bin groups}
+#' \item{waa}{length bin groups}
 #' \item{wt_m}{male weight (kg)}
 #' \item{wt_f}{female weight (kg)}
 #' }
