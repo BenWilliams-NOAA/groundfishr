@@ -4,7 +4,7 @@
 \alias{best_f}
 \title{best F}
 \usage{
-best_f(data, m, last_ofl, type = 1, f_ratio = NULL, m2 = NULL)
+best_f(data, m, last_ofl, type = 1, f_ratio = NULL, m2 = NULL, last_f)
 }
 \arguments{
 \item{data}{data.frame in form (age, naa, waa, saa)}
@@ -18,6 +18,8 @@ best_f(data, m, last_ofl, type = 1, f_ratio = NULL, m2 = NULL)
 \item{f_ratio}{is the final ratio of catch between gears in the previous year, as estimated by this year's model - only needed if using multiple gear types}
 
 \item{m2}{is the second estimate of natural mortality}
+
+\item{last_f}{F value from the previous assessment}
 }
 \value{
 The estimated F_OFL

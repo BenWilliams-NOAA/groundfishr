@@ -14,15 +14,20 @@
 #'
 q_fish_obs <- function(year, fishery = "fsh1", norpac_species, area, akfin, save = TRUE){
 
-  # get appropriate age compe query data for a specific fishery
-  # e.g., ("fsh1", "fsh2")
+
   file <- grep(paste0(fishery,"_obs"),
-                list.files(system.file("sql", package = "groundfishr")), value=TRUE)
+               list.files(system.file("sql", package = "groundfishr")), value=TRUE)
 
   .obs = sql_read(file)
   .obs = sql_filter(sql_precode = "", x = year-3, sql_code = .obs, flag = "-- insert year")
-  .obs = sql_filter(sql_precode = "", x = year-1, sql_code = .obs, flag = "-- insert year2")
-  .obs = sql_filter(x = area, sql_code = .obs, flag = "-- insert region")
+  .obs = sql_filter(sql_precode = "", x = year-1, sql_code = .obs, flag = "-- year2")
+
+  if(length(area) == 1){
+    .obs = sql_filter(x = area, sql_code = .obs, flag = "-- insert region")
+  } else {
+    .obs = sql_filter(sql_precode = "IN", x = area,
+                      sql_code = .obs, flag = "-- insert region")
+  }
 
   if(length(norpac_species) == 1){
     .obs = sql_filter(x = norpac_species, sql_code = .obs, flag = "-- insert species")
@@ -30,9 +35,6 @@ q_fish_obs <- function(year, fishery = "fsh1", norpac_species, area, akfin, save
     .obs = sql_filter(sql_precode = "IN", x = norpac_species,
                       sql_code = .obs, flag = "-- insert species")
   }
-
-
-  dat = sql_run(akfin, .obs)
 
   if(isTRUE(save)){
 

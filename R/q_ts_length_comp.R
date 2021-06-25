@@ -16,11 +16,16 @@ q_ts_length_comp <- function(year, survey = "goa", afsc_species, afsc, save = TR
   files <- grep(paste0(survey,"_ts_length"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
 
-  .one = sql_read(files[1])
-  .two = sql_read(files[2])
+  if(grep("sabl", files) > 0){
+    # sablefish are different...
+    .one = sql_read(files[1])
+    .two = sql_read(files[3])
+  } else {
+    .one = sql_read(files[1])
+    .two = sql_read(files[2])
+  }
 
   if(length(afsc_species) == 1){
-
     .one = sql_filter(x = afsc_species, sql_code = .one, flag = "-- insert species")
     .two = sql_filter(x = afsc_species, sql_code = .two, flag = "-- insert species")
 
@@ -38,7 +43,7 @@ q_ts_length_comp <- function(year, survey = "goa", afsc_species, afsc, save = TR
     sql_run(afsc, .two) %>%
       write.csv(here::here(year, "data", "raw", paste0(survey, "_ts_specimen_data.csv")),
                 row.names = FALSE)
-  } else {
+  } else{
     list(sql_run(afsc, .one),
          sql_run(afsc, .two))
   }

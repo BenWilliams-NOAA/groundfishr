@@ -38,7 +38,7 @@
 #' \item{wt_m}{male weight (kg)}
 #' \item{wt_f}{female weight (kg)}
 #' }
-"sabl_old_wts_sex"
+"sabl_waa"
 
 
 #' vessel lengths

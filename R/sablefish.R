@@ -48,6 +48,9 @@ sablefish <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
     write.csv(here::here(year, "data", "raw", "fsh2_catch_data.csv"),
               row.names = FALSE)
 
+  # observer data ----
+  q_fish_obs(year, fishery = "fsh1", norpac_species = norpac_species, area = area, akfin = akfin)
+
   # whale depredation ----
   .wd = sql_read("sabl_whale.sql")
 
@@ -56,13 +59,58 @@ sablefish <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
     write.csv(here::here(year, "data", "raw", "fsh1_whale_dep_data.csv"),
               row.names = FALSE)
 
-  # vessel sizes
+  # vessel lengths ----
   .v = sql_read("sabl_vessel.sql")
 
   sql_run(akfin, .v) %>%
     dplyr::rename_all(tolower) %>%
     write.csv(here::here(year, "data", "raw", "vessels.csv"),
               row.names = FALSE)
+
+  DBI::dbDisconnect(akfin)
+
+  # lls rpw ----
+
+  # lls rpn ----
+
+  # llf cpue ----
+
+  # llf age comp ----
+
+  # lls age comp ----
+
+  # llf length comp ----
+
+  # lls length comp ----
+
+  # tf length comp ----
+
+
+
+  #establish afsc connection ----
+  afsc = DBI::dbConnect(odbc::odbc(), "afsc",
+                        UID = afsc_user, PWD = afsc_pwd)
+  # goa ts biomass ----
+  q_ts_biomass(year, survey = "goa", afsc_species = afsc_species, afsc = afsc)
+
+  # ts length comp ----
+  q_ts_length_comp(year, survey = "goa", afsc_species = afsc_species, afsc = afsc)
+
+  DBI::dbDisconnect(afsc)
+
+  file.copy(system.file("data", "sabl_fixed_abundance.rda", package = "groundfishr"),
+            here::here(year, "data", "user_input"))
+  file.copy(system.file("data", "sabl_fixed_ageage.rda", package = "groundfishr"),
+            here::here(year, "data", "user_input"))
+  file.copy(system.file("data", "sabl_fixed_comps.rda", package = "groundfishr"),
+            here::here(year, "data", "user_input"))
+  file.copy(system.file("data", "sabl_fixed_saa.rda", package = "groundfishr"),
+            here::here(year, "data", "user_input"))
+  file.copy(system.file("data", "waa.rda", package = "groundfishr"),
+            here::here(year, "data", "user_input"))
+
+
+  q_date(year)
 
 
 }

@@ -14,6 +14,9 @@ concat_dat(
   plus_age,
   spawn_mo = 5,
   maturity = NULL,
+  n_ageage = 1,
+  n_sizeage = 1,
+  retro = NULL,
   n_fleets = 1,
   n_ts = NULL,
   n_lls = NULL
@@ -38,17 +41,17 @@ concat_dat(
 
 \item{maturity}{if maturity is from outside the model (should be placed in user_input folder)}
 
-\item{n_fleets}{number of fishing fleets e.g., ll fleet, trawl fleet, default is 1}
-
-\item{n_ts}{number of trawl surveys dafault is 1}
-
-\item{n_lls}{number of longline surveys e.g., domestic and japanes, default is 1}
-
 \item{n_ageage}{number of age error transmission matrices default is 1}
 
 \item{n_sizeage}{number of size at age transmission matrices default is 1}
 
 \item{retro}{not yet implemented}
+
+\item{n_fleets}{number of fishing fleets e.g., ll fleet, trawl fleet, default is 1}
+
+\item{n_ts}{number of trawl surveys dafault is 1}
+
+\item{n_lls}{number of longline surveys e.g., domestic and japanes, default is 1}
 }
 \description{
 Concatenate a .dat file
