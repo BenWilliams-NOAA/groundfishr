@@ -1,7 +1,7 @@
 #' trawl survey biomass data query
 #'
 #' @param year
-#' @param survey
+#' @param area
 #' @param afsc_species
 #' @param afsc
 #' @param save
@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-q_ts_biomass <- function (year, survey = "goa", afsc_species, afsc, save = TRUE){
+q_ts_biomass <- function (year, area = "goa", afsc_species, afsc, save = TRUE){
 
   files <- grep("_ts",
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
@@ -31,7 +31,7 @@ q_ts_biomass <- function (year, survey = "goa", afsc_species, afsc, save = TRUE)
 
   if(isTRUE(save)){
     sql_run(afsc, .bio) %>%
-      write.csv(here::here(year, "data", "raw", paste0(survey, "_ts_biomass_data.csv")),
+      write.csv(here::here(year, "data", "raw", paste0(area, "_ts_biomass_data.csv")),
                 row.names = FALSE)
   } else {
     sql_run(afsc, .bio)

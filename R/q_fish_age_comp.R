@@ -3,7 +3,7 @@
 #' @param year assessment year
 #' @param fishery default is fsh1, change if age comps from multiple fisheries
 #' @param norpac_species norpac species code
-#' @param region GOA or BSAI
+#' @param area GOA or BSAI
 #' @param akfin the database to query
 #' @param save save the file in designated folder
 #'

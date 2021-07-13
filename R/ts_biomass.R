@@ -1,15 +1,15 @@
 #' survey biomass
 #'
 #' @param year of interest
-#' @param type if not using the design-based abundance, the file name must be stated (e.g. "GAP_VAST.csv")
-#' @param file
+#' @param area e.g., "goa"
+#' @param file if not using the design-based abundance, the file name must be stated (e.g. "GAP_VAST.csv")
 #'
 #' @return
 #' @export ts_biomass
 #'
 #' @examples
 #'
-ts_biomass <- function(year, survey = "goa", file = NULL){
+ts_biomass <- function(year, area = "goa", file = NULL){
 
   if(is.null(file)){
 
@@ -40,7 +40,7 @@ ts_biomass <- function(year, survey = "goa", file = NULL){
     read.csv(here::here(year, "data", "user_input", file)) -> sb
   }
 
-  write.csv(sb, here::here(year, "data", "output", paste0(survey, "_ts_biomass.csv")), row.names = FALSE)
+  write.csv(sb, here::here(year, "data", "output", paste0(area, "_ts_biomass.csv")), row.names = FALSE)
 
   sb
 }

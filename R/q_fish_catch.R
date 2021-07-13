@@ -3,7 +3,7 @@
 #' @param year assessment year
 #' @param fishery default is fsh1, change if age comps from multiple fisheries
 #' @param species group species code
-#' @param region GOA or BSAI
+#' @param area GOA or BSAI
 #' @param akfin the database to query
 #' @param save save the file in designated folder
 #'
@@ -26,7 +26,7 @@ q_fish_catch <- function(year, fishery = "fsh1", species, area, akfin, save = TR
     .c = sql_read(file)
     .c = sql_filter(sql_precode = "<=", year, sql_code = .c, flag = "-- insert year")
     if(length(area) > 1){
-    .c = sql_filter(sql_precode = "IN",x = area, sql_code = .c, flag = "-- insert region")
+    .c = sql_filter(sql_precode = "IN", x = area, sql_code = .c, flag = "-- insert region")
     } else {
       .c = sql_filter(x = area, sql_code = .c, flag = "-- insert region")
     }

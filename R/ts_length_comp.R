@@ -1,7 +1,7 @@
 #' trawl survey length composition analysis
 #'
 #' @param year assessment year
-#' @param survey survey area default = "goa"
+#' @param area survey area default = "goa"
 #' @param lenbins lenbin file if left NULL it looks for (year/data/user_input/len_bins.csv")
 #'
 #' @return
@@ -9,10 +9,10 @@
 #'
 #' @examples
 #'
-ts_length_comp <- function(year, survey = "goa", lenbins = NULL){
+ts_length_comp <- function(year, area = "goa", lenbins = NULL){
 
 
-  read.csv(here::here(year, "data", "raw", paste0(survey, "_ts_length_data.csv"))) %>%
+  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_length_data.csv"))) %>%
     dplyr::rename_all(tolower) -> df
 
   if(!("summary_depth" %in% names(df)) & is.null(lenbins)){
@@ -21,7 +21,7 @@ ts_length_comp <- function(year, survey = "goa", lenbins = NULL){
     lenbins = read.csv(here::here(year, "data", "user_input", lenbins))$len_bins
   }
 
-  read.csv(here::here(year, "data", "raw", paste0(survey, "_ts_specimen_data.csv"))) %>%
+  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_specimen_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::filter(!is.na(length)) %>%
     dplyr::mutate(length = length / 10) -> dat
@@ -81,7 +81,7 @@ ts_length_comp <- function(year, survey = "goa", lenbins = NULL){
       tidyr::pivot_wider(names_from = length, values_from = prop) -> size_comp
   }
 
-  readr::write_csv(size_comp, here::here(year, "data", "output", paste0(survey, "_ts_length_comp.csv")))
+  readr::write_csv(size_comp, here::here(year, "data", "output", paste0(area, "_ts_length_comp.csv")))
 
   size_comp
 

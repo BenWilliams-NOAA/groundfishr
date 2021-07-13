@@ -8,7 +8,7 @@
 #' @export lls_length_comp
 #'
 #' @examples
-lls_length_comp <- function(year, species = NULL, region, lenbins = NULL){
+lls_length_comp <- function(year, species = NULL, area, lenbins = NULL){
 
   if(is.null(lenbins)){
     stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")
@@ -33,7 +33,7 @@ lls_length_comp <- function(year, species = NULL, region, lenbins = NULL){
 
 
 
-  read.csv(here::here(year, "data", "raw", paste0(region, "_lls_specimen_data.csv"))) %>%
+  read.csv(here::here(year, "data", "raw", paste0(area, "_lls_specimen_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::rename(area_code = geographic_area_code) %>%
     dplyr::filter(area_code > drop[[1]],
@@ -48,7 +48,7 @@ lls_length_comp <- function(year, species = NULL, region, lenbins = NULL){
     dplyr::ungroup() -> dat
 
 
-  read.csv(here::here(year, "data", "raw", paste0(region, "_lls_length_data.csv"))) %>%
+  read.csv(here::here(year, "data", "raw", paste0(area, "_lls_length_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::filter(area_code > drop[[1]],
                   !(area_code %in% drop[[2]]),
@@ -71,7 +71,7 @@ lls_length_comp <- function(year, species = NULL, region, lenbins = NULL){
                   n_h = mean(n_h, na.rm = T)) %>%
     tidyr::pivot_wider(names_from = length, values_from = prop) -> size_comp
 
-  write.csv(size_comp, here::here(year, "data", "output", paste0(region, "_lls_length_comp.csv")),
+  write.csv(size_comp, here::here(year, "data", "output", paste0(area, "_lls_length_comp.csv")),
             row.names = FALSE)
 
   size_comp

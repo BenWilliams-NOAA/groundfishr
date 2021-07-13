@@ -2,7 +2,7 @@
 #'
 #' @param year assessment year
 #' @param species "NORK", "REBS", "SABL"
-#' @param region "goa", "bsai", "everywhere"
+#' @param area "goa", "bsai", "everywhere"
 #' @param model folder that the `.tpl` will be in
 #' @param dat_name what to call the .dat file - ".dat" will be appended to the name
 #' @param rec_age recruitment age
@@ -17,9 +17,9 @@
 #' @param n_lls number of longline surveys e.g., domestic and japanes, default is 1
 #' @export concat_dat
 #'
-#' @examples concat_dat(year = 2020, species = "NORK",  region = "goa", model = "base", dat_name = "goa_nr", rec_age = 2, plus_age = 45)
+#' @examples concat_dat(year = 2020, species = "NORK",  area = "goa", model = "base", dat_name = "goa_nr", rec_age = 2, plus_age = 45)
 #'
-concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, plus_age, spawn_mo = 5,
+concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, plus_age, spawn_mo = 5,
                        maturity = NULL, n_ageage = 1, n_sizeage = 1, retro = NULL, n_fleets = 1, n_ts = NULL, n_lls = NULL){
 
   # create directory
@@ -28,10 +28,10 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
   }
 
 
-  if(length(grep(paste0(region,"_lls"),
+  if(length(grep(paste0(area,"_lls"),
                  list.files(here::here(year, "data", "output")), value=TRUE)) > 0){
-    llslc = read.csv(here::here(year, "data", "output", paste0(region, "_lls_length_comp.csv")))
-    llsb = read.csv(here::here(year, "data", "output", paste0(region, "_lls_biomass.csv")))
+    llslc = read.csv(here::here(year, "data", "output", paste0(area, "_lls_length_comp.csv")))
+    llsb = read.csv(here::here(year, "data", "output", paste0(area, "_lls_biomass.csv")))
   }
 
   if(!is.null(maturity)){
@@ -88,7 +88,7 @@ concat_dat <- function(year, species, region = "goa", model, dat_name, rec_age, 
 
   # header ----
   header = c(sep,
-             paste0("#", region, " ", species, " Rockfish .dat file for ADMB optimization"),
+             paste0("#", area, " ", species, " Rockfish .dat file for ADMB optimization"),
              paste ("# New data provided on:", read.table(file = here::here(year, "data/raw/data_called.txt"),
                                                           sep = "\t")[2,1]),
              "# Notes:",

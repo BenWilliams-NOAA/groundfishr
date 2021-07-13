@@ -1,7 +1,7 @@
 #' Longline survey length comp data query
 #'
 #' @param year assessment year
-#' @param survey default is fsh1, change if age comps from multiple fisheries
+#' @param area default is fsh1, change if age comps from multiple fisheries
 #' @param afsc_species afsc species code
 #' @param akfin the database to query
 #' @param save save the file in designated folder
@@ -11,9 +11,9 @@
 #'
 #' @examples
 #'
-q_lls_length_comp <- function(year, survey = "goa", afsc_species, akfin, save = TRUE){
+q_lls_length_comp <- function(year, area = "goa", afsc_species, akfin, save = TRUE){
 
-  files <- grep(paste0(survey,"_lls_length"),
+  files <- grep(paste0(area,"_lls_length"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
 
   .one = sql_read(files[1])
@@ -33,10 +33,10 @@ q_lls_length_comp <- function(year, survey = "goa", afsc_species, akfin, save = 
 
   if(isTRUE(save)){
     sql_run(akfin, .one) %>%
-      write.csv(here::here(year, "data", "raw", paste0(survey, "_lls_length_data.csv")),
+      write.csv(here::here(year, "data", "raw", paste0(area, "_lls_length_data.csv")),
                 row.names = FALSE)
     sql_run(akfin, .two) %>%
-      write.csv(here::here(year, "data", "raw", paste0(survey, "_lls_specimen_data.csv")),
+      write.csv(here::here(year, "data", "raw", paste0(area, "_lls_specimen_data.csv")),
                 row.names = FALSE)
   } else {
     list(sql_run(akfin, .one),

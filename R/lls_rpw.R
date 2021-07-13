@@ -1,7 +1,7 @@
 #' longline survey relative population weight
 #'
 #' @param year of interest
-#' @param survey "goa", "bsai"
+#' @param area "goa", "bsai"
 #' @param file using an alt-ll survey rpw? (file must have format: year, rpw, cv, sd, lci, uci)
 #' @param filter_yrs any years that would like removed from survey biomass estimates e.g., 1997 or c(2001, 2003)
 #'
@@ -10,13 +10,13 @@
 #'
 #' @examples
 #'
-lls_rpw <- function(year, survey, file = NULL, filter_yrs = NULL){
+lls_rpw <- function(year, area, file = NULL, filter_yrs = NULL){
 
   # For GOA only at this time
   if(is.null(filter_yrs)){
     if(is.null(file)){
 
-      read.csv(here::here(year, "data", "raw", paste0(survey, "_lls_biomass_data.csv"))) %>%
+      read.csv(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
         dplyr::rename_all(tolower) %>%
         dplyr::filter(survey != "Japan",
                       area_id >= 3, # goa
@@ -37,7 +37,7 @@ lls_rpw <- function(year, survey, file = NULL, filter_yrs = NULL){
   } else {
     if(is.null(file)){
 
-      read.csv(here::here(year, "data", "raw", paste0(survey, "_lls_biomass_data.csv"))) %>%
+      read.csv(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
         dplyr::rename_all(tolower) %>%
         dplyr::filter(!(year %in% filter_yrs)) %>%
         dplyr::filter(survey != "Japan",
@@ -60,7 +60,7 @@ lls_rpw <- function(year, survey, file = NULL, filter_yrs = NULL){
 
   }
 
-  write.csv(sb, here::here(year, "data", "output", paste0(survey, "_lls_biomass.csv")), row.names = FALSE)
+  write.csv(sb, here::here(year, "data", "output", paste0(area, "_lls_biomass.csv")), row.names = FALSE)
 
   sb
 }

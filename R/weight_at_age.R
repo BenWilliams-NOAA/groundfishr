@@ -3,12 +3,12 @@
 #' @param year model year
 #' @param admb_home = location admb exists on your computer
 #' @param rec_age recruitment age
-#' @param region currently fixed at "goa"
+#' @param area currently fixed at "goa"
 #' @return
 #' @export weight_at_age
 #'
 #' @examples weight_at_age(year = 2020, admb_home = "C:/Program Files (x86)/ADMB-12.1", rec_age = 2)
-weight_at_age <- function(year, admb_home, rec_age, region = "goa"){
+weight_at_age <- function(year, admb_home, rec_age, area = "goa"){
 
   if(is.null(admb_home)){
     R2admb::setup_admb()
@@ -25,7 +25,7 @@ weight_at_age <- function(year, admb_home, rec_age, region = "goa"){
 
 
   # data ----
-  read.csv(here::here(year, "data", "raw", paste0(region, "_ts_saa_length_data.csv"))) %>%
+  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_saa_length_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::filter(year >= 1990, !is.na(length)) -> length_data_raw
 
@@ -37,7 +37,7 @@ weight_at_age <- function(year, admb_home, rec_age, region = "goa"){
   }
 
 
-  read.csv(here::here(year, "data", "raw", paste0(region, "_ts_saa_age_data.csv"))) %>%
+  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_saa_age_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::select(year, age, length, weight) %>%
     dplyr::filter(year >= 1990, !is.na(age))  %>%

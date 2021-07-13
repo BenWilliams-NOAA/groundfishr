@@ -1,7 +1,7 @@
 #' longline survey biomass data query
 #'
 #' @param year
-#' @param survey
+#' @param area
 #' @param afsc_species
 #' @param akfin
 #' @param save
@@ -10,9 +10,9 @@
 #' @export
 #'
 #' @examples
-q_lls_biomass <- function (year, survey = "goa", afsc_species, akfin, save = TRUE){
+q_lls_biomass <- function (year, area = "goa", afsc_species, akfin, save = TRUE){
 
-  files <- grep(paste0(survey,"_lls"),
+  files <- grep(paste0(area,"_lls"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
 
   .bio = sql_read(files[1])
@@ -26,7 +26,7 @@ q_lls_biomass <- function (year, survey = "goa", afsc_species, akfin, save = TRU
 
   if(isTRUE(save)){
     sql_run(akfin, .bio) %>%
-      write.csv(here::here(year, "data", "raw", paste0(survey, "_lls_biomass_data.csv")),
+      write.csv(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv")),
                 row.names = FALSE)
   } else {
     sql_run(akfin, .bio)
