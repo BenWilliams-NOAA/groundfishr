@@ -37,11 +37,11 @@ q_fish_obs <- function(year, fishery = "fsh1", norpac_species, area, akfin, save
   }
 
   if(isTRUE(save)){
-
-      write.csv(dat, here::here(year, "data", "raw", paste0(fishery, "_obs_data.csv")),
+    sql_run(akfin, .obs) %>%
+      write.csv(here::here(year, "data", "raw", paste0(fishery, "_obs_data.csv")),
                 row.names = FALSE)
   } else {
-    dat
+    sql_run(akfin, .obs)
   }
 
 
