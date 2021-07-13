@@ -1,6 +1,6 @@
 #' aging error analysis
 #'
-#' @param read_tester = if left blank it looks for the following file:"data/user_input/reader_tester.csv"
+#' @param read_tester = looks for a file in the user_input folder, e.g., :"reader_tester.csv"
 #' @param species = "NORK"
 #' @param year = year of the assessment
 #' @param admb_home = location admb exists on your computer - if is "c:/admb" can leave NULL
@@ -12,16 +12,12 @@
 #' @return
 #' @export age_error
 #'
-#' @examples ageage(species = "NORK", year = 2020, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100, ...)
+#' @examples ageage(species = "NORK", year = 2020, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100)
 #'
-age_error <- function(reader_tester = NULL, species, year, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100){
+age_error <- function(reader_tester, species, year, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100){
 
 
-  if(is.null(reader_tester)){
-    rt = read.csv(here::here(year, "data", "user_input", "reader_tester.csv"))
-  } else{
-    rt = read.csv(rstudioapi::selectFile("Select File"))
-  }
+    rt = read.csv(here::here(year, "data", "user_input", reader_tester))
 
   if(species == "NORK"){
     norpac_species = 303
