@@ -4,12 +4,12 @@
 \alias{q_ts_length_comp}
 \title{trawl survey length comp data query}
 \usage{
-q_ts_length_comp(year, survey = "goa", afsc_species, afsc, save = TRUE)
+q_ts_length_comp(year, area = "goa", afsc_species, afsc, save = TRUE)
 }
 \arguments{
 \item{year}{assessment year}
 
-\item{survey}{default is fsh1, change if age comps from multiple fisheries}
+\item{area}{default is fsh1, change if age comps from multiple fisheries}
 
 \item{save}{save the file in designated folder}
 

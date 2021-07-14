@@ -4,14 +4,14 @@
 \alias{ts_biomass}
 \title{survey biomass}
 \usage{
-ts_biomass(year, survey = "goa", file = NULL)
+ts_biomass(year, area = "goa", file = NULL)
 }
 \arguments{
 \item{year}{of interest}
 
-\item{file}{}
+\item{area}{e.g., "goa"}
 
-\item{type}{if not using the design-based abundance, the file name must be stated (e.g. "GAP_VAST.csv")}
+\item{file}{if not using the design-based abundance, the file name must be stated (e.g. "GAP_VAST.csv")}
 }
 \value{
 

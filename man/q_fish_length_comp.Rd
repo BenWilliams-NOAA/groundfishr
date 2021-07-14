@@ -20,11 +20,11 @@ q_fish_length_comp(
 
 \item{norpac_species}{norpac species code}
 
+\item{area}{GOA or BSAI}
+
 \item{akfin}{the database to query}
 
 \item{save}{save the file in designated folder}
-
-\item{region}{GOA or BSAI}
 }
 \value{
 

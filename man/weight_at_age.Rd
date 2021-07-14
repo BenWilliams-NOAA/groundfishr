@@ -4,7 +4,7 @@
 \alias{weight_at_age}
 \title{estimate allometric relationship and weight-at-age}
 \usage{
-weight_at_age(year, admb_home, rec_age, region = "goa")
+weight_at_age(year, admb_home, rec_age, area = "goa")
 }
 \arguments{
 \item{year}{model year}
@@ -13,7 +13,7 @@ weight_at_age(year, admb_home, rec_age, region = "goa")
 
 \item{rec_age}{recruitment age}
 
-\item{region}{currently fixed at "goa"}
+\item{area}{currently fixed at "goa"}
 }
 \value{
 

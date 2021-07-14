@@ -5,7 +5,7 @@
 \title{aging error analysis}
 \usage{
 age_error(
-  reader_tester = NULL,
+  reader_tester,
   species,
   year,
   admb_home = NULL,
@@ -30,7 +30,7 @@ age_error(
 
 \item{max_age}{= max age for age error analysis - default = 100}
 
-\item{read_tester}{= if left blank it looks for the following file:"data/user_input/reader_tester.csv"}
+\item{read_tester}{= looks for a file in the user_input folder, e.g., :"reader_tester.csv"}
 }
 \value{
 
@@ -39,6 +39,6 @@ age_error(
 aging error analysis
 }
 \examples{
-ageage(species = "NORK", year = 2020, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100, ...)
+ageage(species = "NORK", year = 2020, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100)
 
 }

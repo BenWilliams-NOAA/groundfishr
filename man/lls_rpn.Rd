@@ -4,12 +4,12 @@
 \alias{lls_rpn}
 \title{longline survey relative population numbers}
 \usage{
-lls_rpn(year, survey, file = NULL, filter_yrs = NULL)
+lls_rpn(year, area, file = NULL, filter_yrs = NULL)
 }
 \arguments{
 \item{year}{of interest}
 
-\item{survey}{"goa", "bsai"}
+\item{area}{"goa", "bsai"}
 
 \item{file}{using an alt-ll survey rnp? (file must have format: year, rnp, cv, sd, lci, uci)}
 

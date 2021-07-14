@@ -4,12 +4,12 @@
 \alias{ts_length_comp}
 \title{trawl survey length composition analysis}
 \usage{
-ts_length_comp(year, survey = "goa", lenbins = NULL)
+ts_length_comp(year, area = "goa", lenbins = NULL)
 }
 \arguments{
 \item{year}{assessment year}
 
-\item{survey}{survey area default = "goa"}
+\item{area}{survey area default = "goa"}
 
 \item{lenbins}{lenbin file if left NULL it looks for (year/data/user_input/len_bins.csv")}
 }

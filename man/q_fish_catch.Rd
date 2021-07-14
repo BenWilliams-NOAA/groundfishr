@@ -13,11 +13,11 @@ q_fish_catch(year, fishery = "fsh1", species, area, akfin, save = TRUE)
 
 \item{species}{group species code}
 
+\item{area}{GOA or BSAI}
+
 \item{akfin}{the database to query}
 
 \item{save}{save the file in designated folder}
-
-\item{region}{GOA or BSAI}
 }
 \value{
 

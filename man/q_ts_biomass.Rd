@@ -4,7 +4,7 @@
 \alias{q_ts_biomass}
 \title{trawl survey biomass data query}
 \usage{
-q_ts_biomass(year, survey = "goa", afsc_species, afsc, save = TRUE)
+q_ts_biomass(year, area = "goa", afsc_species, afsc, save = TRUE)
 }
 \arguments{
 \item{save}{}
