@@ -32,6 +32,9 @@ clean_catch <- function(year, species, fishery = "fsh1", TAC = c(3333, 2222, 111
     if(species == "REBS"){
       fixed_catch = groundfishr:::goa_rebs_catch_1977_2004
     }
+    if(species == "POPA"){
+      fixed_catch = groundfishr:::goa_pop_catch_1960_1990
+    }
   }
 
   names(fixed_catch) <- c("Year", "Catch")
