@@ -47,12 +47,12 @@ ts_length_comp <- function(year, area = "goa", lenbins = NULL){
       tidyr::pivot_longer(cols = c(males, females, unsexed)) %>%
       dplyr:: mutate(bin = round((length / 10 - 0.5) / 20, 1) * 20 + 1) %>%
       dplyr::filter(bin >40) %>%
-      group_by(year, name, bin) %>%
-      summarise(value = sum(value)) %>%
-      ungroup() %>%
-      complete(bin, nesting(year, name), fill = list(value = 0)) %>%
-      group_by(year, name) %>%
-      mutate(prop = value / sum(value)) %>%
+      dplyr::group_by(year, name, bin) %>%
+      dplyr::summarise(value = sum(value)) %>%
+      dplyr::ungroup() %>%
+      tidyr::complete(bin, tidyr::nesting(year, name), fill = list(value = 0)) %>%
+      dplyr::group_by(year, name) %>%
+      dplyr::mutate(prop = value / sum(value)) %>%
       dplyr::select(-value) %>%
       dplyr::left_join(dat) %>%
       dplyr::group_by(year) %>%

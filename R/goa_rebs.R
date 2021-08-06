@@ -15,7 +15,7 @@ goa_rebs <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
   # globals ----
   species = "REYE"
   area = "GOA"
-  afsc_species = 30050
+  afsc_species1 = 30050
   afsc_species2 = 30051
   afsc_species3 = 30052
   norpac_species = 307
@@ -44,13 +44,13 @@ goa_rebs <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
                         UID = afsc_user, PWD = afsc_pwd)
 
   q_ts_biomass(year, area = "goa",
-               afsc_species = c(afsc_species, afsc_species2, afsc_species3), afsc = afsc)
+               afsc_species = c(afsc_species1, afsc_species2, afsc_species3), afsc = afsc)
   q_ts_age_comp(year, area = "goa",
-                afsc_species = c(afsc_species, afsc_species2, afsc_species3), afsc = afsc)
+                afsc_species = c(afsc_species1, afsc_species2, afsc_species3), afsc = afsc)
   q_ts_length_comp(year, area = "goa",
-                   afsc_species = c(afsc_species, afsc_species2, afsc_species3), afsc = afsc)
+                   afsc_species = c(afsc_species1, afsc_species2, afsc_species3), afsc = afsc)
   q_ts_saa(year, area = "goa",
-           afsc_species = c(afsc_species, afsc_species2, afsc_species3), afsc = afsc)
+           afsc_species = c(afsc_species1, afsc_species2, afsc_species3), afsc = afsc)
 
   DBI::dbDisconnect(afsc)
 

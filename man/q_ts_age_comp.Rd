@@ -13,9 +13,9 @@ q_ts_age_comp(year, area = "goa", afsc_species, afsc, save = TRUE)
 
 \item{afsc_species}{afsc species code(s)}
 
-\item{save}{save the file in designated folder}
+\item{afsc}{the database to query}
 
-\item{akfin}{the database to query}
+\item{save}{save the file in designated folder}
 }
 \value{
 

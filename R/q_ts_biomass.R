@@ -15,6 +15,8 @@ q_ts_biomass <- function (year, area = "goa", afsc_species, afsc, save = TRUE){
   files <- grep("_ts",
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
 
+  .bio = sql_read(files[1])
+
   if(length(afsc_species) == 1){
     if(afsc_species == 20510){
     .bio = sql_read(files[9])

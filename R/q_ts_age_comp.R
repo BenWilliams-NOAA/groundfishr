@@ -3,7 +3,7 @@
 #' @param year assessment year
 #' @param area default is goa, change if age comps from multiple surveys
 #' @param afsc_species afsc species code(s)
-#' @param akfin the database to query
+#' @param afsc  the database to query
 #' @param save save the file in designated folder
 #'
 #' @return
