@@ -24,7 +24,7 @@ concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, pl
 
   # create directory
   if (!dir.exists(here::here(year, model))){
-    dir.create(here::here(year, model))
+    dir.create(here::here(year, model), recursive=TRUE)
   }
 
 
@@ -40,11 +40,6 @@ concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, pl
                          dplyr::select(-age))
   }
 
-  if(!is.null(weights)){
-    weights = as.vector(read.csv(paste0(here::here(year, "data", "user_input", maturity))))
-  }
-
-
   fishery = grep("fsh", list.files(here::here(year, 'data', "output")), value=TRUE)
   survey = grep("ts_", list.files(here::here(year, 'data', "output")), value=TRUE)
   ll_survey = grep("lls_", list.files(here::here(year, 'data', "output")), value=TRUE)
@@ -59,9 +54,11 @@ concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, pl
   tslc = read.csv(here::here(year, "data", "output", grep("length", survey, value=TRUE)))
   tsb = read.csv(here::here(year, "data", "output", grep("biomass", survey, value=TRUE)))
 
-  llsrpw = read.csv(here::here(year, "data", "output", grep("biomass", ll_survey, value=TRUE)))
-  llsslc = read.csv(here::here(year, "data", "output", grep("length", ll_survey, value=TRUE)))
-  llsrpn = read.csv(here::here(year, "data", "output", grep("numbers", ll_survey, value=TRUE)))
+  if(length(ll_survey) > 0){
+    llsrpw = read.csv(here::here(year, "data", "output", grep("biomass", ll_survey, value=TRUE)))
+    llsslc = read.csv(here::here(year, "data", "output", grep("length", ll_survey, value=TRUE)))
+    llsrpn = read.csv(here::here(year, "data", "output", grep("numbers", ll_survey, value=TRUE)))
+  }
 
   names(tsb) <- c("year", "biomass", "se", "lci", "uci")
   m_nages = nrow(ae)
@@ -71,10 +68,6 @@ concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, pl
   lbin = as.numeric(gsub("[^0-9.]", "",  colnames(tslc)))
   lbin = lbin[!is.na(lbin)]
   nlenbins = length(lbin)
-
-  if (!dir.exists(here::here(year, model))){
-    dir.create(here::here(year, model), recursive=TRUE)
-  }
 
   if(is.null(n_ageage)){
     n_ageage = 1
@@ -102,7 +95,35 @@ concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, pl
 
   # model inputs ----
 
-  if(exists("mature")){
+  if(is.null(maturity)){
+    mipv <- c(sep,
+              "# Model input parameters/vectors",
+              sep,
+              "# Start and end years, recruitment age, number of age and length bins",
+              "# Model start year (styr):",
+              as.character(min(catch$Year)),
+              "# Model end year (endyr): #!",
+              as.character(year),
+              "# Age at recruitment (rec_age): #-",
+              as.character(rec_age),
+              "# Number of ages in data (nages_D):",
+              as.character(nages),
+              "# Number of ages in model (nages_M):",
+              as.character(m_nages),
+              "# Number of length bins (nlenbins):",
+              as.character(nlenbins),
+              "# Number of age-age transition matrices (n_ageage_mat):",
+              as.character(n_ageage),
+              "# Number of size-age transition matrices (n_sizeage_mat):",
+              as.character(n_sizeage),
+              "# Length bin labels (len_bin_labels):",
+              paste(lbin, collapse=" "),
+              "# Spawn month (spawn_fract):",
+              as.character(spawn_mo),
+              "#",
+              "#")
+
+  } else {
     mipv <- c(sep,
               "# Model input parameters/vectors",
               sep,
@@ -137,35 +158,6 @@ concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, pl
             "#-",
             "",
             "")
-
-
-  } else {
-    mipv <- c(sep,
-              "# Model input parameters/vectors",
-              sep,
-              "# Start and end years, recruitment age, number of age and length bins",
-              "# Model start year (styr):",
-              as.character(min(catch$Year)),
-              "# Model end year (endyr): #!",
-              as.character(year),
-              "# Age at recruitment (rec_age): #-",
-              as.character(rec_age),
-              "# Number of ages in data (nages_D):",
-              as.character(nages),
-              "# Number of ages in model (nages_M):",
-              as.character(m_nages),
-              "# Number of length bins (nlenbins):",
-              as.character(nlenbins),
-              "# Number of age-age transition matrices (n_ageage_mat):",
-              as.character(n_ageage),
-              "# Number of size-age transition matrices (n_sizeage_mat):",
-              as.character(n_sizeage),
-              "# Length bin labels (len_bin_labels):",
-              paste(lbin, collapse=" "),
-              "# Spawn month (spawn_fract):",
-              as.character(spawn_mo),
-              "#",
-              "#")
   }
 
   waa = c(sep,
@@ -408,10 +400,9 @@ concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, pl
 
   # Compile DAT file for ADMB ----
 
-  if(exists("llsrpw") & exists("mat")){
+  if(is.null(maturity)){
     dat <- c(header,
              mipv,
-             mat,
              waa,
              fishery_catch,
              cpue,
@@ -425,7 +416,7 @@ concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, pl
              sizeage,
              aa,
              eof)
-  } else if(!exists("llsrpw") & exists("mat")){
+  } else {
     dat <- c(header,
              mipv,
              mat,
@@ -433,24 +424,12 @@ concat_dat <- function(year, species, area = "goa", model, dat_name, rec_age, pl
              fishery_catch,
              cpue,
              trawl_biomass,
+             ll_biomass,
              fac,
              tsac,
              flc,
              tslc,
-             sizeage,
-             aa,
-             eof)
-  } else {
-    dat <- c(header,
-             mipv,
-             waa,
-             fishery_catch,
-             cpue,
-             trawl_biomass,
-             fac,
-             tsac,
-             flc,
-             tslc,
+             llsc,
              sizeage,
              aa,
              eof)

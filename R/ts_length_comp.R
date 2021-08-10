@@ -3,13 +3,13 @@
 #' @param year assessment year
 #' @param area survey area default = "goa"
 #' @param lenbins lenbin file if left NULL it looks for (year/data/user_input/len_bins.csv")
-#'
+#' @param bysex should the length comp be calculated by sex - default is null (not differentiated)
 #' @return
 #' @export ts_length_comp
 #'
 #' @examples
 #'
-ts_length_comp <- function(year, area = "goa", lenbins = NULL){
+ts_length_comp <- function(year, area = "goa", lenbins = NULL, bysex = NULL){
 
 
   read.csv(here::here(year, "data", "raw", paste0(area, "_ts_length_data.csv"))) %>%
@@ -21,7 +21,7 @@ ts_length_comp <- function(year, area = "goa", lenbins = NULL){
     lenbins = read.csv(here::here(year, "data", "user_input", lenbins))$len_bins
   }
 
-  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_specimen_data.csv"))) %>%
+  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_length_specimen_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::filter(!is.na(length)) %>%
     dplyr::mutate(length = length / 10) -> dat
@@ -46,7 +46,7 @@ ts_length_comp <- function(year, area = "goa", lenbins = NULL){
       dplyr::filter(summary_depth < 995, year != 2001) %>%
       tidyr::pivot_longer(cols = c(males, females, unsexed)) %>%
       dplyr:: mutate(bin = round((length / 10 - 0.5) / 20, 1) * 20 + 1) %>%
-      dplyr::filter(bin >40) %>%
+      dplyr::filter(bin %in% lenbins) %>%
       dplyr::group_by(year, name, bin) %>%
       dplyr::summarise(value = sum(value)) %>%
       dplyr::ungroup() %>%

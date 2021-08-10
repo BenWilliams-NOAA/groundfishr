@@ -11,7 +11,7 @@
 #' @examples ts_age_comp(year = 2020, rec_age = 2, plus_age = 45)
 ts_age_comp <- function(year, area = "goa", rec_age, plus_age){
 
-  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_specimen_data.csv"))) %>%
+  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_age_specimen_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::filter(!is.na(age)) %>%
     dplyr::group_by(year) %>%

@@ -53,7 +53,7 @@ devtools::install_github("BenWilliams-NOAA/groundfishr")
 
 ## Example 
 
-```{r example}
+```{r example, eval = FALSE}
 
 # load ----
 library(groundfishr)

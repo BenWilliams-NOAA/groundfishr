@@ -16,13 +16,13 @@ q_ts_length_comp <- function(year, area = "goa", afsc_species, afsc, save = TRUE
   files <- grep(paste0(area,"_ts_length"),
                 list.files(system.file("sql", package = "groundfishr")), value=TRUE)
 
-  if(grep("sabl", files) > 0){
+  if(afsc_species == 20510){
     # sablefish are different...
     .one = sql_read(files[1])
     .two = sql_read(files[3])
   } else {
-    .one = sql_read(files[1])
-    .two = sql_read(files[2])
+    .one = sql_read(files[2])
+    .two = sql_read(files[3])
   }
 
   if(length(afsc_species) == 1){
@@ -41,7 +41,7 @@ q_ts_length_comp <- function(year, area = "goa", afsc_species, afsc, save = TRUE
       write.csv(here::here(year, "data", "raw", paste0(area, "_ts_length_data.csv")),
                 row.names = FALSE)
     sql_run(afsc, .two) %>%
-      write.csv(here::here(year, "data", "raw", paste0(area, "_ts_specimen_data.csv")),
+      write.csv(here::here(year, "data", "raw", paste0(area, "_ts_length_specimen_data.csv")),
                 row.names = FALSE)
   } else{
     list(sql_run(afsc, .one),

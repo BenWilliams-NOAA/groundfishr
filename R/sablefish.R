@@ -78,10 +78,13 @@ sablefish <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
   # llf age comp ----
 
   # lls age comp ----
+  sql_run(akfin,"SELECT * FROM AFSC.AGE_VIEW") %>%
+    vroom::vroom_write(., here::here(year, "data", "raw", "lls_age_comp_data.csv"))
 
   # llf length comp ----
 
   # lls length comp ----
+  q_lls_length_comp(year, area = "goa", afsc_species = afsc_species, akfin = akfin)
 
   # tf length comp ----
 

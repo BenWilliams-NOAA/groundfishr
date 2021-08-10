@@ -24,16 +24,20 @@ clean_catch <- function(year, species, fishery = "fsh1", TAC = c(3333, 2222, 111
     fixed_catch = vroom::vroom(here::here("data", "user_input", "fixed_catch"))
   } else if(is.null(fixed_catch)){
     if(species == "NORK"){
-      fixed_catch = groundfishr:::goa_nork_catch_1961_1992
+      fixed_catch = groundfishr::goa_nork_catch_1961_1992
     }
     if(species == "SABL"){
-      fixed_catch = groundfishr:::sabl_catch_1960_1990
+      fixed_catch = groundfishr::sabl_fixed_abundance |>
+        dplyr::filter(variable == "catch")
     }
     if(species == "REBS"){
-      fixed_catch = groundfishr:::goa_rebs_catch_1977_2004
+      fixed_catch = groundfishr::goa_rebs_catch_1977_2004
+    }
+    if(species == "DUSK"){
+      fixed_catch = groundfishr::goa_dusk_catch_1970_1990
     }
     if(species == "POPA"){
-      fixed_catch = groundfishr:::goa_pop_catch_1960_1990
+      fixed_catch = groundfishr::goa_pop_catch_1960_1990
     }
   }
 

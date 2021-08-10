@@ -74,3 +74,15 @@
 #' \item{catch}{weight of catch in 1,000 t}
 #' }
 "goa_rebs_catch_1977_2004"
+
+
+#' Sablefish defining areas for age samples
+#'
+#' A dataset containing area definitions
+#'
+#' @format A data frame with 15 observations and 2 variables:
+#' \describe{
+#' \item{NMFS_AREA}{area number}
+#' \item{AREA_NAME}{assignment for area number}
+#' }
+"sabl_new_areas"

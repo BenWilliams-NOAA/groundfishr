@@ -36,7 +36,7 @@ q_ts_age_comp <- function(year, area = "goa", afsc_species, afsc, save = TRUE){
       write.csv(here::here(year, "data", "raw", paste0(area, "_ts_age_data.csv")),
                 row.names = FALSE)
     sql_run(afsc, .two) %>%
-      write.csv(here::here(year, "data", "raw", paste0(area, "_ts_specimen_data.csv")),
+      write.csv(here::here(year, "data", "raw", paste0(area, "_ts_age_specimen_data.csv")),
                 row.names = FALSE)
   } else {
     list(sql_run(afsc, .one),
