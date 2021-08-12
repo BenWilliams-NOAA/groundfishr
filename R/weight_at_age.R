@@ -8,7 +8,7 @@
 #' @export weight_at_age
 #'
 #' @examples weight_at_age(year = 2020, admb_home = "C:/Program Files (x86)/ADMB-12.1", rec_age = 2)
-weight_at_age <- function(year, admb_home, rec_age, area = "goa"){
+weight_at_age <- function(year, admb_home = NULL, rec_age, area = "goa"){
 
   if(is.null(admb_home)){
     R2admb::setup_admb()

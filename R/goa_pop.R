@@ -46,8 +46,8 @@ goa_pop <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
 
   DBI::dbDisconnect(afsc)
 
-  file.copy(system.file("data", "goa_nork_catch_1961_1992.rda", package = "groundfishr"),
-            here::here(year, "data", "user_input"))
+  write.csv(goa_pop_catch_1960_1990,
+            here::here(year, "data", "user_input", "goa_pop_catch_1960_1990.csv"))
 
 
   q_date(year)

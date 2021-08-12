@@ -23,6 +23,10 @@ age_error <- function(reader_tester, species, year, admb_home = NULL, area = "GO
     norpac_species = 303
   }
 
+    if(species == "POP" | species == "POPA"){
+      norpac_species = 301
+    }
+
   if(species == "REBS"){
     norpac_species = c(307, 357)
   }

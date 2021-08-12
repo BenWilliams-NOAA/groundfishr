@@ -23,10 +23,9 @@ size_at_age_pop_60 <- function(year, rec_age, lenbins = NULL){
   }
 
   # move parameters to user_input folder
-  file.copy(system.file("data", "saa_pop_60.rda", package = "groundfishr"),
-            here::here(year, "data", "user_input"))
+  write.csv(saa_pop_60, here::here(year, "data", "user_input", "saa_pop_60.csv"))
 
-  pars = read.csv(here::here(year, "data", "user_input", "saa_pop_60.rda"))
+  pars = read.csv(here::here(year, "data", "user_input", "saa_pop_60.csv"))
 
 expand.grid(age = ages_m,
             length = lenbins) %>%
@@ -41,5 +40,9 @@ expand.grid(age = ages_m,
   dplyr::select(age, length, prob) %>%
   tidyr::pivot_wider(names_from = length, values_from = prob) %>%
   dplyr::mutate(!!rev(names(.))[1] := 1 - rowSums(.[2:(ncol(.) - 1)])) %>%
-  dplyr::mutate_at(2:ncol(.), round, 4)
+  dplyr::mutate_at(2:ncol(.), round, 4) -> saa
+
+write.csv(saa, here::here(year, "data", "output", "saa_60.csv"), row.names = FALSE)
+saa
+
 }

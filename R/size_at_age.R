@@ -9,7 +9,7 @@
 #' @export size_at_age
 #'
 #' @examples
-size_at_age <- function(year, admb_home, rec_age, lenbins = NULL){
+size_at_age <- function(year, admb_home = NULL, rec_age, lenbins = NULL){
 
   if (!dir.exists(here::here(year, "data", "output"))){
     dir.create(here::here(year, "data", "output"), recursive=TRUE)
