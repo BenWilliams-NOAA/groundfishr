@@ -66,17 +66,17 @@ clean_catch <- function(year, species, fishery = "fsh1", TAC = c(3333, 2222, 111
     dplyr::select(Year = YEAR, Catch = WEIGHT_POSTED) %>%
     dplyr::filter(Year > max(fixed_catch$Year)) %>%
     dplyr::group_by(Year) %>%
-    dplyr::summarise(Catch = round(sum(Catch))) %>%
+    dplyr::summarise(Catch = round(sum(Catch), 4)) %>%
     dplyr::bind_rows(fixed_catch) %>%
     dplyr::arrange(Year) %>%
-    dplyr::mutate(Catch = ifelse(Year==year, round(Catch * ratio), Catch)) -> catch
+    dplyr::mutate(Catch = ifelse(Year==year, round(Catch * ratio, 4), Catch)) -> catch
   } else {
     catch_data %>%
       dplyr::select(Year = YEAR, Catch = WEIGHT_POSTED) %>%
       dplyr::group_by(Year) %>%
-      dplyr::summarise(Catch = round(sum(Catch))) %>%
+      dplyr::summarise(Catch = round(sum(Catch), 4)) %>%
       dplyr::arrange(Year) %>%
-      dplyr::mutate(Catch = ifelse(Year==year, round(Catch * ratio), Catch)) -> catch
+      dplyr::mutate(Catch = ifelse(Year==year, round(Catch * ratio, 4), Catch)) -> catch
   }
 
   write.csv(catch, here::here(year, "data", "output",  paste0(fishery, "_catch.csv")), row.names = FALSE)
@@ -87,5 +87,8 @@ clean_catch <- function(year, species, fishery = "fsh1", TAC = c(3333, 2222, 111
     dplyr::bind_cols(tac = TAC) %>%
     dplyr::mutate(yld = Catch / tac) %>%
     dplyr::summarise(yld = mean(yld)) %>%
-    write.csv(here::here(year, "data", "output", "yld_rat.csv"), row.names = FALSE)
+    dplyr::pull(yld) -> yld
+
+    data.frame(yld = yld, catch_rat = ratio) %>%
+      write.csv(here::here(year, "data", "output", "yld_rat.csv"), row.names = FALSE)
 }

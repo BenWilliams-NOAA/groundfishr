@@ -4,12 +4,13 @@
 #' @param area default is "goa"
 #' @param rec_age recruitment age
 #' @param plus_age plus group age
+#' @param rmv_yrs any survey years to exclude
 #'
 #' @return
 #' @export ts_age_comp
 #'
 #' @examples ts_age_comp(year = 2020, rec_age = 2, plus_age = 45)
-ts_age_comp <- function(year, area = "goa", rec_age, plus_age){
+ts_age_comp <- function(year, area = "goa", rec_age, plus_age, rmv_yrs = NULL){
 
   read.csv(here::here(year, "data", "raw", paste0(area, "_ts_age_specimen_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
@@ -38,6 +39,13 @@ ts_age_comp <- function(year, area = "goa", rec_age, plus_age){
                   n_h = mean(n_h, na.rm = T)) %>%
     tidyr::pivot_wider(names_from = age, values_from = prop) %>%
     dplyr::arrange(year) -> age_comp
+
+
+  if(!is.null(rmv_yrs)){
+    age_comp |>
+      dplyr::filter(!(year %in% rmv_yrs)) -> age_comp
+  }
+
 
   readr::write_csv(age_comp, here::here(year, "data", "output", paste0(area, "_ts_age_comp.csv")))
 

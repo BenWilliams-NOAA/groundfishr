@@ -4,7 +4,7 @@
 \alias{ts_age_comp}
 \title{trawl survey age comp analysis}
 \usage{
-ts_age_comp(year, area = "goa", rec_age, plus_age)
+ts_age_comp(year, area = "goa", rec_age, plus_age, rmv_yrs = NULL)
 }
 \arguments{
 \item{year}{assessment year}
@@ -14,6 +14,8 @@ ts_age_comp(year, area = "goa", rec_age, plus_age)
 \item{rec_age}{recruitment age}
 
 \item{plus_age}{plus group age}
+
+\item{rmv_yrs}{any survey years to exclude}
 }
 \value{
 
