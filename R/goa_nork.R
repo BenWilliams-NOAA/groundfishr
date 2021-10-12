@@ -5,7 +5,7 @@
 #' @param akfin_pwd user password
 #' @param afsc_user user name
 #' @param afsc_pwd user password
-#' @param off_yr
+#' @param off_yr if this is an off-year assessment change to TRUE
 #'
 #' @return
 #' @export goa_nork
@@ -32,6 +32,13 @@ goa_nork <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd, off_yr = 
   q_fish_obs(year, fishery = "fsh1", norpac_species = norpac_species, area, akfin)
 
   DBI::dbDisconnect(akfin)
+
+  afsc = DBI::dbConnect(odbc::odbc(), "afsc",
+                      UID = afsc_user, PWD = afsc_pwd)
+
+  q_ts_biomass(year, area = "goa", afsc_species = afsc_species, afsc = afsc)
+
+  DBI::dbDisconnect(afsc)
 
   } else{
     akfin = DBI::dbConnect(odbc::odbc(), "akfin",

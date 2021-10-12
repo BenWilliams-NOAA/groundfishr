@@ -5,6 +5,7 @@
 #' @param akfin_pwd user password
 #' @param afsc_user user name
 #' @param afsc_pwd user password
+#' @param off_yr if this is an off-year assessment change to TRUE
 #'
 #' @return
 #' @export goa_dusk
@@ -13,7 +14,7 @@
 #' \dontrun{
 #' goa_disk(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd)
 #' }
-goa_dusk <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
+goa_dusk <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd, off_yr = NULL){
 
   # globals ----
   species = "DUSK"
@@ -22,6 +23,25 @@ goa_dusk <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
   afsc_species2 = 30152
   norpac_species = 330
 
+
+if(!is.null(off_yr)){
+  # establish akfin connection
+  akfin = DBI::dbConnect(odbc::odbc(), "akfin",
+                          UID = akfin_user, PWD = akfin_pwd)
+  # catch
+  q_fish_catch(year, fishery = "fsh1", species = species, area = area, akfin = akfin)
+  q_fish_obs(year, fishery = "fsh1", norpac_species = norpac_species, area, akfin)
+
+  DBI::dbDisconnect(akfin)
+
+  afsc = DBI::dbConnect(odbc::odbc(), "afsc",
+                      UID = afsc_user, PWD = afsc_pwd)
+
+  q_ts_biomass(year, area = "goa", afsc_species = c(afsc_species1, afsc_species2), afsc = afsc)
+
+  DBI::dbDisconnect(afsc)
+
+  } else{
   # establish akfin connection
   akfin <- DBI::dbConnect(odbc::odbc(), "akfin",
                           UID = akfin_user, PWD = akfin_pwd)
@@ -62,6 +82,7 @@ goa_dusk <- function(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd){
 
   file.copy(system.file("data", "goa_dusk_catch_1977_1990.rda", package = "groundfishr"),
             here::here(year, "data", "user_input"))
-
+}
   q_date(year)
+
 }

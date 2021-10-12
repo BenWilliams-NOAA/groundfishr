@@ -17,7 +17,7 @@ goa_nork(year, akfin_user, akfin_pwd, afsc_user, afsc_pwd, off_yr = NULL)
 
 \item{afsc_pwd}{user password}
 
-\item{off_yr}{}
+\item{off_yr}{if this is an off-year assessment change to TRUE}
 }
 \value{
 

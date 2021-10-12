@@ -34,7 +34,7 @@ clean_catch <- function(year, species, fishery = "fsh1", TAC = c(3333, 2222, 111
       fixed_catch = groundfishr::goa_rebs_catch_1977_2004
     }
     if(species == "DUSK"){
-      fixed_catch = groundfishr::goa_dusk_catch_1970_1990
+      fixed_catch = groundfishr::goa_dusk_catch_1977_1990
     }
     if(species == "POPA"){
       fixed_catch = groundfishr::goa_pop_catch_1960_1990
