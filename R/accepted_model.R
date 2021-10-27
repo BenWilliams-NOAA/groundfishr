@@ -20,7 +20,7 @@ accepted_model <- function(base_year, base_model, year){
 
   if (!x) {
     dir.create(here::here(year, "base"))
-  } else if(x){
+  } else {
     y = readline("To overwrite the base folder enter 1, else 0: ")
   }
 
