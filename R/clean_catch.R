@@ -20,7 +20,7 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
     stop("check your TAC!")
   }
 
-  if(species = "REYE"){
+  if(species == "REYE"){
     species = "REBS"
   }
 

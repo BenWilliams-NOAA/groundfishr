@@ -4,7 +4,7 @@
 \alias{ts_biomass}
 \title{survey biomass}
 \usage{
-ts_biomass(year, area = "goa", file = NULL, rmv_yrs = NULL)
+ts_biomass(year, area = "goa", file = NULL, rmv_yrs = NULL, id = NULL)
 }
 \arguments{
 \item{year}{of interest}

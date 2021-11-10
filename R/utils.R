@@ -1,37 +1,32 @@
 
-#' @export sql_read
-#' @export collapse_filters
-#' @export sql_filter
-#' @export sql_run
-#' @export purrit
 #' @export collapse_row
-sql_read <- function(x) {
-  if(file.exists(system.file("sql", x, package = "groundfishr"))) {
-    readLines(system.file("sql", x, package = "groundfishr"))
-  } else {
-    stop("The sql file does not exist.")
-  }
-}
+#' @export purrit
+
+# sql_read <- function(x) {
+#   if(file.exists(system.file("sql", x, package = "groundfishr"))) {
+#     readLines(system.file("sql", x, package = "groundfishr"))
+#   } else {
+#     stop("The sql file does not exist.")
+#   }
+# }
 
 
-collapse_filters <- function(x) {
-  sprintf("'%s'", paste(x, collapse = "','"))
-}
 
-sql_filter <- function(sql_precode = "=", x, sql_code, flag = "-- insert species") {
 
-  i = suppressWarnings(grep(flag, sql_code))
-  sql_code[i] <- paste0(
-    sql_precode, " (",
-    collapse_filters(x), ")"
-  )
-  sql_code
-}
+# sql_filter <- function(sql_precode = "=", x, sql_code, flag = "-- insert species") {
+#
+#   i = suppressWarnings(grep(flag, sql_code))
+#   sql_code[i] <- paste0(
+#     sql_precode, " (",
+#     collapse_filters(x), ")"
+#   )
+#   sql_code
+# }
 
-sql_run <- function(database, query) {
-  query = paste(query, collapse = "\n")
-  DBI::dbGetQuery(database, query, as.is=TRUE, believeNRows=FALSE)
-}
+# sql_run <- function(database, query) {
+#   query = paste(query, collapse = "\n")
+#   DBI::dbGetQuery(database, query, as.is=TRUE, believeNRows=FALSE)
+# }
 
 
 #' helper function for comp data
