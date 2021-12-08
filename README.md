@@ -10,12 +10,6 @@ You must be able to have a connection to the AFSC & AKFIN (Answers) data servers
 <!-- badges: end -->
 
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  fig.path = "man/figures/"
-)
-```
-
 ## Installation
 
 You can install the released version of groundfishr from [github](https://github.com/BenWilliams-NOAA/groundfishr) with:
