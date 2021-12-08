@@ -19,13 +19,13 @@ weight_at_age <- function(year, admb_home = NULL, rec_age, area = "goa"){
   if (!file.exists(here::here(year,"data", "output", "ae_model.csv"))){
     stop("You must first run the age-error function 'ageage()")
   } else {
-    nages_m = nrow(read.csv(here::here(year, "data", "output", "ae_model.csv")))
+    nages_m = nrow(vroom::vroom(here::here(year, "data", "output", "ae_model.csv")))
     ages_m = rec_age:(rec_age + nages_m - 1)
   }
 
 
   # data ----
-  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_saa_length_data.csv"))) %>%
+  vroom::vroom(here::here(year, "data", "raw", paste0(area, "_ts_saa_length_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::filter(year >= 1990, !is.na(length)) -> length_data_raw
 
@@ -37,7 +37,7 @@ weight_at_age <- function(year, admb_home = NULL, rec_age, area = "goa"){
   }
 
 
-  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_saa_age_data.csv"))) %>%
+  vroom::vroom(here::here(year, "data", "raw", paste0(area, "_ts_saa_age_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::select(year, age, length, weight) %>%
     dplyr::filter(year >= 1990, !is.na(age))  %>%
@@ -151,8 +151,8 @@ weight_at_age <- function(year, admb_home = NULL, rec_age, area = "goa"){
   WaA_stats = WaA_stats[-r,]
 
   # Write data
-  write.csv(WaA_stats,
-            here::here(year, "data", "output", "waa_stats.csv"), row.names = FALSE)
+  vroom::vroom_write(WaA_stats,
+            here::here(year, "data", "output", "waa_stats.csv"), ",")
 
 
 
@@ -169,8 +169,7 @@ weight_at_age <- function(year, admb_home = NULL, rec_age, area = "goa"){
 
 
   # Write data
-  write.csv(lw_mdl_data, here::here(year, "data", "output", "wal_stats.csv"),
-            row.names = FALSE)
+  vroom::vroom_write(lw_mdl_data, here::here(year, "data", "output", "wal_stats.csv"), ",")
 
 
   # Run allometric model ----
@@ -199,7 +198,7 @@ weight_at_age <- function(year, admb_home = NULL, rec_age, area = "goa"){
   setwd(here::here())
 
   allo = data.frame(alpha_lw = alpha_lw, beta_lw = beta_lw)
-  write.csv(allo, here::here(year, "data", "output", "alpha_beta_lw.csv"))
+  vroom::vroom_write(allo, here::here(year, "data", "output", "alpha_beta_lw.csv"), ",")
 
 
 
@@ -245,8 +244,8 @@ weight_at_age <- function(year, admb_home = NULL, rec_age, area = "goa"){
   Wbar = round(Wbar, digits=1)
   Wbar_params = cbind(Winf, k, t0, beta_lw)
 
-  write.csv(Wbar_params, here::here(year, "data", "output", "Wbar_params.csv"), row.names = FALSE)
-  write.csv(Wbar, here::here(year, "data", "output", "waa.csv"), row.names = FALSE)
+  vroom::vroom_write(Wbar_params, here::here(year, "data", "output", "Wbar_params.csv"), ",")
+  vroom::vroom_write(Wbar, here::here(year, "data", "output", "waa.csv"), ",")
 
   Wbar
 }

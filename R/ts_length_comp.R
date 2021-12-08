@@ -18,10 +18,10 @@ ts_length_comp <- function(year, area = "goa", lenbins = NULL, bysex = NULL){
   if(!("summary_depth" %in% names(df)) & is.null(lenbins)){
     stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")
   } else if(!("summary_depth" %in% names(df))){
-    lenbins = read.csv(here::here(year, "data", "user_input", lenbins))$len_bins
+    lenbins =  vroom::vroom(here::here(year, "data", "user_input", lenbins))$len_bins
   }
 
-  read.csv(here::here(year, "data", "raw", paste0(area, "_ts_length_specimen_data.csv"))) %>%
+  vroom::vroom(here::here(year, "data", "raw", paste0(area, "_ts_length_specimen_data.csv"))) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::filter(!is.na(length)) %>%
     dplyr::mutate(length = length / 10) -> dat
@@ -81,7 +81,7 @@ ts_length_comp <- function(year, area = "goa", lenbins = NULL, bysex = NULL){
       tidyr::pivot_wider(names_from = length, values_from = prop) -> size_comp
   }
 
-  readr::write_csv(size_comp, here::here(year, "data", "output", paste0(area, "_ts_length_comp.csv")))
+  vroom::vroom_write(size_comp, here::here(year, "data", "output", paste0(area, "_ts_length_comp.csv")), ",")
 
   size_comp
 

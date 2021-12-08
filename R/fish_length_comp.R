@@ -15,7 +15,7 @@ fish_length_comp <- function(year, fishery = "fsh1", rec_age, lenbins = NULL){
   if(is.null(lenbins)){
     stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")
   } else {
-    lenbins = read.csv(here::here(year, "data", "user_input", lenbins))$len_bins
+    lenbins =  vroom::vroom(here::here(year, "data", "user_input", lenbins))$len_bins
   }
 
   Y = year
@@ -27,9 +27,9 @@ fish_length_comp <- function(year, fishery = "fsh1", rec_age, lenbins = NULL){
     dplyr::filter(age >= 50) %>%
     dplyr::ungroup() -> ages
 
-  read.csv(here::here(year, "data", "raw", paste0(fishery,"_length_comp_data.csv")),
-           colClasses = c(HAUL_JOIN = "character",
-                          PORT_JOIN = "character")) %>%
+  vroom::vroom(here::here(year, "data", "raw", paste0(fishery,"_length_comp_data.csv")),
+               col_types = list(HAUL_JOIN = "c",
+                                PORT_JOIN = "c")) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::filter(!(year %in% unique(ages$year)), year>1990 & year<Y) %>%
     dplyr::group_by(year) %>%
@@ -50,7 +50,7 @@ fish_length_comp <- function(year, fishery = "fsh1", rec_age, lenbins = NULL){
     dplyr::select(-length_tot) %>%
     tidyr::pivot_wider(names_from = length, values_from = prop) -> fish_length_comp
 
-  readr::write_csv(fish_length_comp, here::here(year, "data", "output", paste0(fishery, "_length_comp.csv")))
+  vroom::vroom_write(fish_length_comp, here::here(year, "data", "output", paste0(fishery, "_length_comp.csv")), ",")
 
   fish_length_comp
 
