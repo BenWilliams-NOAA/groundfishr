@@ -10,7 +10,7 @@
 #'
 #' @examples
 #'
-ts_biomass <- function(year, area = "goa", file = NULL, rmv_yrs = NULL){
+ts_biomass <- function(year, area = "goa", file = NULL, rmv_yrs = NULL, id = NULL){
 
   if(is.null(file)){
 
@@ -46,7 +46,11 @@ ts_biomass <- function(year, area = "goa", file = NULL, rmv_yrs = NULL){
       dplyr::filter(!(year %in% rmv_yrs)) -> sb
   }
 
-  write.csv(sb, here::here(year, "data", "output", paste0(area, "_ts_biomass.csv")), row.names = FALSE)
+  if(!is.null(id)){
+    write.csv(sb, here::here(year, "data", "output", paste0(area, "_ts_biomass_", id, ".csv")), row.names = FALSE)
+  } else {
+    write.csv(sb, here::here(year, "data", "output", paste0(area, "_ts_biomass.csv")), row.names = FALSE)
+  }
 
   sb
 }

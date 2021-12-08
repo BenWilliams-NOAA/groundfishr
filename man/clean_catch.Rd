@@ -7,7 +7,7 @@
 clean_catch(
   year,
   species,
-  fishery = "fsh1",
+  fishery = "fsh",
   TAC = c(3333, 2222, 1111),
   fixed_catch = NULL
 )
@@ -17,7 +17,7 @@ clean_catch(
 
 \item{species}{species of interest e.g., "SABL", "DUSK"}
 
-\item{fishery}{identify the fishery default is "fsh1"}
+\item{fishery}{identify the fishery default is "fsh"}
 
 \item{TAC}{last three TAC in form: c(year-3, year-2, year-1)}
 
@@ -31,7 +31,7 @@ clean up catch data
 }
 \examples{
 \dontrun{
-clean_catch(year, TAC = c(2874, 2756, 3100), fixed_catch = "goa_rebs_catch_1977_2004")
+clean_catch(year, TAC = c(2874, 2756, 3100))
 }
 
 }
