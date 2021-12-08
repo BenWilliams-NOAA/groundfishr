@@ -23,6 +23,9 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
   if(species == "REYE"){
     species = "REBS"
   }
+  if(species == "POP"){
+    species = "POPA"
+  }
 
   if(!is.null(fixed_catch)){
     fixed_catch = vroom::vroom(here::here("data", "user_input", "fixed_catch"))
@@ -72,15 +75,13 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
     dplyr::group_by(Year) %>%
     dplyr::summarise(Catch = round(sum(Catch), 4)) %>%
     dplyr::bind_rows(fixed_catch) %>%
-    dplyr::arrange(Year) %>%
-    dplyr::mutate(Catch = ifelse(Year==year, round(Catch * ratio, 4), Catch)) -> catch
+    dplyr::arrange(Year) -> catch
   } else {
     catch_data %>%
       dplyr::select(Year = YEAR, Catch = WEIGHT_POSTED) %>%
       dplyr::group_by(Year) %>%
       dplyr::summarise(Catch = round(sum(Catch), 4)) %>%
-      dplyr::arrange(Year) %>%
-      dplyr::mutate(Catch = ifelse(Year==year, round(Catch * ratio, 4), Catch)) -> catch
+      dplyr::arrange(Year) -> catch
   }
 
   write.csv(catch, here::here(year, "data", "output",  paste0(fishery, "_catch.csv")), row.names = FALSE)
@@ -93,8 +94,14 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
     dplyr::summarise(yld = mean(yld)) %>%
     dplyr::pull(yld) -> yld
 
-    data.frame(yld = yld, catch_rat = ratio) %>%
-      write.csv(here::here(year, "data", "output", "yld_rat.csv"), row.names = FALSE)
+  # estimate catch through end of the year
+  catch %>%
+    dplyr::filter(Year==year) %>%
+    dplyr::mutate(catch = Catch * ratio) %>%
+    dplyr::pull(catch) -> proj_catch
+
+    data.frame(yld = yld, catch_rat = ratio, proj_catch = proj_catch) %>%
+      vroom::vroom_write(here::here(year, "data", "output", "yld_rat.csv"), row.names = FALSE)
 
   catch
 }
