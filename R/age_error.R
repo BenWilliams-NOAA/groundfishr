@@ -17,7 +17,7 @@
 age_error <- function(reader_tester, species, year, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100){
 
 
-    rt = read.csv(here::here(year, "data", "user_input", reader_tester))
+    rt = vroom::vroom(here::here(year, "data", "user_input", reader_tester))
 
   if(species == "NORK"){
     norpac_species = 303
@@ -111,8 +111,8 @@ age_error <- function(reader_tester, species, year, admb_home = NULL, area = "GO
     mtx100[j,nrow(fits)] = 1 - sum(mtx100[j, 1:(nrow(fits) - 1)])
   }
 
-  write.csv(mtx100, here::here(paste0(year, "data", "output", "ae_mtx_", max_age, ".csv")), row.names = FALSE)
-  write.csv(fits,  here::here(year,"data", "output", "ae_SD.csv"), row.names = FALSE)
+  write.csv(mtx100, here::here(year, "data", "output", paste0("ae_mtx_", max_age, ".csv")), row.names = FALSE)
+  vroom::vroom_write(fits,  here::here(year,"data", "output", "ae_SD.csv"), ",")
 
   # Compute ageing error matrix for model
   ae_Mdl = matrix(nrow=length(ages), ncol=nages)
