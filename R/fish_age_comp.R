@@ -12,11 +12,11 @@
 #' \dontrun{
 #' fish_age_comp(year, fishery = "fsh1", rec_age, plus_age)
 #' }
-fish_age_comp <- function(year, fishery = "fsh1", rec_age, plus_age){
+fish_age_comp <- function(year, fishery = "fsh", rec_age, plus_age){
 
-  read.csv(here::here(year, "data", "raw", paste0(fishery, "_age_comp_data.csv")),
-           colClasses = c(HAUL_JOIN = "character",
-                          PORT_JOIN = "character")) %>%
+  vroom::vroom(here::here(year, "data", "raw", paste0(fishery, "_age_comp_data.csv")),
+           col_types = list(HAUL_JOIN = "c",
+                          PORT_JOIN = "c")) %>%
     dplyr::rename_all(tolower) %>%
     dplyr::filter(specimen_type!=3, !is.na(age), age>=rec_age) %>%
     dplyr::mutate(age = ifelse(age>plus_age, plus_age, age)) %>%

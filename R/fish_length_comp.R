@@ -10,12 +10,12 @@
 #' @export fish_length_comp
 #'
 #' @examples
-fish_length_comp <- function(year, fishery = "fsh1", rec_age, lenbins = NULL){
+fish_length_comp <- function(year, fishery = "fsh", rec_age, lenbins = NULL){
 
   if(is.null(lenbins)){
     stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")
   } else {
-    lenbins =  vroom::vroom(here::here(year, "data", "user_input", lenbins))$len_bins
+    lenbins =  vroom::vroom(here::here(year, "data", "user_input", lenbins), delim = ",")$len_bins
   }
 
   Y = year
