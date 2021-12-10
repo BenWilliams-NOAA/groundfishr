@@ -16,13 +16,11 @@ lls_rpw <- function(year, area, file = NULL, filter_yrs = NULL){
   if(is.null(filter_yrs)){
     if(is.null(file)){
 
-      read.csv(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
+      vroom::vroom(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
         dplyr::rename_all(tolower) %>%
-        dplyr::filter(survey != "Japan",
-                      area_id >= 3, # goa
-                      year > 1992) %>% # poor data prior
+        dplyr::filter(year > 1992) %>% # poor data prior
         dplyr::group_by(year) %>%
-        dplyr::summarise(rpw = sum(rpw)) %>%
+        dplyr::summarise(rpw = sum(rpw, na.rm = T)) %>%
         dplyr::ungroup() %>%
         dplyr::mutate(cv = sqrt(var(rpw)) / mean(rpw),
                       sd = cv * rpw,
@@ -32,19 +30,16 @@ lls_rpw <- function(year, area, file = NULL, filter_yrs = NULL){
         dplyr::mutate_if(is.double, round) %>%
         dplyr::select(-cv) -> sb
     } else {
-      read.csv(here::here(year, "data", "user_input", file)) -> sb
+      vroom::vroom(here::here(year, "data", "user_input", file)) -> sb
     }
   } else {
     if(is.null(file)){
 
-      read.csv(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
+      vroom::vroom(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
         dplyr::rename_all(tolower) %>%
-        dplyr::filter(!(year %in% filter_yrs)) %>%
-        dplyr::filter(survey != "Japan",
-                      area_id >= 3, # goa
-                      year > 1992) %>% # poor data prior
+        dplyr::filter(!(year %in% filter_yrs), year > 1992) %>% # poor data prior
         dplyr::group_by(year) %>%
-        dplyr::summarise(rpw = sum( )) %>%
+        dplyr::summarise(rpw = sum(rpw, na.rm = T)) %>%
         dplyr::ungroup() %>%
         dplyr::mutate(cv = sqrt(var(rpw)) / mean(rpw),
                       sd = cv * rpw,
@@ -54,13 +49,13 @@ lls_rpw <- function(year, area, file = NULL, filter_yrs = NULL){
         dplyr::mutate_if(is.double, round) %>%
         dplyr::select(-cv)
     } else {
-      read.csv(here::here(year, "data", "user_input", file)) %>%
+      vroom::vroom(here::here(year, "data", "user_input", file)) %>%
         dplyr::filter(!(year %in% filter_yrs)) -> sb
     }
 
   }
 
-  write.csv(sb, here::here(year, "data", "output", paste0(area, "_lls_biomass.csv")), row.names = FALSE)
+  vroom::vroom_write(sb, here::here(year, "data", "output", paste0(area, "_lls_biomass.csv")), delim = ",")
 
   sb
 }

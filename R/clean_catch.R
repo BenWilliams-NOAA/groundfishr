@@ -84,7 +84,7 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
       dplyr::arrange(Year) -> catch
   }
 
-  vroom::vroom_write(catch, here::here(year, "data", "output",  paste0(fishery, "_catch.csv")))
+  vroom::vroom_write(catch, here::here(year, "data", "output",  paste0(fishery, "_catch.csv")), delim = ",")
 
   # estimate yield ratio of previous 3 years relative to TAC
   catch %>%
@@ -101,7 +101,7 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
     dplyr::pull(catch) -> proj_catch
 
     data.frame(yld = yld, catch_rat = ratio, proj_catch = proj_catch) %>%
-      vroom::vroom_write(here::here(year, "data", "output", "yld_rat.csv"), ",")
+      vroom::vroom_write(here::here(year, "data", "output", "yld_rat.csv"), delim = ",")
 
   catch
 }

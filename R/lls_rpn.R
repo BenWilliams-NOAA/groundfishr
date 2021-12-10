@@ -13,47 +13,49 @@
 lls_rpn <- function(year, area, file = NULL, filter_yrs = NULL){
 
   # For GOA only at this time
-  if(is.null(file) & is.null(filter_yrs)){
+  if(is.null(filter_yrs)){
+    if(is.null(file)){
 
-    read.csv(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
-      dplyr::rename_all(tolower) %>%
-      dplyr::filter(survey != "Japan",
-                    area_id >= 3, # goa
-                    year > 1992) %>% # poor data prior to this year?
-      dplyr::group_by(year) %>%
-      dplyr::summarise(rpn = sum(rpn)) %>%
-      dplyr::ungroup() %>%
-      dplyr::mutate(cv = sqrt(var(rpn)) / mean(rpn),
-                    sd = cv * rpn,
-                    lci = rpn - 1.96 * sd,
-                    uci = rpn + 1.96 * sd) %>%
-      dplyr::mutate(lci = ifelse(lci < 0, 0, lci)) %>%
-      dplyr::mutate_if(is.double, round) %>%
-      dplyr::select(-cv) -> sb
+      vroom::vroom(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
+        dplyr::rename_all(tolower) %>%
+        dplyr::filter(year > 1992) %>% # poor data prior
+        dplyr::group_by(year) %>%
+        dplyr::summarise(rpn = sum(rpn, na.rm = T)) %>%
+        dplyr::ungroup() %>%
+        dplyr::mutate(cv = sqrt(var(rpn)) / mean(rpn),
+                      sd = cv * rpn,
+                      lci = rpn - 1.96 * sd,
+                      uci = rpn + 1.96 * sd) %>%
+        dplyr::mutate(lci = ifelse(lci < 0, 0, lci)) %>%
+        dplyr::mutate_if(is.double, round) %>%
+        dplyr::select(-cv) -> sb
+    } else {
+      vroom::vroom(here::here(year, "data", "user_input", file)) -> sb
+    }
+  } else {
+    if(is.null(file)){
 
-  } else if(is.null(file) & !is.null(filter_yrs)){
+      vroom::vroom(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
+        dplyr::rename_all(tolower) %>%
+        dplyr::filter(!(year %in% filter_yrs), year > 1992) %>% # poor data prior
+        dplyr::group_by(year) %>%
+        dplyr::summarise(rpn = sum(rpn, na.rm = T)) %>%
+        dplyr::ungroup() %>%
+        dplyr::mutate(cv = sqrt(var(rpn)) / mean(rpn),
+                      sd = cv * rpn,
+                      lci = rpn - 1.96 * sd,
+                      uci = rpn + 1.96 * sd) %>%
+        dplyr::mutate(lci = ifelse(lci < 0, 0, lci)) %>%
+        dplyr::mutate_if(is.double, round) %>%
+        dplyr::select(-cv)
+    } else {
+      vroom::vroom(here::here(year, "data", "user_input", file)) %>%
+        dplyr::filter(!(year %in% filter_yrs)) -> sb
+    }
 
-    read.csv(here::here(year, "data", "raw", paste0(area, "_lls_biomass_data.csv"))) %>%
-      dplyr::rename_all(tolower) %>%
-      dplyr::filter(!(year %in% filter_yrs),
-                    survey != "Japan",
-                    area_id >= 3, # goa
-                    year > 1992) %>% # poor data prior to this year?
-      dplyr::group_by(year) %>%
-      dplyr::summarise(rpn = sum(rpn)) %>%
-      dplyr::ungroup() %>%
-      dplyr::mutate(cv = sqrt(var(rpn)) / mean(rpn),
-                    sd = cv * rpn,
-                    lci = rpn - 1.96 * sd,
-                    uci = rpn + 1.96 * sd) %>%
-      dplyr::mutate(lci = ifelse(lci < 0, 0, lci)) %>%
-      dplyr::mutate_if(is.double, round) %>%
-      dplyr::select(-cv) -> sb
-  } else if(!is.null(file)){
-    read.csv(here::here(year, "data", "user_input", file)) -> sb
   }
 
-  write.csv(sb, here::here(year, "data", "output", paste0(area, "_lls_numbers.csv")), row.names = FALSE)
+  vroom::vroom_write(sb, here::here(year, "data", "output", paste0(area, "_lls_numbers.csv")), delim = ",")
 
   sb
 }

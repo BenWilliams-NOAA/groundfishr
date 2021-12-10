@@ -4,7 +4,7 @@
 \alias{fish_age_comp}
 \title{fishery age composition analysis}
 \usage{
-fish_age_comp(year, fishery = "fsh1", rec_age, plus_age)
+fish_age_comp(year, fishery = "fsh", rec_age, plus_age)
 }
 \arguments{
 \item{year}{assessment year}
