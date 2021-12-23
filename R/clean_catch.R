@@ -26,6 +26,9 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
   if(species == "POP"){
     species = "POPA"
   }
+  if(species == "ATF"){
+    species = "ARTH"
+  }
 
   if(!is.null(fixed_catch)){
     fixed_catch = vroom::vroom(here::here("data", "user_input", "fixed_catch"))
@@ -45,6 +48,9 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
     }
     if(species == "POPA"){
       fixed_catch = gfdata::goa_pop_catch_1960_1990
+    }
+    if(species == "ARTH"){
+      fixed_catch = gfdata::goa_atf_catch_1961_1990
     }
   }
 
