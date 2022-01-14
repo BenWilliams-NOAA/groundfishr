@@ -4,7 +4,14 @@
 \alias{ts_biomass}
 \title{survey biomass}
 \usage{
-ts_biomass(year, area = "goa", file = NULL, rmv_yrs = NULL, id = NULL)
+ts_biomass(
+  year,
+  area = "goa",
+  file = NULL,
+  rmv_yrs = NULL,
+  id = NULL,
+  save = TRUE
+)
 }
 \arguments{
 \item{year}{of interest}
@@ -14,6 +21,8 @@ ts_biomass(year, area = "goa", file = NULL, rmv_yrs = NULL, id = NULL)
 \item{file}{if not using the design-based abundance, the file name must be stated (e.g. "GAP_VAST.csv")}
 
 \item{rmv_yrs}{any survey years to exclude}
+
+\item{save}{}
 }
 \value{
 

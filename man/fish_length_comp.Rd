@@ -4,7 +4,7 @@
 \alias{fish_length_comp}
 \title{fishery length composition analysis}
 \usage{
-fish_length_comp(year, fishery = "fsh", rec_age, lenbins = NULL)
+fish_length_comp(year, fishery = "fsh", rec_age, lenbins = NULL, save = TRUE)
 }
 \arguments{
 \item{year}{assessment year}
@@ -14,6 +14,8 @@ fish_length_comp(year, fishery = "fsh", rec_age, lenbins = NULL)
 \item{rec_age}{recruitment age}
 
 \item{lenbins}{lenbin file if left NULL it looks for here::here(year, "data", "user_input", "len_bin_labels.csv")}
+
+\item{save}{}
 }
 \value{
 

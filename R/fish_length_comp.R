@@ -5,12 +5,13 @@
 #' @param fishery default is "fsh1"
 #' @param lenbins lenbin file if left NULL it looks for here::here(year, "data", "user_input", "len_bin_labels.csv")
 #' @param rec_age recruitment age
+#' @param save
 #'
 #' @return
 #' @export fish_length_comp
 #'
 #' @examples
-fish_length_comp <- function(year, fishery = "fsh", rec_age, lenbins = NULL){
+fish_length_comp <- function(year, fishery = "fsh", rec_age, lenbins = NULL, save = TRUE){
 
   if(is.null(lenbins)){
     stop("Please provide the length bin file that is in the user_input folder e.g.,('lengthbins.csv')")
@@ -48,10 +49,13 @@ fish_length_comp <- function(year, fishery = "fsh", rec_age, lenbins = NULL){
                   n_s = mean(n_s, na.rm = T),
                   n_h = mean(n_h, na.rm = T)) %>%
     dplyr::select(-length_tot) %>%
-    tidyr::pivot_wider(names_from = length, values_from = prop) -> fish_length_comp
+    tidyr::pivot_wider(names_from = length, values_from = prop) -> flc
 
-  vroom::vroom_write(fish_length_comp, here::here(year, "data", "output", paste0(fishery, "_length_comp.csv")), ",")
-
-  fish_length_comp
+  if(isTRUE(save)){
+    vroom::vroom_write(flc, here::here(year, "data", "output", paste0(fishery, "_length_comp.csv")), ",")
+    flc
+  } else {
+    flc
+  }
 
 }

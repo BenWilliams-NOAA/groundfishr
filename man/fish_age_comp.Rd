@@ -4,7 +4,7 @@
 \alias{fish_age_comp}
 \title{fishery age composition analysis}
 \usage{
-fish_age_comp(year, fishery = "fsh", rec_age, plus_age)
+fish_age_comp(year, fishery = "fsh", rec_age, plus_age, save = TRUE)
 }
 \arguments{
 \item{year}{assessment year}
@@ -14,6 +14,8 @@ fish_age_comp(year, fishery = "fsh", rec_age, plus_age)
 \item{rec_age}{recruitment age}
 
 \item{plus_age}{plus age group}
+
+\item{save}{}
 }
 \value{
 

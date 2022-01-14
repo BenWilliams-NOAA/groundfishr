@@ -14,6 +14,8 @@ setup_proj(year, model, species, area = "goa", off_yr = NULL)
 \item{species}{identifier for file names}
 
 \item{area}{e.g. "goa"}
+
+\item{off_yr}{is this a partial year (TRUE) otherwise NULL}
 }
 \value{
 

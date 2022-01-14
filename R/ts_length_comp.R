@@ -4,12 +4,13 @@
 #' @param area survey area default = "goa"
 #' @param lenbins lenbin file if left NULL it looks for (year/data/user_input/len_bins.csv")
 #' @param bysex should the length comp be calculated by sex - default is null (not differentiated)
+#' @param save
 #' @return
 #' @export ts_length_comp
 #'
 #' @examples
 #'
-ts_length_comp <- function(year, area = "goa", lenbins = NULL, bysex = NULL){
+ts_length_comp <- function(year, area = "goa", lenbins = NULL, bysex = NULL, save = TRUE){
 
 
   read.csv(here::here(year, "data", "raw", paste0(area, "_ts_length_data.csv"))) %>%
@@ -81,8 +82,11 @@ ts_length_comp <- function(year, area = "goa", lenbins = NULL, bysex = NULL){
       tidyr::pivot_wider(names_from = length, values_from = prop) -> size_comp
   }
 
-  vroom::vroom_write(size_comp, here::here(year, "data", "output", paste0(area, "_ts_length_comp.csv")), ",")
-
-  size_comp
+  if(isTRUE(save)){
+    vroom::vroom_write(size_comp, here::here(year, "data", "output", paste0(area, "_ts_length_comp.csv")), ",")
+    size_comp
+  } else {
+    size_comp
+  }
 
 }

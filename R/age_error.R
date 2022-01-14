@@ -8,13 +8,14 @@
 #' @param rec_age = recruitment age
 #' @param plus_age = max age for modeling
 #' @param max_age = max age for age error analysis - default = 100
+#' @param save = deafult is TRUE
 #'
 #' @return
 #' @export age_error
 #'
 #' @examples ageage(species = "NORK", year = 2020, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100)
 #'
-age_error <- function(reader_tester, species, year, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100){
+age_error <- function(reader_tester, species, year, admb_home = NULL, area = "GOA", rec_age = 2, plus_age = 45, max_age = 100, save = TRUE){
 
 
     rt = vroom::vroom(here::here(year, "data", "user_input", reader_tester))
@@ -111,18 +112,21 @@ age_error <- function(reader_tester, species, year, admb_home = NULL, area = "GO
     mtx100[j,nrow(fits)] = 1 - sum(mtx100[j, 1:(nrow(fits) - 1)])
   }
 
-  write.csv(mtx100, here::here(year, "data", "output", paste0("ae_mtx_", max_age, ".csv")), row.names = FALSE)
-  vroom::vroom_write(fits,  here::here(year,"data", "output", "ae_SD.csv"), ",")
+    # Compute ageing error matrix for model
+    ae_Mdl = matrix(nrow=length(ages), ncol=nages)
+    ae_Mdl[, 1:(nages-1)] = as.matrix(mtx100[, 1:(nages-1)])
+    ae_Mdl[, nages] = rowSums(mtx100[, nages:length(ages)])
+    ae_Mdl = round(ae_Mdl, digits=4)
+    r = which(ae_Mdl[, nages]>=0.999)[1]
+    ae_Mdl = ae_Mdl[1:r,]
 
-  # Compute ageing error matrix for model
-  ae_Mdl = matrix(nrow=length(ages), ncol=nages)
-  ae_Mdl[, 1:(nages-1)] = as.matrix(mtx100[, 1:(nages-1)])
-  ae_Mdl[, nages] = rowSums(mtx100[, nages:length(ages)])
-  ae_Mdl = round(ae_Mdl, digits=4)
-  r = which(ae_Mdl[, nages]>=0.999)[1]
-  ae_Mdl = ae_Mdl[1:r,]
-
-  write.csv(ae_Mdl,  here::here(year, "data", "output", "ae_model.csv"), row.names = FALSE)
-  ae_Mdl
+  if(isTRUE(save)){
+    write.csv(mtx100, here::here(year, "data", "output", paste0("ae_mtx_", max_age, ".csv")), row.names = FALSE)
+    vroom::vroom_write(fits,  here::here(year,"data", "output", "ae_SD.csv"), ",")
+    write.csv(ae_Mdl,  here::here(year, "data", "output", "ae_model.csv"), row.names = FALSE)
+    ae_Mdl
+  } else {
+    list(mtx100 = mtx100, ae_SD = fits, ae_Mdl = aeMdl)
+  }
 
 }

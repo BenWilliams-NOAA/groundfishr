@@ -4,13 +4,14 @@
 #' @param area e.g., "goa"
 #' @param file if not using the design-based abundance, the file name must be stated (e.g. "GAP_VAST.csv")
 #' @param rmv_yrs any survey years to exclude
+#' @param save
 #'
 #' @return
 #' @export ts_biomass
 #'
 #' @examples
 #'
-ts_biomass <- function(year, area = "goa", file = NULL, rmv_yrs = NULL, id = NULL){
+ts_biomass <- function(year, area = "goa", file = NULL, rmv_yrs = NULL, id = NULL, save = TRUE){
 
   if(is.null(file)){
 
@@ -46,11 +47,14 @@ ts_biomass <- function(year, area = "goa", file = NULL, rmv_yrs = NULL, id = NUL
       dplyr::filter(!(year %in% rmv_yrs)) -> sb
   }
 
-  if(!is.null(id)){
-    write.csv(sb, here::here(year, "data", "output", paste0(area, "_ts_biomass_", id, ".csv")), row.names = FALSE)
+  if(isTRUE(save)){
+    if(!is.null(id)){
+        write.csv(sb, here::here(year, "data", "output", paste0(area, "_ts_biomass_", id, ".csv")), row.names = FALSE)
+      } else {
+        write.csv(sb, here::here(year, "data", "output", paste0(area, "_ts_biomass.csv")), row.names = FALSE)
+      }
+      sb
   } else {
-    write.csv(sb, here::here(year, "data", "output", paste0(area, "_ts_biomass.csv")), row.names = FALSE)
+    sb
   }
-
-  sb
 }

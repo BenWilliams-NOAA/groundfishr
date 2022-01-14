@@ -5,6 +5,7 @@
 #' @param fishery identify the fishery default is "fsh"
 #' @param TAC last three TAC in form: c(year-3, year-2, year-1)
 #' @param fixed_catch if catch is frozen place the file in user_input folder (format: Year, Catch)
+#' @param save
 #'
 #' @return
 #' @export clean_catch
@@ -14,7 +15,7 @@
 #' clean_catch(year, TAC = c(2874, 2756, 3100))
 #' }
 #'
-clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111), fixed_catch = NULL){
+clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111), fixed_catch = NULL, save = TRUE){
 
   if(sum(TAC == c(3333, 2222, 1111)) == 3) {
     stop("check your TAC!")
@@ -90,7 +91,6 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
       dplyr::arrange(Year) -> catch
   }
 
-  vroom::vroom_write(catch, here::here(year, "data", "output",  paste0(fishery, "_catch.csv")), delim = ",")
 
   # estimate yield ratio of previous 3 years relative to TAC
   catch %>%
@@ -106,8 +106,15 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
     dplyr::mutate(catch = Catch * ratio) %>%
     dplyr::pull(catch) -> proj_catch
 
-    data.frame(yld = yld, catch_rat = ratio, proj_catch = proj_catch) %>%
-      vroom::vroom_write(here::here(year, "data", "output", "yld_rat.csv"), delim = ",")
+  data.frame(yld = yld, catch_rat = ratio, proj_catch = proj_catch) -> yld
 
-  catch
+  if(isTRUE(save)){
+    vroom::vroom_write(catch, here::here(year, "data", "output",  paste0(fishery, "_catch.csv")), delim = ",")
+    vroom::vroom_write(yld, here::here(year, "data", "output", "yld_rat.csv"), delim = ",")
+    catch
+  } else {
+    list(catch = catch, yld_rat = yld)
+  }
+
+
 }

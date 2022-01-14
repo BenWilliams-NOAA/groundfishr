@@ -4,7 +4,7 @@
 \alias{ts_length_comp}
 \title{trawl survey length composition analysis}
 \usage{
-ts_length_comp(year, area = "goa", lenbins = NULL, bysex = NULL)
+ts_length_comp(year, area = "goa", lenbins = NULL, bysex = NULL, save = TRUE)
 }
 \arguments{
 \item{year}{assessment year}

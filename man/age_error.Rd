@@ -12,7 +12,8 @@ age_error(
   area = "GOA",
   rec_age = 2,
   plus_age = 45,
-  max_age = 100
+  max_age = 100,
+  save = TRUE
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ age_error(
 \item{plus_age}{= max age for modeling}
 
 \item{max_age}{= max age for age error analysis - default = 100}
+
+\item{save}{= deafult is TRUE}
 
 \item{read_tester}{= looks for a file in the user_input folder, e.g., :"reader_tester.csv"}
 }

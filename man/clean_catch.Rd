@@ -9,7 +9,8 @@ clean_catch(
   species,
   fishery = "fsh",
   TAC = c(3333, 2222, 1111),
-  fixed_catch = NULL
+  fixed_catch = NULL,
+  save = TRUE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ clean_catch(
 \item{TAC}{last three TAC in form: c(year-3, year-2, year-1)}
 
 \item{fixed_catch}{if catch is frozen place the file in user_input folder (format: Year, Catch)}
+
+\item{save}{}
 }
 \value{
 

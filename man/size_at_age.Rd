@@ -4,7 +4,7 @@
 \alias{size_at_age}
 \title{size at age analysis}
 \usage{
-size_at_age(year, admb_home = NULL, rec_age, lenbins = NULL)
+size_at_age(year, admb_home = NULL, rec_age, lenbins = NULL, save = TRUE)
 }
 \arguments{
 \item{year}{analysis year}

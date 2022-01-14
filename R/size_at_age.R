@@ -5,11 +5,12 @@
 #' @param rec_age recruitment age
 #' @param max_age max age for age error analysis - default = 100
 #' @param lenbins length bin file
+#' @param save
 #' @return
 #' @export size_at_age
 #'
 #' @examples
-size_at_age <- function(year, admb_home = NULL, rec_age, lenbins = NULL){
+size_at_age <- function(year, admb_home = NULL, rec_age, lenbins = NULL, save = TRUE){
 
   if (!dir.exists(here::here(year, "data", "output"))){
     dir.create(here::here(year, "data", "output"), recursive=TRUE)
@@ -73,7 +74,9 @@ size_at_age <- function(year, admb_home = NULL, rec_age, lenbins = NULL){
                      SD_Lbar = sqrt(1 / (sum(prop) - 1) * sum(prop * (length / 10 - Lbar)^2))) %>%
     dplyr::filter(SD_Lbar>=0.01) -> laa_stats
 
-  vroom::vroom_write(laa_stats, here::here(year, "data", "output", "laa_stats.csv"), ",")
+  if(isTRUE(save)){
+    vroom::vroom_write(laa_stats, here::here(year, "data", "output", "laa_stats.csv"), ",")
+  }
 
   laa_stats
 
@@ -126,7 +129,11 @@ size_at_age <- function(year, admb_home = NULL, rec_age, lenbins = NULL){
   b <- STD$value[2]
   (params <- cbind(Linf, k, t0, a, b))
 
-  vroom::vroom_write(params, here::here(year, "data", "output", "lbar_params.csv"), ",")
+  if(isTRUE(save)){
+    vroom::vroom_write(params, here::here(year, "data", "output", "lbar_params.csv"), ",")
+  } else {
+    params
+  }
 
 
   # Compute Sz@A transition matrix
@@ -146,7 +153,11 @@ size_at_age <- function(year, admb_home = NULL, rec_age, lenbins = NULL){
     dplyr::mutate(!!rev(names(.))[1] := 1 - rowSums(.[2:(ncol(.) - 1)])) %>%
     dplyr::mutate_at(2:ncol(.), round, 4) -> saa
 
-  vroom::vroom_write(saa, here::here(year, "data", "output", "saa.csv"), ",")
-  saa
+  if(isTRUE(save)){
+    vroom::vroom_write(saa, here::here(year, "data", "output", "saa.csv"), ",")
+    saa
+  } else {
+    saa
+  }
 
 }

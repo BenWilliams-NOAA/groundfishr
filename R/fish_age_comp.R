@@ -4,6 +4,7 @@
 #' @param fishery default is fsh1, change if age comps from multiple fisheries (e.g., fsh2)
 #' @param rec_age recruitment age
 #' @param plus_age plus age group
+#' @param save
 #'
 #' @return
 #' @export  fish_age_comp
@@ -12,7 +13,7 @@
 #' \dontrun{
 #' fish_age_comp(year, fishery = "fsh1", rec_age, plus_age)
 #' }
-fish_age_comp <- function(year, fishery = "fsh", rec_age, plus_age){
+fish_age_comp <- function(year, fishery = "fsh", rec_age, plus_age, save = TRUE){
 
   vroom::vroom(here::here(year, "data", "raw", paste0(fishery, "_age_comp_data.csv")),
            col_types = list(HAUL_JOIN = "c",
@@ -36,10 +37,14 @@ fish_age_comp <- function(year, fishery = "fsh", rec_age, plus_age){
                   n_s = mean(n_s, na.rm = T),
                   n_h = mean(n_h, na.rm = T)) %>%
     dplyr::select(-age_tot) %>%
-    tidyr::pivot_wider(names_from = age, values_from = prop) -> fish_age_comp
+    tidyr::pivot_wider(names_from = age, values_from = prop) -> fac
 
-  readr::write_csv(fish_age_comp, here::here(year, "data", "output", paste0(fishery, "_age_comp.csv")))
+  if(isTRUE(save)){
+    readr::write_csv(fac, here::here(year, "data", "output", paste0(fishery, "_age_comp.csv")))
+    fac
+  } else {
+    fac
+  }
 
-  fish_age_comp
 
 }
