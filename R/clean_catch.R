@@ -38,7 +38,7 @@ clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111
       fixed_catch = gfdata::goa_nork_catch_1961_1992
     }
     if(species == "SABL"){
-      fixed_catch = gfdata::sabl_fixed_abundance |>
+      fixed_catch = gfdata::sabl_fixed_abundance %>%
         dplyr::filter(variable == "catch")
     }
     if(species == "REBS"){
