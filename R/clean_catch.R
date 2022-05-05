@@ -4,7 +4,9 @@
 #' @param species species of interest e.g., "SABL", "DUSK"
 #' @param fishery identify the fishery default is "fsh"
 #' @param TAC last three TAC in form: c(year-3, year-2, year-1)
-#' @param fixed_catch if catch is frozen place the file in user_input folder (format: Year, Catch)
+#' @param discard if summarizing catch by discard/retained is desired change to TRUE
+#' @param gear if summarizing catch by gear type is desired change to TRUE
+#' @param fixed_catch if early catch is frozen place the file in user_input folder (format: Year, Catch)
 #' @param save
 #'
 #' @return
@@ -15,7 +17,7 @@
 #' clean_catch(year, TAC = c(2874, 2756, 3100))
 #' }
 #'
-clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111), fixed_catch = NULL, save = TRUE){
+clean_catch <- function(year, species, fishery = "fsh", TAC = c(3333, 2222, 1111), discard = NULL, gear = NULL, fixed_catch = NULL, save = TRUE){
 
   if(sum(TAC == c(3333, 2222, 1111)) == 3) {
     stop("check your TAC!")

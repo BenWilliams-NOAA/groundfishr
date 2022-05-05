@@ -9,6 +9,8 @@ clean_catch(
   species,
   fishery = "fsh",
   TAC = c(3333, 2222, 1111),
+  discard = NULL,
+  gear = NULL,
   fixed_catch = NULL,
   save = TRUE
 )
@@ -22,7 +24,11 @@ clean_catch(
 
 \item{TAC}{last three TAC in form: c(year-3, year-2, year-1)}
 
-\item{fixed_catch}{if catch is frozen place the file in user_input folder (format: Year, Catch)}
+\item{discard}{if summarizing catch by discard/retained is desired change to TRUE}
+
+\item{gear}{if summarizing catch by gear type is desired change to TRUE}
+
+\item{fixed_catch}{if early catch is frozen place the file in user_input folder (format: Year, Catch)}
 
 \item{save}{}
 }
